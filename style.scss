@@ -13,15 +13,19 @@ $colorset-default-border: #ccc;
 $colorset-default-accent: DeepSkyBlue;
 $colorset-default-accent-hover: rgba(0, 191, 255, .1);
 $colorset-default-light: gray;
-$colorset-default-text-footer: #fff;
+$colorset-default-text-footer: white;
+$colorset-default-background-footer: gray;
+$colorset-default-background-accent: lightgray;
 // yellow
 $colorset-yellow-background: yellow;
 $colorset-yellow-text: black;
-$colorset-yellow-border: #99f;
+$colorset-yellow-border: #ff9;
 $colorset-yellow-accent: DeepSkyBlue;
 $colorset-yellow-accent-hover: rgba(0, 191, 255, .1);
 $colorset-yellow-light: gray;
-$colorset-yellow-text-footer: white;
+$colorset-yellow-text-footer: black;
+$colorset-yellow-background-footer: rgb(255, 255, 100);
+$colorset-yellow-background-accent: rgb(255, 255, 100);
 // blue
 $colorset-blue-background: blue;
 $colorset-blue-text: yellow;
@@ -30,6 +34,8 @@ $colorset-blue-accent: #f90;
 $colorset-blue-accent-hover: rgba(0, 191, 255, .1);
 $colorset-blue-light: lightgray;
 $colorset-blue-text-footer: black;
+$colorset-blue-background-footer: rgb(100, 100, 255);
+$colorset-blue-background-accent: rgb(100, 100, 255);
 // black
 $colorset-black-background: black;
 $colorset-black-text: white;
@@ -37,7 +43,17 @@ $colorset-black-border: #ccc;
 $colorset-black-accent: DeepSkyBlue;
 $colorset-black-accent-hover: rgba(0, 191, 255, .1);
 $colorset-black-light: lightgray;
-$colorset-black-text-footer: black;
+$colorset-black-text-footer: white;
+$colorset-black-background-footer: rgb(50, 50, 50);
+$colorset-black-background-accent: rgb(50, 50, 50);
+
+@mixin pc {
+	@media (min-width: 460px) { @content; }
+}
+
+@mixin sp {
+	@media (max-width: 459px) { @content; }
+}
 
 * {
 	z-index: 0;
@@ -88,6 +104,8 @@ html {
 					--color-accent-hover: #{$colorset-default-accent-hover};
 					--color-light: #{$colorset-default-light};
 					--color-text-footer: #{$colorset-default-text-footer};
+					--color-background-footer: #{$colorset-default-background-footer};
+					--color-background-accent: #{$colorset-default-background-accent};
 
 					div.setting-colorset div.setting-colorset-default {
 						border-color: var(--color-border);
@@ -103,6 +121,8 @@ html {
 					--color-accent-hover: #{$colorset-yellow-accent-hover};
 					--color-light: #{$colorset-yellow-light};
 					--color-text-footer: #{$colorset-yellow-text-footer};
+					--color-background-footer: #{$colorset-yellow-background-footer};
+					--color-background-accent: #{$colorset-yellow-background-accent};
 					
 					div.setting-colorset div.setting-colorset-yellow {
 						border-color: var(--color-border);
@@ -118,6 +138,8 @@ html {
 					--color-accent-hover: #{$colorset-blue-accent-hover};
 					--color-light: #{$colorset-blue-light};
 					--color-text-footer: #{$colorset-blue-text-footer};
+					--color-background-footer: #{$colorset-blue-background-footer};
+					--color-background-accent: #{$colorset-blue-background-accent};
 					
 					div.setting-colorset div.setting-colorset-blue {
 						border-color: var(--color-border);
@@ -133,6 +155,8 @@ html {
 					--color-accent-hover: #{$colorset-black-accent-hover};
 					--color-light: #{$colorset-black-light};
 					--color-text-footer: #{$colorset-black-text-footer};
+					--color-background-footer: #{$colorset-black-background-footer};
+					--color-background-accent: #{$colorset-black-background-accent};
 					
 					div.setting-colorset div.setting-colorset-black {
 						border-color: var(--color-border);
@@ -145,6 +169,10 @@ html {
 			width: 100%;
 			max-width: 900px;
 			margin: 0 auto;
+
+			p.strike {
+				text-decoration: line-through;
+			}
 	
 			header {
 				#eyecatch {
@@ -225,7 +253,7 @@ html {
 								transform: scaleY(1);
 							}
 						}
-						
+
 						div {
 							opacity: 0;
 							transform: scaleY(0);
@@ -361,15 +389,56 @@ html {
 							h3 ~ h3 {
 								margin-top: 40px;
 							}
-							h3 ~ p {
-								margin: 0 0 0 15px;
-								line-height: 40px;
+							h3 + div.content {
+								margin-left: 20px;
+
+								div.serif {
+									box-sizing: border-box;
+									width: 90%;
+									max-width: 305px;
+									border-radius: 10px;
+									padding: 1px 10px;
+									background-color: var(--color-background-accent);
+
+									&::after {
+										content: '';
+										width: 0;
+										height: 0;
+										position: absolute;
+										border: 30px solid transparent;
+										
+										@include pc {
+											top: 150px;
+											left: 330px;
+											border-left: 30px solid var(--color-background-accent);	
+										};
+										@include sp {
+											left: 50px;
+											border-top: 30px solid var(--color-background-accent);
+										};
+									}
+								}
+
+								img.logo {
+									height: 150px;
+
+									@include pc {
+										position: absolute;
+										top: 120px;
+										left: 370px;
+									};
+									@include sp {
+										margin-top: 40px;
+										margin-left: 10px;
+									}
+								}	
 							}
-	
+
 							div.pages {
 								width: 100%;
 								max-width: 400px;
 								display: flex;
+								flex-direction: row;
 								margin-top: 50px;
 	
 								label {
@@ -406,7 +475,7 @@ html {
 				height: auto;
 				padding: 5px;
 				display: flex;
-				background-color: var(--color-light);
+				background-color: var(--color-background-footer);
 				color: var(--color-text-footer);
 
 				p {
