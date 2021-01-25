@@ -378,19 +378,130 @@ html {
 							padding-left: 10px;
 							border-left: solid var(--color-accent) 7px;
 							border-bottom: solid var(--color-accent) 3px;
+
+							p {
+								margin: 0;
+								display: inline-block;
+								width: calc(100% - 150px);
+							}
+
+							svg {
+								width: 128px;
+								height: 32px;
+								position: relative;
+								top: 5px;
+
+								&#pict-home {
+									width: 32px;
+									margin-left: 100px;
+									polyline {
+										fill: none;
+										stroke: var(--color-accent);
+										stroke-width: 5px;
+										stroke-linecap: round;
+									}
+								}
+								&#pict-past {
+									path {
+										fill: none;
+										stroke: var(--color-accent);
+										stroke-width: 5px;
+									}
+								}
+								&#pict-now {
+									
+								}
+								&#pict-future {
+									
+								}
+							}
 						}
 	
 						div {
 							h3 {
 								border-bottom: solid var(--color-border) 2px;
-								width: 300px;
+								max-width: 300px;
 								padding-left: 10px;
+
+								p {
+									margin: 0;
+									display: inline-block;
+									width: calc(100% - 40px);
+								}
+
+								svg {
+									width: 32px;
+									height: 32px;
+									position: relative;
+									top: 7px;
+
+									// 幼児期
+									svg#baby {
+										rect, circle, polygon {
+											fill: var(--color-border);
+											stroke: white;
+											stroke-width: 3px;
+										}
+									}
+									// 小学生
+									svg#elementary {
+										circle {
+											stroke: none;
+											fill: var(--color-border);
+										}
+										path {
+											stroke: white;
+											stroke-width: 3px;
+											fill: none;
+										}
+									}
+									// 中学生
+									svg#junior {
+										polygon {
+											stroke: none;
+											fill: var(--color-border);
+										}
+									}
+									// プログラミング
+									svg#programming {
+										polygon.screen {
+											fill: none;
+											stroke: var(--color-border);
+											stroke-width: 5px;
+										}
+										polygon.keyboard {
+											fill: var(--color-border);
+											stroke: var(--color-border);
+											stroke-width: 5px;
+										}
+									}
+									// 黒板消し
+									svg#blackboard-eraser {
+										path.cover {
+											stroke: none;
+											fill: var(--color-border);
+										}
+										circle.button {
+											stroke: none;
+											r: 3px;
+										}
+										path.up {
+											stroke: var(--color-border);
+											stroke-width: 5px;
+											fill: none;
+										}
+										path.bottom {
+											stroke: none;
+											fill: var(--color-border);
+										}
+									}
+								}
 							}
 							h3 ~ h3 {
 								margin-top: 40px;
 							}
-							h3 + div.content {
-								margin-left: 20px;
+							h3 ~ div.content {
+								margin: 0 10px 0 20px;
 
 								div.serif {
 									box-sizing: border-box;
@@ -408,7 +519,7 @@ html {
 										border: 30px solid transparent;
 										
 										@include pc {
-											top: 150px;
+											top: 190px;
 											left: 330px;
 											border-left: 30px solid var(--color-background-accent);	
 										};
@@ -424,7 +535,7 @@ html {
 
 									@include pc {
 										position: absolute;
-										top: 120px;
+										top: 160px;
 										left: 370px;
 									};
 									@include sp {

@@ -60,7 +60,13 @@
 				<input id="home" type="radio" name="TAB" checked="checked" />
 				<label for="home" class="tab-menu">ホーム</label>
 				<div id="tab-home" class="tab-content">
-					<h2>ホーム</h2>
+					<h2>
+						<p>ホーム</p>
+						<svg id="pict-home" viewBox="0 0 64 64">
+							<polyline points="4,30 32,4 60,30" />
+							<polyline points="12,30 12,60 52,60 52,30" />
+						</svg>
+					</h2>
 
 					<div>
 						<h3>自己紹介</h3>
@@ -91,15 +97,36 @@
 				<input id="past" type="radio" name="TAB" />
 				<label for="past" class="tab-menu">過去</label>
 				<div id="tab-past" class="tab-content">
-					<h2>過去</h2>
+					<h2>
+						<p>過去</p>
+						<svg id="pict-past" viewBox="0 0 128 32">
+							<path d="M 4 16 L 124 16 L 116 12 L 124 16 L 116 20" />
+						</svg>
+					</h2>
 					<div>
-						<h3>幼児期（0～5歳程度）</h3>
+						<h3>
+							<p>幼児期（0～5歳程度）</p>
+							<svg id="baby" viewBox="0 0 64 64">
+								<rect x="4" y="34" width="30" height="30" />
+								<polygon points="20,4 4,32 36,32" />
+								<circle cx="40" cy="32" r="17" />
+							</svg>
+						</h3>
 						<div class="content">
 							<p>幼少期はほとんど記憶がない</p>
 							<p>すなわち書くことがない</p>	
 						</div>
 
-						<h3>小学生（6～12歳程度）</h3>
+						<h3>
+							<p>小学生（6～12歳程度）</p>
+								<svg id="elementary" viewBox="0 0 64 64">
+									<circle cx="32" cy="32" r="24" />
+									<path d="M 14 12 Q 30 32, 14 52" />
+									<path d="M 32 8 L 32 56" />
+									<path d="M 50 12 Q 34 32, 50 52" />
+									<path d="M 8 30 Q 32 40, 56 30" />
+								</svg>
+							</h3>
 						<div class="content">
 							<p>このころは割と運動神経は良かった（と自分で思っている）</p>
 							<p>高学年あたりからプログラミングに目覚め始める</p>
@@ -107,7 +134,13 @@
 							<p>これ以外のものに手を出すのは中学生になってからだ</p>	
 						</div>
 
-						<h3>中学生（13～15歳程度）</h3>
+						<h3>
+							<p>中学生（13～15歳程度）</p>
+							<svg id="junior" viewBox="0 0 64 64">
+								<polygon points="24,4 40,4 38,14 26,14" />
+								<polygon points="26,18 20,50 32,60 44,50 38,18" />
+							</svg>
+						</h3>
 						<div class="content">
 							<p>運動する習慣がなくなってだんだん体力が落ちていく中学生のころ</p>
 							<p>中2のころに初めてHSPというScratch以外のプログラミングに触れる</p>
@@ -131,9 +164,21 @@
 				<input id="now" type="radio" name="TAB" />
 				<label for="now" class="tab-menu">現在</label>
 				<div id="tab-now" class="tab-content">
-					<h2>現在</h2>
+					<h2>
+						<p>現在</p>
+						<svg id="pict-now" viewBox="0 0 64 64">
+
+						</svg>
+					</h2>
 					<div>
-						<h3>プログラミング</h3>
+						<h3>
+							<p>プログラミング</p>
+							<svg id="programming" viewBox="0 0 64 64">
+								<polygon class="screen" points="10,44 10,15 54,15 54,44"/>
+								<polygon class="keyboard" points="10,44 2,54 60,54 54,44"/>
+								<polygon class="keyboard" points="2,54 2,57 60,57 60,54"/>
+							</svg>
+						</h3>
 						<div class="content">
 							<p>過去の項でいろいろ書いたが現在でもプログラミングはやっている</p>
 							<p>最近は様々なプログラミング言語に触れていて、その中でもハマっているのがPythonとJavaScriptだ</p>
@@ -147,7 +192,14 @@
 							<p>プログラミングが気になっている人もプログラミングに興味がない人も是非一度触ってみてほしい（もう情報で少し触ってはいるが）</p>	
 						</div>
 
-						<h3>黒板消し</h3>
+						<h3>
+							<p>黒板消し</p>							
+							<svg id="blackboard-eraser" viewBox="0 0 64 64">
+								<path class="cover" d="M 32 14 l 2 0 q 1 0, 1 1 l 0 25 q 0 1, -1 1 l -4 0 q -1 0, -1 -1 l 0 -25 q 0 -1, 1 -1 l 2 0"></path>
+								<path class="up" d="M 8 40 l 0 -10 q 0 -8, 8 -8 l 32 0 q 8 0, 8 8 l 0 10"></path>
+								<path class="bottom" d="M 9 36 l 0 12 q 0 4, 4 4 l 38 0 q 4 0, 4 -4 l 0 -12"></path>
+							</svg>
+						</h3>
 						<div class="content">
 							<p>わざわざ項にするほど語ることも多くないのだが項が１つしかないのは少し寂しいので項にまとめた</p>
 							<p>中2ぐらいから本格的に始めて年を経るごとに若干進化していると思う</p>
@@ -167,7 +219,12 @@
 				<input id="future" type="radio" name="TAB" />
 				<label for="future" class="tab-menu">未来</label>
 				<div id="tab-future" class="tab-content">
-					<h2>未来</h2>
+					<h2>
+						<p>未来</p>
+						<svg id="pict-future" viewBox="0 0 64 64">
+
+						</svg>
+					</h2>
 					<div>
 						<h3>やりたいこと</h3>
 						<div class="content">
