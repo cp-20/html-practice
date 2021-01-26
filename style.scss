@@ -1,5 +1,4 @@
 $color-background: WhiteSmoke;
-$color-loading: #ddd;
 $color-popup-background: white;
 
 $font-size-small: 12px;
@@ -11,31 +10,34 @@ $colorset-default-background: white;
 $colorset-default-text: black;
 $colorset-default-border: #ccc;
 $colorset-default-accent: DeepSkyBlue;
-$colorset-default-accent-hover: rgba(0, 191, 255, .1);
+$colorset-default-accent-hover: rgb(235, 248, 255);
 $colorset-default-light: gray;
 $colorset-default-text-footer: white;
 $colorset-default-background-footer: gray;
 $colorset-default-background-accent: lightgray;
+$colorset-default-select: rgb(150, 230, 255);
 // yellow
 $colorset-yellow-background: yellow;
 $colorset-yellow-text: black;
-$colorset-yellow-border: #ff9;
+$colorset-yellow-border: darkgray;
 $colorset-yellow-accent: DeepSkyBlue;
 $colorset-yellow-accent-hover: rgba(0, 191, 255, .1);
 $colorset-yellow-light: gray;
 $colorset-yellow-text-footer: black;
 $colorset-yellow-background-footer: rgb(255, 255, 100);
 $colorset-yellow-background-accent: rgb(255, 255, 100);
+$colorset-yellow-select: rgb(150, 230, 255);
 // blue
 $colorset-blue-background: blue;
 $colorset-blue-text: yellow;
 $colorset-blue-border: #ccc;
 $colorset-blue-accent: #f90;
-$colorset-blue-accent-hover: rgba(0, 191, 255, .1);
+$colorset-blue-accent-hover: rgba(255, 153, 0, .1);
 $colorset-blue-light: lightgray;
 $colorset-blue-text-footer: black;
 $colorset-blue-background-footer: rgb(100, 100, 255);
 $colorset-blue-background-accent: rgb(100, 100, 255);
+$colorset-blue-select: rgb(255, 230, 150);
 // black
 $colorset-black-background: black;
 $colorset-black-text: white;
@@ -46,6 +48,7 @@ $colorset-black-light: lightgray;
 $colorset-black-text-footer: white;
 $colorset-black-background-footer: rgb(50, 50, 50);
 $colorset-black-background-accent: rgb(50, 50, 50);
+$colorset-black-select: rgb(150, 230, 255);
 
 @mixin pc {
 	@media (min-width: 460px) { @content; }
@@ -106,6 +109,7 @@ html {
 					--color-text-footer: #{$colorset-default-text-footer};
 					--color-background-footer: #{$colorset-default-background-footer};
 					--color-background-accent: #{$colorset-default-background-accent};
+					--color-select: #{$colorset-default-select};
 
 					div.setting-colorset div.setting-colorset-default {
 						border-color: var(--color-border);
@@ -123,7 +127,8 @@ html {
 					--color-text-footer: #{$colorset-yellow-text-footer};
 					--color-background-footer: #{$colorset-yellow-background-footer};
 					--color-background-accent: #{$colorset-yellow-background-accent};
-					
+					--color-select: #{$colorset-yellow-select};
+
 					div.setting-colorset div.setting-colorset-yellow {
 						border-color: var(--color-border);
 					}
@@ -140,7 +145,8 @@ html {
 					--color-text-footer: #{$colorset-blue-text-footer};
 					--color-background-footer: #{$colorset-blue-background-footer};
 					--color-background-accent: #{$colorset-blue-background-accent};
-					
+					--color-select: #{$colorset-blue-select};
+
 					div.setting-colorset div.setting-colorset-blue {
 						border-color: var(--color-border);
 					}
@@ -157,7 +163,8 @@ html {
 					--color-text-footer: #{$colorset-black-text-footer};
 					--color-background-footer: #{$colorset-black-background-footer};
 					--color-background-accent: #{$colorset-black-background-accent};
-					
+					--color-select: #{$colorset-black-select};
+
 					div.setting-colorset div.setting-colorset-black {
 						border-color: var(--color-border);
 					}
@@ -203,7 +210,7 @@ html {
 							width: 200px;
 							p {
 								font-family: '游ゴシック', sans-serif;
-								color: white;
+								color: var(--color-background);
 								background-color: transparent;
 								margin: 0 auto;
 							}
@@ -235,7 +242,7 @@ html {
 							right: 0;
 
 							circle, line {
-								stroke: white;
+								stroke: var(--color-background);
 								stroke-width: 10px;
 							}
 						}
@@ -401,19 +408,22 @@ html {
 										stroke-linecap: round;
 									}
 								}
-								&#pict-past {
+								&#pict-past, &#pict-now, &#pict-future {
 									path {
 										fill: none;
 										stroke: var(--color-accent);
-										stroke-width: 5px;
+										stroke-width: 2px;
+									}
+									circle {
+										fill: var(--color-background);
+										stroke: var(--color-accent);
+										stroke-width: 2px;
+										r: 7px;
 									}
 								}
-								&#pict-now {
-									
-								}
-								&#pict-future {
-									
-								}
+								&#pict-past > circle:nth-of-type(1) { fill: var(--color-select); }
+								&#pict-now > circle:nth-of-type(2) { fill: var(--color-select); }
+								&#pict-future > circle:nth-of-type(3) { fill: var(--color-select); }
 							}
 						}
 	
@@ -436,34 +446,34 @@ html {
 									top: 7px;
 
 									// 幼児期
-									svg#baby {
+									&#baby {
 										rect, circle, polygon {
 											fill: var(--color-border);
-											stroke: white;
+											stroke: var(--color-background);
 											stroke-width: 3px;
 										}
 									}
 									// 小学生
-									svg#elementary {
+									&#elementary {
 										circle {
 											stroke: none;
 											fill: var(--color-border);
 										}
 										path {
-											stroke: white;
+											stroke: var(--color-background);
 											stroke-width: 3px;
 											fill: none;
 										}
 									}
 									// 中学生
-									svg#junior {
+									&#junior {
 										polygon {
 											stroke: none;
 											fill: var(--color-border);
 										}
 									}
 									// プログラミング
-									svg#programming {
+									&#programming {
 										polygon.screen {
 											fill: none;
 											stroke: var(--color-border);
@@ -476,7 +486,7 @@ html {
 										}
 									}
 									// 黒板消し
-									svg#blackboard-eraser {
+									&#blackboard-eraser {
 										path.cover {
 											stroke: none;
 											fill: var(--color-border);
