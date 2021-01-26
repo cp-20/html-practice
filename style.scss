@@ -24,7 +24,7 @@ $colorset-yellow-accent: DeepSkyBlue;
 $colorset-yellow-accent-hover: rgba(0, 191, 255, .1);
 $colorset-yellow-light: gray;
 $colorset-yellow-text-footer: black;
-$colorset-yellow-background-footer: rgb(255, 255, 100);
+$colorset-yellow-background-footer: rgb(230, 230, 0);
 $colorset-yellow-background-accent: rgb(255, 255, 100);
 $colorset-yellow-select: rgb(150, 230, 255);
 // blue
@@ -209,8 +209,8 @@ html {
 							margin: 0 10% 0 auto;
 							width: 200px;
 							p {
+								color: white;
 								font-family: '游ゴシック', sans-serif;
-								color: var(--color-background);
 								background-color: transparent;
 								margin: 0 auto;
 							}
@@ -242,7 +242,7 @@ html {
 							right: 0;
 
 							circle, line {
-								stroke: var(--color-background);
+								stroke: white;
 								stroke-width: 10px;
 							}
 						}
@@ -503,6 +503,30 @@ html {
 										path.bottom {
 											stroke: none;
 											fill: var(--color-border);
+										}
+									}
+									// やりたいこと
+									&#to-do {
+										path.hand {
+											fill: none;
+											stroke: var(--color-border);
+											stroke-width: 5px;
+										}
+										path.bag {
+											fill: var(--color-border);
+											stroke: none;
+										}
+									}
+									// さいごに
+									&#end {
+										path {
+											fill: var(--color-border);
+											stroke: none;
+										}
+										circle {
+											fill: var(--color-border);
+											stroke: var(--color-background);
+											stroke-width: 3px;
 										}
 									}
 								}
