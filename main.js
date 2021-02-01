@@ -10,6 +10,11 @@ client.on('ready', () => {
 	console.log('bot is ready!');
 })
 
+// .last()
+if (!Array.prototype.last) Array.prototype.last = function () { return this[this.length - 1] }
+// .replaceAt()
+if (!String.prototype.replaceAt) String.prototype.replaceAt = function (begin, end, to) { return this.slice(0, begin) + to + this.slice(end + 1) }
+
 client.on('message', message => {
 	// 自分自身には応答しない
 	if (message.author === client.user) return
@@ -27,7 +32,8 @@ client.on('message', message => {
 		MA: /^MA(\s+all)?$/i,
 		FCL: /^FCL(\s+all)?$/i,
 		FCM: /^FCM(\s+all)?$/i,
-		dice: /^(\d+)d(\d+)/i
+		dice: /^([\(\)\+\-\\\*\dd]+)([<>]=)?([\(\)\+\-\\\*\d]+)?/i,
+		simple: /^d66/i
 	}
 
 	const utilList = {
@@ -313,6 +319,13 @@ client.on('message', message => {
 					return '失敗'
 				}
 			}
+			const calc = form => {
+				try {
+					return eval(form)
+				} catch (error) {
+					return 0
+				}
+			}
 			let output = ''
 
 			switch (pattern) {
@@ -334,7 +347,7 @@ client.on('message', message => {
 						// ボーナスダイス
 						const bonusDice = Number((match[1] || '0').replace('(', '').replace(')', ''))
 						// 目標値
-						const diff = eval(match[2])
+						const diff = calc(match[2])
 
 						// 目標値<=0
 						if (diff <= 0) break;
@@ -356,7 +369,7 @@ client.on('message', message => {
 					{
 						// 目標値
 						match.shift()
-						const diff = match.map(val => eval(val.replace(',', '')))
+						const diff = match.map(val => calc(val.replace(',', '')))
 						// ダイスの値
 						const total = roll(1, 100)
 						// それぞれの結果
@@ -383,17 +396,17 @@ client.on('message', message => {
 					// 自動火器
 					{
 						// 弾丸の数
-						const bullet = eval(match[1])
+						const bullet = calc(match[1])
 						// 技能値
-						const diff = eval(match[3])
+						const diff = calc(match[3])
 						// 故障ナンバー
-						const brokenNumber = eval(match[5])
+						const brokenNumber = calc(match[5])
 						// ボーナスダイス・ペナルティダイス
-						const bonusDice = eval(match[7] || 0)
+						const bonusDice = calc(match[7] || 0)
 						// 指定難易度で終了
 						const endDiff = match[9] || ''
 						// ボレー弾丸の数
-						const volley = eval(match[11] || Math.floor(diff / 10))
+						const volley = calc(match[11] || Math.floor(diff / 10))
 
 						// 弾丸<=0
 						if (bullet <= 0) break;
@@ -651,7 +664,113 @@ client.on('message', message => {
 					}
 					break;
 				case 'dice':
+					{
+						const evalDiceRoll = str => {
+							// ()内 > dice > 四則演算の優先度で計算
 
+							let evalStr = str
+							// 括弧探索
+							evalStr = (() => {
+								const bracketPos = evalStr.indexOf('(')
+								if (bracketPos >= 0) {
+									let bracketNest = 1
+									let currentPos = bracketPos
+									while (true) {
+										if (bracketNest === 0) break;
+										const nextOpen = (() => (evalStr.indexOf('(', currentPos + 1) === -1) ? 10000 : evalStr.indexOf('(', currentPos + 1))()
+										const nextClose = (() => (evalStr.indexOf(')', currentPos + 1) === -1) ? 10000 : evalStr.indexOf(')', currentPos + 1))()
+										if (nextClose < nextOpen) {
+											// )がくる
+											bracketNest--
+											currentPos = nextClose
+										} else {
+											// (がくる
+											bracketNest++
+											currentPos = nextOpen
+										}
+									}
+									const inBracket = evalStr.substring(bracketPos + 1, currentPos)
+									return evalStr.replaceAt(bracketPos, currentPos, evalDiceRoll(inBracket))
+								} else {
+									return evalStr
+								}
+							})()
+
+							// dice探索
+							while (true) {
+								const dicePos = evalStr.search(/\d+d\d+/i)
+								if (dicePos >= 0) {
+									const matches = evalStr.match(/(\d+)d(\d+)/i)
+									evalStr = evalStr.replaceAt(dicePos, dicePos + matches[0].length - 1, (() => {
+										const totalList = (() => {
+											let totalList = []
+											for (let i = 0; i < Number(matches[1]); i++) {
+												if (Number(matches[2]) === 0) {
+													totalList.push(0)
+												} else {
+													totalList.push(roll(1, Number(matches[2])))
+												}
+											}
+											return totalList
+										})()
+										const total = totalList.reduce((a, b) => a + b, 0)
+
+										return `${total}`
+									})())
+								} else {
+									break;
+								}
+							}
+
+							// 式評価
+							return calc(evalStr)
+						}
+
+						if (match[0] === 'd66') break;
+
+						switch (match[2]) {
+							case '<=':
+								{
+									// ～以下なら
+									const evalStr = match[1]
+									const result = evalDiceRoll(evalStr)
+									const diff = calc(match[3])
+
+									if (diff === 0) break;
+
+									const resultText = (() => (result <= diff) ? '成功' : '失敗')
+									output = `(${match[0]}) ＞ ${result} ＞ ${resultText}`
+								}
+								break;
+							case '>=':
+								{
+									// ～以上なら
+									const evalStr = match[1]
+									const result = evalDiceRoll(evalStr)
+									const diff = calc(match[3])
+
+									if (diff === 0) break;
+
+									const resultText = (() => (result >= diff) ? '成功' : '失敗')
+									output = `(${match[0]}) ＞ ${result} ＞ ${resultText}`
+								}
+								break;
+							default:
+								{
+									// ダイスロールのみ
+									const evalStr = match[1]
+									const result = evalDiceRoll(evalStr)
+
+									output = `(${match[0]}) ＞ ${result}`
+								}
+								break;
+						}
+					}
+					break;
+				case 'simple':
+					{
+						output = `(d66) ＞ ${roll(1, 6) * 10 + roll(1, 6)}`
+					}
 					break;
 			}
 
