@@ -200,7 +200,7 @@ html {
 						right: 0;
 						bottom: 0;
 						margin: 0;
-						background: linear-gradient(to top, rgba(black, 0.8), rgba(black, 0));
+						background: linear-gradient(to top, rgba(black, 1), rgba(black, 0));
 						justify-content: center;
 						align-items: center;
 
@@ -547,20 +547,27 @@ html {
 
 									&::after {
 										content: '';
+										display: inline-block;
 										width: 0;
 										height: 0;
-										position: absolute;
-										border: 30px solid transparent;
+										position: relative;
+										border: 40px solid transparent;
+										margin-top: -100px;
 										
 										@include pc {
-											top: 190px;
-											left: 330px;
-											border-left: 30px solid var(--color-background-accent);	
+											top: -10px;
+											left: 290px;
+											border-left: 40px solid var(--color-background-accent);
 										};
 										@include sp {
-											left: 50px;
-											border-top: 30px solid var(--color-background-accent);
+											top: 80px;
+											left: 0px;
+											border-top: 40px solid var(--color-background-accent);
 										};
+									}
+
+									p {
+										margin-bottom: 0;
 									}
 								}
 
@@ -568,9 +575,10 @@ html {
 									height: 150px;
 
 									@include pc {
-										position: absolute;
-										top: 160px;
-										left: 370px;
+										position: relative;
+										top: -260px;
+										left: 350px;
+										margin-bottom: -250px
 									};
 									@include sp {
 										margin-top: 40px;
@@ -630,7 +638,7 @@ html {
 
 				#settings {
 					margin: auto 0;
-					width: 100px;
+					min-width: 120px;
 					svg {
 						float: left;
 						circle, line {
@@ -765,7 +773,7 @@ html {
 										}
 									}
 								}
-	
+
 								div.setting-colorset {
 									display: flex;
 									flex-wrap: wrap;
@@ -782,8 +790,9 @@ html {
 										label {
 											width: 100%;
 											cursor: pointer;
+											padding: 2px;
 											padding-left: 5px;
-											border-left: solid 5px;	
+											border-left: solid 5px;
 	
 											&[for="setting-colorset-default"] {
 												background-color: $colorset-default-background;
@@ -806,6 +815,18 @@ html {
 												border-left-color: $colorset-black-accent;
 											}	
 										}
+									}
+								}
+
+								div.setting-language {
+									select {
+										margin-left: 10px;
+										outline: none;
+										border: none;
+										border-bottom: solid 1px var(--color-accent);
+										font-size: inherit;
+										min-width: 150px;
+										padding: 0 5px;
 									}
 								}
 							}

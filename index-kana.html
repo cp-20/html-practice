@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>みらいにっき</title>
+
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<input id="setting-font-size-small" type="radio" name="setting-font-size" class="settings setting-font-size">
+	<input id="setting-font-size-medium" type="radio" name="setting-font-size" class="settings setting-font-size" checked="checked">
+	<input id="setting-font-size-big" type="radio" name="setting-font-size" class="settings setting-font-size">
+
+	<input id="setting-colorset-default" type="radio" name="setting-colorset" class="settings setting-colorset" checked="checked">
+	<input id="setting-colorset-yellow" type="radio" name="setting-colorset" class="settings setting-colorset">
+	<input id="setting-colorset-blue" type="radio" name="setting-colorset" class="settings setting-colorset">
+	<input id="setting-colorset-black" type="radio" name="setting-colorset" class="settings setting-colorset">
+	
+	<div id="content">
+		<header>
+			<figure id="eyecatch">
+				<img src="./img/eyecatch.jpg" alt="プログラミングをイメージした画像(がぞう)">
+				<figcaption style="height: 110px;">
+					<div>
+						<p class="caption"><ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby><ruby><rb>日記</rb><rp>(</rp><rt>にっき</rt><rp>)</rp></ruby></p>
+						<p class="subcaption">-The Future Diary-</p>
+					</div>
+				</figcaption>
+				<div id="setting-button">
+					<svg width="32" height="32" viewBox="0 0 64 64">
+						<circle cx="32" cy="32" r="13" fill="none"/>
+						<!-- ↓ -->
+						<line x1="32" y1="42" x2="32" y2="57"/>
+						<!-- ↙ -->
+						<line x1="25" y1="39" x2="14" y2="50"/>
+						<!-- ← -->
+						<line x1="22" y1="32" x2="7" y2="32"/>
+						<!-- ↖ -->
+						<line x1="25" y1="25" x2="14" y2="14"/>
+						<!-- ↑ -->
+						<line x1="32" y1="22" x2="32" y2="7"/>
+						<!-- ↗ -->
+						<line x1="39" y1="25" x2="50" y2="14"/>
+						<!-- → -->
+						<line x1="42" y1="32" x2="57" y2="32"/>
+						<!-- ↘ -->
+						<line x1="39" y1="39" x2="50" y2="50"/>
+					</svg>
+					<label for="popup-settings"></label>
+					<div style="width: 40px;left: -47px;">
+						<style>#setting-button div::before {left: 20px!important;}</style>
+						<p><ruby><rb>設定</rb><rp>(</rp><rt>せってい</rt><rp>)</rp></ruby></p>
+					</div>
+				</div>
+			</figure>
+		</header>
+	
+		<main>
+			<div class="tab-wrap">
+				<input id="home" type="radio" name="TAB" checked="checked" />
+				<label for="home" class="tab-menu">ホーム</label>
+				<div id="tab-home" class="tab-content">
+					<h2>
+						<p>ホーム</p>
+						<svg id="pict-home" viewBox="0 0 64 64">
+							<polyline points="4,30 32,4 60,30" />
+							<polyline points="12,30 12,60 52,60 52,30" />
+						</svg>
+					</h2>
+
+					<div>
+						<h3><ruby><rb>自己</rb><rp>(</rp><rt>じこ</rt><rp>)</rp></ruby><ruby><rb>紹介</rb><rp>(</rp><rt>しょうかい</rt><rp>)</rp></ruby></h3>
+						<div class="content">
+							<div class="serif">
+								<p>プログラミング<ruby><rb>好</rb><rp>(</rp><rt>す</rt><rp>)</rp></ruby>きな<ruby><rb>高校生</rb><rp>(</rp><rt>こうこうせい</rt><rp>)</rp></ruby></p>
+								<p>それ<ruby><rb>以上</rb><rp>(</rp><rt>いじょう</rt><rp>)</rp></ruby>でもそれ<ruby><rb>以下</rb><rp>(</rp><rt>いか</rt><rp>)</rp></ruby>でもない</p>
+								<p class="strike">それ<ruby><rb>以上</rb><rp>(</rp><rt>いじょう</rt><rp>)</rp></ruby>でもそれ<ruby><rb>以下</rb><rp>(</rp><rt>いか</rt><rp>)</rp></ruby>でもない</p>
+							</div>
+							<img class="logo" src="img/logo.png" alt="自分(じぶん)のイメージ画像(がぞう)" height="200">	
+						</div>
+
+						<h3>サイトの<ruby><rb>紹介</rb><rp>(</rp><rt>しょうかい</rt><rp>)</rp></ruby>（？）</h3>
+						<div class="content">
+							<p>ヘッダー<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>てわかる<ruby><rb>通</rb><rp>(</rp><rt>とお</rt><rp>)</rp></ruby>り<ruby><rb>自分</rb><rp>(</rp><rt>じぶん</rt><rp>)</rp></ruby>のこれまでとこれからについて<ruby><rb>語</rb><rp>(</rp><rt>かた</rt><rp>)</rp></ruby>るだけのサイトです</p>
+							<p>つまらないものですが<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>てくれるとうれしい、のか？</p>	
+						</div>
+						
+						<div class="pages">
+							<label for="home" class="page now">ホーム</label>
+							<label for="past" class="page"><ruby><rb>過去</rb><rp>(</rp><rt>かこ</rt><rp>)</rp></ruby></label>
+							<label for="now" class="page"><ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby></label>
+							<label for="future" class="page"><ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby></label>	
+						</div>
+					</div>
+				</div>
+
+				<input id="past" type="radio" name="TAB" />
+				<label for="past" class="tab-menu"><ruby><rb>過去</rb><rp>(</rp><rt>かこ</rt><rp>)</rp></ruby></label>
+				<div id="tab-past" class="tab-content">
+					<h2>
+						<p><ruby><rb>過去</rb><rp>(</rp><rt>かこ</rt><rp>)</rp></ruby></p>
+						<svg id="pict-past" viewBox="0 0 128 32">
+							<path d="M 4 16 L 124 16 L 116 12 L 124 16 L 116 20" />
+							<circle cx="30" cy="16" />
+							<circle cx="65" cy="16" />
+							<circle cx="100" cy="16" />
+						</svg>
+					</h2>
+					<div>
+						<h3>
+							<p><ruby><rb>幼児期</rb><rp>(</rp><rt>ようじき</rt><rp>)</rp></ruby>（0～5<ruby><rb>歳</rb><rp>(</rp><rt>さい</rt><rp>)</rp></ruby><ruby><rb>程度</rb><rp>(</rp><rt>ていど</rt><rp>)</rp></ruby>）</p>
+							<svg id="baby" viewBox="0 0 64 64">
+								<rect x="4" y="34" width="30" height="30" />
+								<polygon points="20,4 4,32 36,32" />
+								<circle cx="40" cy="32" r="17" />
+							</svg>
+						</h3>
+						<div class="content">
+							<p><ruby><rb>幼少期</rb><rp>(</rp><rt>ようしょうき</rt><rp>)</rp></ruby>はほとんど<ruby><rb>記憶</rb><rp>(</rp><rt>きおく</rt><rp>)</rp></ruby>がない</p>
+							<p>すなわち<ruby><rb>書</rb><rp>(</rp><rt>か</rt><rp>)</rp></ruby>くことがない</p>	
+						</div>
+
+						<h3>
+							<p><ruby><rb>小学生</rb><rp>(</rp><rt>しょうがくせい</rt><rp>)</rp></ruby>（6～12<ruby><rb>歳</rb><rp>(</rp><rt>さい</rt><rp>)</rp></ruby><ruby><rb>程度</rb><rp>(</rp><rt>ていど</rt><rp>)</rp></ruby>）</p>
+								<svg id="elementary" viewBox="0 0 64 64">
+									<circle cx="32" cy="32" r="24" />
+									<path d="M 14 12 Q 30 32, 14 52" />
+									<path d="M 32 8 L 32 56" />
+									<path d="M 50 12 Q 34 32, 50 52" />
+									<path d="M 8 30 Q 32 40, 56 30" />
+								</svg>
+							</h3>
+						<div class="content">
+							<p>このころは<ruby><rb>割</rb><rp>(</rp><rt>わり</rt><rp>)</rp></ruby>と<ruby><rb>運動</rb><rp>(</rp><rt>うんどう</rt><rp>)</rp></ruby><ruby><rb>神経</rb><rp>(</rp><rt>しんけい</rt><rp>)</rp></ruby>は<ruby><rb>良</rb><rp>(</rp><rt>よ</rt><rp>)</rp></ruby>かった（と<ruby><rb>自分</rb><rp>(</rp><rt>じぶん</rt><rp>)</rp></ruby>で<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>っている）</p>
+							<p><ruby><rb>高</rb><rp>(</rp><rt>こう</rt><rp>)</rp></ruby><ruby><rb>学年</rb><rp>(</rp><rt>がくねん</rt><rp>)</rp></ruby>あたりからプログラミングに<ruby><rb>目覚</rb><rp>(</rp><rt>めざ</rt><rp>)</rp></ruby>め<ruby><rb>始</rb><rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>める</p>
+							<p><ruby><rb>最初</rb><rp>(</rp><rt>さいしょ</rt><rp>)</rp></ruby>に<ruby><rb>振</rb><rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>れたのはScratchというコードを<ruby><rb>書</rb><rp>(</rp><rt>か</rt><rp>)</rp></ruby>かなくても<ruby><rb>簡単</rb><rp>(</rp><rt>かんたん</rt><rp>)</rp></ruby>にプログラミングの<ruby><rb>基礎</rb><rp>(</rp><rt>きそ</rt><rp>)</rp></ruby>っぽいものが<ruby><rb>学</rb><rp>(</rp><rt>まな</rt><rp>)</rp></ruby>べるサービス</p>
+							<p>これ<ruby><rb>以外</rb><rp>(</rp><rt>いがい</rt><rp>)</rp></ruby>のものに<ruby><rb>手</rb><rp>(</rp><rt>て</rt><rp>)</rp></ruby>を<ruby><rb>出</rb><rp>(</rp><rt>だ</rt><rp>)</rp></ruby>すのは<ruby><rb>中学生</rb><rp>(</rp><rt>ちゅうがくせい</rt><rp>)</rp></ruby>になってからだ</p>	
+						</div>
+
+						<h3>
+							<p><ruby><rb>中学生</rb><rp>(</rp><rt>ちゅうがくせい</rt><rp>)</rp></ruby>（13～15<ruby><rb>歳</rb><rp>(</rp><rt>さい</rt><rp>)</rp></ruby><ruby><rb>程度</rb><rp>(</rp><rt>ていど</rt><rp>)</rp></ruby>）</p>
+							<svg id="junior" viewBox="0 0 64 64">
+								<polygon points="24,4 40,4 38,14 26,14" />
+								<polygon points="26,18 20,50 32,60 44,50 38,18" />
+							</svg>
+						</h3>
+						<div class="content">
+							<p><ruby><rb>運動</rb><rp>(</rp><rt>うんどう</rt><rp>)</rp></ruby>する<ruby><rb>習慣</rb><rp>(</rp><rt>しゅうかん</rt><rp>)</rp></ruby>がなくなってだんだん<ruby><rb>体力</rb><rp>(</rp><rt>たいりょく</rt><rp>)</rp></ruby>が<ruby><rb>落</rb><rp>(</rp><rt>お</rt><rp>)</rp></ruby>ちていく<ruby><rb>中学生</rb><rp>(</rp><rt>ちゅうがくせい</rt><rp>)</rp></ruby>のころ</p>
+							<p><ruby><rb>中</rb><rp>(</rp><rt>ちゅう</rt><rp>)</rp></ruby>2のころに<ruby><rb>初</rb><rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>めてHSPというScratch<ruby><rb>以外</rb><rp>(</rp><rt>いがい</rt><rp>)</rp></ruby>のプログラミングに<ruby><rb>触</rb><rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>れる</p>
+							<p>1<ruby><rb>年</rb><rp>(</rp><rt>ねん</rt><rp>)</rp></ruby><ruby><rb>間</rb><rp>(</rp><rt>かん</rt><rp>)</rp></ruby><ruby><rb>半</rb><rp>(</rp><rt>はん</rt><rp>)</rp></ruby>ぐらいかけて<ruby><rb>中</rb><rp>(</rp><rt>なか</rt><rp>)</rp></ruby>の<ruby><rb>上</rb><rp>(</rp><rt>うえ</rt><rp>)</rp></ruby>ぐらいまで<ruby><rb>実力</rb><rp>(</rp><rt>じつりょく</rt><rp>)</rp></ruby>を<ruby><rb>上</rb><rp>(</rp><rt>あ</rt><rp>)</rp></ruby>げた</p>
+							<p><ruby><rb>中</rb><rp>(</rp><rt>ちゅう</rt><rp>)</rp></ruby>3の<ruby><rb>時</rb><rp>(</rp><rt>とき</rt><rp>)</rp></ruby>にはHSPプログラミングコンテストで<ruby><rb>学生</rb><rp>(</rp><rt>がくせい</rt><rp>)</rp></ruby><ruby><rb>賞</rb><rp>(</rp><rt>しょう</rt><rp>)</rp></ruby>を<ruby><rb>受賞</rb><rp>(</rp><rt>じゅしょう</rt><rp>)</rp></ruby>して<ruby><rb>若干</rb><rp>(</rp><rt>じゃっかん</rt><rp>)</rp></ruby><ruby><rb>活躍</rb><rp>(</rp><rt>かつやく</rt><rp>)</rp></ruby>もした</p>
+							<p><ruby><rb>中</rb><rp>(</rp><rt>ちゅう</rt><rp>)</rp></ruby>3<ruby><rb>後半</rb><rp>(</rp><rt>こうはん</rt><rp>)</rp></ruby>からだんだんHSP<ruby><rb>以外</rb><rp>(</rp><rt>いがい</rt><rp>)</rp></ruby>のプログラミング<ruby><rb>言語</rb><rp>(</rp><rt>げんご</rt><rp>)</rp></ruby>にも<ruby><rb>触</rb><rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>れ<ruby><rb>始</rb><rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>める</p>
+							<p>またプログラミング<ruby><rb>以外</rb><rp>(</rp><rt>いがい</rt><rp>)</rp></ruby>には<ruby><rb>黒板</rb><rp>(</rp><rt>こくばん</rt><rp>)</rp></ruby><ruby><rb>消</rb><rp>(</rp><rt>け</rt><rp>)</rp></ruby>しを<ruby><rb>積極</rb><rp>(</rp><rt>せっきょく</rt><rp>)</rp></ruby><ruby><rb>的</rb><rp>(</rp><rt>まと</rt><rp>)</rp></ruby>にするようになったことがある</p>
+							<p><ruby><rb>中学生</rb><rp>(</rp><rt>ちゅうがくせい</rt><rp>)</rp></ruby>の<ruby><rb>初期</rb><rp>(</rp><rt>しょき</rt><rp>)</rp></ruby>ぐらいから<ruby><rb>初</rb><rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>めて<ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby>に<ruby><rb>至</rb><rp>(</rp><rt>いた</rt><rp>)</rp></ruby>るまで<ruby><rb>割</rb><rp>(</rp><rt>わり</rt><rp>)</rp></ruby>と<ruby><rb>積極的</rb><rp>(</rp><rt>せっきょくてき</rt><rp>)</rp></ruby>に<ruby><rb>黒板</rb><rp>(</rp><rt>こくばん</rt><rp>)</rp></ruby>を<ruby><rb>掃除</rb><rp>(</rp><rt>そうじ</rt><rp>)</rp></ruby>している</p>
+							<p>そして<ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby>へ<ruby><rb>続</rb><rp>(</rp><rt>つづ</rt><rp>)</rp></ruby>く.......</p>	
+						</div>
+
+						<div class="pages">
+							<label for="home" class="page">ホーム</label>
+							<label for="past" class="page now"><ruby><rb>過去</rb><rp>(</rp><rt>かこ</rt><rp>)</rp></ruby></label>
+							<label for="now" class="page"><ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby></label>
+							<label for="future" class="page"><ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby></label>	
+						</div>
+					</div>
+				</div>
+
+				<input id="now" type="radio" name="TAB" />
+				<label for="now" class="tab-menu"><ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby></label>
+				<div id="tab-now" class="tab-content">
+					<h2>
+						<p><ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby></p>
+						<svg id="pict-now" viewBox="0 0 128 32">
+							<path d="M 4 16 L 124 16 L 116 12 L 124 16 L 116 20" />
+							<circle cx="30" cy="16" />
+							<circle cx="65" cy="16" />
+							<circle cx="100" cy="16" />
+						</svg>
+					</h2>
+					<div>
+						<h3>
+							<p>プログラミング</p>
+							<svg id="programming" viewBox="0 0 64 64">
+								<polygon class="screen" points="10,44 10,15 54,15 54,44"/>
+								<polygon class="keyboard" points="10,44 2,54 60,54 54,44"/>
+								<polygon class="keyboard" points="2,54 2,57 60,57 60,54"/>
+							</svg>
+						</h3>
+						<div class="content">
+							<p><ruby><rb>過去</rb><rp>(</rp><rt>かこ</rt><rp>)</rp></ruby>の<ruby><rb>項</rb><rp>(</rp><rt>こう</rt><rp>)</rp></ruby>でいろいろ<ruby><rb>書</rb><rp>(</rp><rt>か</rt><rp>)</rp></ruby>いたが<ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby>でもプログラミングはやっている</p>
+							<p><ruby><rb>最近</rb><rp>(</rp><rt>さいきん</rt><rp>)</rp></ruby>は<ruby><rb>様々</rb><rp>(</rp><rt>さまざま</rt><rp>)</rp></ruby>なプログラミング<ruby><rb>言語</rb><rp>(</rp><rt>げんご</rt><rp>)</rp></ruby>に<ruby><rb>触</rb><rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>れていて、その<ruby><rb>中</rb><rp>(</rp><rt>なか</rt><rp>)</rp></ruby>でもハマっているのがPythonとJavaScriptだ</p>
+							<p>Pythonは<ruby><rb>初心者</rb><rp>(</rp><rt>しょしんしゃ</rt><rp>)</rp></ruby>でも<ruby><rb>書</rb><rp>(</rp><rt>か</rt><rp>)</rp></ruby>きやすいらしいということで<ruby><rb>書</rb><rp>(</rp><rt>か</rt><rp>)</rp></ruby>いてみるとかなりすんなり<ruby><rb>書</rb><rp>(</rp><rt>か</rt><rp>)</rp></ruby>くことができた</p>
+							<p>ドキュメントやライブラリのサポートも<ruby><rb>充実</rb><rp>(</rp><rt>じゅうじつ</rt><rp>)</rp></ruby>してていい<ruby><rb>言語</rb><rp>(</rp><rt>げんご</rt><rp>)</rp></ruby>だなと<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>った</p>
+							<p>JavaScriptもサポートは<ruby><rb>充実</rb><rp>(</rp><rt>じゅうじつ</rt><rp>)</rp></ruby>しているのだが<ruby><rb>自分</rb><rp>(</rp><rt>じぶん</rt><rp>)</rp></ruby>がやろうとしているのがかなりマイナーな<ruby><rb>分野</rb><rp>(</rp><rt>ぶんや</rt><rp>)</rp></ruby>なのかほとんど<ruby><rb>情報</rb><rp>(</rp><rt>じょうほう</rt><rp>)</rp></ruby>が<ruby><rb>出</rb><rp>(</rp><rt>で</rt><rp>)</rp></ruby>てこないこともしばしば</p>
+							<p>それでも<ruby><rb>頑張</rb><rp>(</rp><rt>がんば</rt><rp>)</rp></ruby>って<ruby><rb>作</rb><rp>(</rp><rt>つく</rt><rp>)</rp></ruby>りたいものを<ruby><rb>作</rb><rp>(</rp><rt>つく</rt><rp>)</rp></ruby>ることができたのでよかったなと<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>う</p>
+							<p><ruby><rb>今</rb><rp>(</rp><rt>いま</rt><rp>)</rp></ruby>サイトを<ruby><rb>作</rb><rp>(</rp><rt>つく</rt><rp>)</rp></ruby>っている<ruby><rb>時</rb><rp>(</rp><rt>とき</rt><rp>)</rp></ruby>に<ruby><rb>使</rb><rp>(</rp><rt>つか</rt><rp>)</rp></ruby>っているHTML/CSSも<ruby><rb>中学</rb><rp>(</rp><rt>ちゅうがく</rt><rp>)</rp></ruby>のころから<ruby><rb>少</rb><rp>(</rp><rt>すこ</rt><rp>)</rp></ruby>しずつやっていた</p>
+							<p>HTML/CSSを<ruby><rb>学</rb><rp>(</rp><rt>まな</rt><rp>)</rp></ruby>んで<ruby><rb>良</rb><rp>(</rp><rt>よ</rt><rp>)</rp></ruby>かったと<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>うのは<ruby><rb>普段</rb><rp>(</rp><rt>ふだん</rt><rp>)</rp></ruby><ruby><rb>使</rb><rp>(</rp><rt>つか</rt><rp>)</rp></ruby>っているチャットアプリを<ruby><rb>自分</rb><rp>(</rp><rt>じぶん</rt><rp>)</rp></ruby><ruby><rb>好</rb><rp>(</rp><rt>ごの</rt><rp>)</rp></ruby>みのテーマに<ruby><rb>改変</rb><rp>(</rp><rt>かいへん</rt><rp>)</rp></ruby>できたことだ</p>
+							<p>プログラミングは<ruby><rb>学</rb><rp>(</rp><rt>まな</rt><rp>)</rp></ruby>ぶと<ruby><rb>気軽</rb><rp>(</rp><rt>きがる</rt><rp>)</rp></ruby>にアプリ<ruby><rb>製作</rb><rp>(</rp><rt>せいさく</rt><rp>)</rp></ruby>ができたり<ruby><rb>既存</rb><rp>(</rp><rt>きそん</rt><rp>)</rp></ruby>のアプリをちょこっと<ruby><rb>改造</rb><rp>(</rp><rt>かいぞう</rt><rp>)</rp></ruby>できたりするので<ruby><rb>結構</rb><rp>(</rp><rt>けっこう</rt><rp>)</rp></ruby><ruby><rb>楽</rb><rp>(</rp><rt>たの</rt><rp>)</rp></ruby>しいと<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>う</p>
+							<p>プログラミングが<ruby><rb>気</rb><rp>(</rp><rt>き</rt><rp>)</rp></ruby>になっている<ruby><rb>人</rb><rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>もプログラミングに<ruby><rb>興味</rb><rp>(</rp><rt>きょうみ</rt><rp>)</rp></ruby>がない<ruby><rb>人</rb><rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>も<ruby><rb>是非</rb><rp>(</rp><rt>ぜひ</rt><rp>)</rp></ruby><ruby><rb>一度</rb><rp>(</rp><rt>いちど</rt><rp>)</rp></ruby><ruby><rb>触</rb><rp>(</rp><rt>さわ</rt><rp>)</rp></ruby>ってみてほしい（もう<ruby><rb>情報</rb><rp>(</rp><rt>じょうほう</rt><rp>)</rp></ruby>で<ruby><rb>少</rb><rp>(</rp><rt>すこ</rt><rp>)</rp></ruby>し<ruby><rb>触</rb><rp>(</rp><rt>さわ</rt><rp>)</rp></ruby>ってはいるが）</p>	
+						</div>
+
+						<h3>
+							<p><ruby><rb>黒板</rb><rp>(</rp><rt>こくばん</rt><rp>)</rp></ruby><ruby><rb>消</rb><rp>(</rp><rt>け</rt><rp>)</rp></ruby>し</p>							
+							<svg id="blackboard-eraser" viewBox="0 0 64 64">
+								<path class="cover" d="M 32 14 l 2 0 q 1 0, 1 1 l 0 25 q 0 1, -1 1 l -4 0 q -1 0, -1 -1 l 0 -25 q 0 -1, 1 -1 l 2 0"></path>
+								<path class="up" d="M 8 40 l 0 -10 q 0 -8, 8 -8 l 32 0 q 8 0, 8 8 l 0 10"></path>
+								<path class="bottom" d="M 9 36 l 0 12 q 0 4, 4 4 l 38 0 q 4 0, 4 -4 l 0 -12"></path>
+							</svg>
+						</h3>
+						<div class="content">
+							<p>わざわざ<ruby><rb>項</rb><rp>(</rp><rt>こう</rt><rp>)</rp></ruby>にするほど<ruby><rb>語</rb><rp>(</rp><rt>かた</rt><rp>)</rp></ruby>ることも<ruby><rb>多</rb><rp>(</rp><rt>おお</rt><rp>)</rp></ruby>くないのだが<ruby><rb>項</rb><rp>(</rp><rt>こう</rt><rp>)</rp></ruby>が１つしかないのは<ruby><rb>少</rb><rp>(</rp><rt>すこ</rt><rp>)</rp></ruby>し<ruby><rb>寂</rb><rp>(</rp><rt>さび</rt><rp>)</rp></ruby>しいので<ruby><rb>項</rb><rp>(</rp><rt>こう</rt><rp>)</rp></ruby>にまとめた</p>
+							<p><ruby><rb>中</rb><rp>(</rp><rt>ちゅう</rt><rp>)</rp></ruby>2ぐらいから<ruby><rb>本格的</rb><rp>(</rp><rt>ほんかくてき</rt><rp>)</rp></ruby>に<ruby><rb>始</rb><rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>めて<ruby><rb>年</rb><rp>(</rp><rt>とし</rt><rp>)</rp></ruby>を<ruby><rb>経</rb><rp>(</rp><rt>へ</rt><rp>)</rp></ruby>るごとに<ruby><rb>若干</rb><rp>(</rp><rt>じゃっかん</rt><rp>)</rp></ruby><ruby><rb>進化</rb><rp>(</rp><rt>しんか</rt><rp>)</rp></ruby>していると<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>う</p>
+							<p><ruby><rb>今</rb><rp>(</rp><rt>いま</rt><rp>)</rp></ruby>では<ruby><rb>授業</rb><rp>(</rp><rt>じゅぎょう</rt><rp>)</rp></ruby><ruby><rb>休</rb><rp>(</rp><rt>やす</rt><rp>)</rp></ruby>みと<ruby><rb>昼休</rb><rp>(</rp><rt>ひるやす</rt><rp>)</rp></ruby>みの<ruby><rb>全</rb><rp>(</rp><rt>すべ</rt><rp>)</rp></ruby>てを<ruby><rb>黒板</rb><rp>(</rp><rt>こくばん</rt><rp>)</rp></ruby><ruby><rb>消</rb><rp>(</rp><rt>け</rt><rp>)</rp></ruby>しに<ruby><rb>費</rb><rp>(</rp><rt>つい</rt><rp>)</rp></ruby>やしている</p>
+							<p><ruby><rb>学年</rb><rp>(</rp><rt>がくねん</rt><rp>)</rp></ruby>で<ruby><rb>一番</rb><rp>(</rp><rt>いちばん</rt><rp>)</rp></ruby><ruby><rb>黒板</rb><rp>(</rp><rt>こくばん</rt><rp>)</rp></ruby>を<ruby><rb>消</rb><rp>(</rp><rt>け</rt><rp>)</rp></ruby>しているんじゃないだろうか</p>	
+						</div>
+
+						<div class="pages">
+							<label for="home" class="page">ホーム</label>
+							<label for="past" class="page"><ruby><rb>過去</rb><rp>(</rp><rt>かこ</rt><rp>)</rp></ruby></label>
+							<label for="now" class="page now"><ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby></label>
+							<label for="future" class="page"><ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby></label>	
+						</div>
+					</div>
+				</div>
+
+				<input id="future" type="radio" name="TAB" />
+				<label for="future" class="tab-menu"><ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby></label>
+				<div id="tab-future" class="tab-content">
+					<h2>
+						<p><ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby></p>
+						<svg id="pict-future" viewBox="0 0 128 32">
+							<path d="M 4 16 L 124 16 L 116 12 L 124 16 L 116 20" />
+							<circle cx="30" cy="16" />
+							<circle cx="65" cy="16" />
+							<circle cx="100" cy="16" />
+						</svg>
+					</h2>
+					<div>
+						<h3>
+							<p>やりたいこと</p>
+							<svg id="to-do" viewBox="0 0 64 64">
+								<path class="hand" d="M 20 20 l 0 -5 q 0 -8, 8 -8 l 8 0 q 8 0, 8 8 l 0 5" />
+								<path class="bag" d="M 32 24 l 20 0 q 8 0, 8 8 l 0 20 q 0 8, -8 8 l -40 0 q -8 0, -8 -8 l 0 -20 q 0 -8, 8 -8 l 24 0" />
+							</svg>	
+						</h3>
+						<div class="content">
+							<p>やりたいことが<ruby><rb>明確</rb><rp>(</rp><rt>めいかく</rt><rp>)</rp></ruby>に<ruby><rb>決</rb><rp>(</rp><rt>き</rt><rp>)</rp></ruby>まっている<ruby><rb>訳</rb><rp>(</rp><rt>わけ</rt><rp>)</rp></ruby>ではないが、プログラミングを<ruby><rb>仕事</rb><rp>(</rp><rt>しごと</rt><rp>)</rp></ruby>か<ruby><rb>趣味</rb><rp>(</rp><rt>しゅみ</rt><rp>)</rp></ruby>にしたいとは<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>っている</p>
+							<p>ウェブデザイン<ruby><rb>系</rb><rp>(</rp><rt>けい</rt><rp>)</rp></ruby>やバックエンド<ruby><rb>系</rb><rp>(</rp><rt>けい</rt><rp>)</rp></ruby>あたりに<ruby><rb>興味</rb><rp>(</rp><rt>きょうみ</rt><rp>)</rp></ruby>があるのでそういう<ruby><rb>会社</rb><rp>(</rp><rt>かいしゃ</rt><rp>)</rp></ruby>に<ruby><rb>就職</rb><rp>(</rp><rt>しゅうしょく</rt><rp>)</rp></ruby>できるといいなと<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>う</p>	
+						</div>
+
+						<h3>
+							<p>さいごに</p>
+							<svg id="end" viewBox="0 0 64 64">
+								<path d="M 8 60 Q 32 0, 56 60" />
+								<circle cx="32" cy="24" r="20" />
+							</svg>
+						</h3>
+						<div class="content">
+							<p>ここまでお<ruby><rb>読</rb><rp>(</rp><rt>よ</rt><rp>)</rp></ruby>みいただきありがとうございました</p>
+						</div>
+
+						<div class="pages">
+							<label for="home" class="page">ホーム</label>
+							<label for="past" class="page"><ruby><rb>過去</rb><rp>(</rp><rt>かこ</rt><rp>)</rp></ruby></label>
+							<label for="now" class="page"><ruby><rb>現在</rb><rp>(</rp><rt>げんざい</rt><rp>)</rp></ruby></label>
+							<label for="future" class="page now"><ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby></label>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<p>Copyright © 2021 <ruby><rb>未来日記</rb><rp>(</rp><rt>みらいにっき</rt><rp>)</rp></ruby> All Rights Reserved.</p>
+			<div id="settings">
+				<svg width="32" height="32" viewBox="0 0 64 64">
+					<circle cx="32" cy="32" r="13" fill="none"/>
+					<!-- ↓ -->
+					<line x1="32" y1="42" x2="32" y2="57"/>
+					<!-- ↙ -->
+					<line x1="25" y1="39" x2="14" y2="50"/>
+					<!-- ← -->
+					<line x1="22" y1="32" x2="7" y2="32"/>
+					<!-- ↖ -->
+					<line x1="25" y1="25" x2="14" y2="14"/>
+					<!-- ↑ -->
+					<line x1="32" y1="22" x2="32" y2="7"/>
+					<!-- ↗ -->
+					<line x1="39" y1="25" x2="50" y2="14"/>
+					<!-- → -->
+					<line x1="42" y1="32" x2="57" y2="32"/>
+					<!-- ↘ -->
+					<line x1="39" y1="39" x2="50" y2="50"/>
+				</svg>
+				<input type="checkbox" id="popup-settings">
+				<label for="popup-settings" class="settings"><ruby><rb>設定</rb><rp>(</rp><rt>せってい</rt><rp>)</rp></ruby></label>
+
+				<div class="popup-settings">	
+					<label for="popup-settings" class="popup-background"></label>
+					<div class="popup-settings-screen">
+						<label for="popup-settings" class="popup-escape">×</label>
+						<h2><ruby><rb>設定</rb><rp>(</rp><rt>せってい</rt><rp>)</rp></ruby></h2>
+						<div class="settings">
+							<h3><ruby><rb>文字</rb><rp>(</rp><rt>もじ</rt><rp>)</rp></ruby>サイズ</h3>
+							<div class="setting-font-size">
+								<label for="setting-font-size-small"><ruby><rb>小</rb><rp>(</rp><rt>しょう</rt><rp>)</rp></ruby></label>
+								<label for="setting-font-size-medium"><ruby><rb>中</rb><rp>(</rp><rt>ちゅう</rt><rp>)</rp></ruby></label>
+								<label for="setting-font-size-big"><ruby><rb>大</rb><rp>(</rp><rt>だい</rt><rp>)</rp></ruby></label>
+							</div>
+
+							<h3><ruby><rb>配色</rb><rp>(</rp><rt>はいしょく</rt><rp>)</rp></ruby><ruby><rb>設定</rb><rp>(</rp><rt>せってい</rt><rp>)</rp></ruby></h3>
+							<div class="setting-colorset">
+								<div class="setting-colorset-default">
+									<label for="setting-colorset-default">サンプルテキスト</label>								
+								</div>
+								<div class="setting-colorset-yellow">
+									<label for="setting-colorset-yellow">サンプルテキスト</label>
+								</div>
+								<div class="setting-colorset-blue">
+									<label for="setting-colorset-blue">サンプルテキスト</label>
+								</div>
+								<div class="setting-colorset-black">
+									<label for="setting-colorset-black">サンプルテキスト</label>
+								</div>
+							</div>
+
+							<h3><ruby><rb>表示</rb><rp>(</rp><rt>ひょうじ</rt><rp>)</rp></ruby><ruby><rb>言語</rb><rp>(</rp><rt>げんご</rt><rp>)</rp></ruby></h3>
+							<div class="setting-language">
+								<select name="setting-language" id="setting-language">
+									<option value="ja">日本語</option>
+									<option value="en">English(<ruby><rb>英語</rb><rp>(</rp><rt>えいご</rt><rp>)</rp></ruby>)</option>
+									<option value="kana" selected>ひらがな</option>
+									<option value="zh-CN">中文(简体) (ちゅうごくご)</option>
+									<option value="zh-tw">中文(繁体) (ちゅうごくご)</option>
+									<option value="ko">한국(<ruby><rb>韓国語</rb><rp>(</rp><rt>かんこくご</rt><rp>)</rp></ruby>)</option>
+								</select>
+								<script src="main.js"></script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>
