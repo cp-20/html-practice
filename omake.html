@@ -5,6 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>おまけ</title>
+	
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 
 	<link rel="stylesheet" href="./omake.css">
 </head>
@@ -28,19 +30,23 @@
 					</div>
 
 					<div class="ms-setting-sizeX ms-setting-box">
-						<input type="number" class="ms-setting" id="ms-sizeX">
+						<input type="number" class="ms-setting" id="ms-sizeX" min="7" max="50">
 					</div>
 					
 					<div class="ms-setting-sizeY ms-setting-box">
-						<input type="number" class="ms-setting" id="ms-sizeY">
+						<input type="number" class="ms-setting" id="ms-sizeY" min="7" max="50">
 					</div>
 
 					<div class="ms-setting-mines ms-setting-box">
-						<input type="number" class="ms-setting" id="ms-mines">
+						<input type="number" class="ms-setting" id="ms-mines" min="1">
 					</div>
 
 					<div class="ms-setting-start ms-setting-box">
 						<button id="ms-start">START / RESET</button>
+					</div>
+
+					<div class="ms-setting-timer ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-timer">
 					</div>
 				</div>
 
@@ -54,7 +60,7 @@
 		</main>
 
 		<footer>
-
+			<p>Copyright © 2021 未来日記 All Rights Reserved.</p>
 		</footer>
 	</div>
 

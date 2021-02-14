@@ -99,7 +99,7 @@ class Board {
 		// 地雷処理
 		if (this.board[this.getIndex(openX, openY)].mine) {
 			// 爆発(ゲームオーバー)
-			this.bomb();
+			this.bomb(openX, openY);
 		}else {
 			// 開く
 			this.board[this.getIndex(openX, openY)].opened = true;
@@ -116,15 +116,13 @@ class Board {
 	}
 
 	// 爆発(ゲームオーバー)
-	bomb() {
-		console.log('bomb');
+	bomb(x, y) {
 		this.bombed = true;
+		this.bombX = x;
+		this.bombY = y;
 
 		// 爆弾描画
 		this.draw();
-
-		// 
-
 	}
 
 	// 盤面初期化
@@ -216,30 +214,34 @@ class Board {
 				const cellContent = this.board[this.getIndex(x, y)];
 
 				if (this.bombed) {
-					if (cellContent.mine) {
-						if (cellContent.flag) {
-							cell.textContent = '🚩';
-						}else {
-							cell.textContent = '💣';
-						}
+					if (x == this.bombX && y == this.bombY) {
+						cell.textContent = '💥';
 					}else {
-						if (cellContent.opened) {
-							if (cellContent.mine) {
-								cell.textContent = '💣';
+						if (cellContent.mine) {
+							if (cellContent.flag) {
+								cell.textContent = '🚩';
 							}else {
-								if (cellContent.mineCount > 0) {
-									cell.textContent = `${cellContent.mineCount}`;
-									cell.dataset.mines = cellContent.mineCount;
-								}
+								cell.textContent = '💣';
 							}
 						}else {
-							if (cellContent.flag) {
+							if (cellContent.opened) {
 								if (cellContent.mine) {
-									cell.textContent = '🚩';
-									cell.classList.add('success');
+									cell.textContent = '💣';
 								}else {
-									cell.textContent = '🚩';
-									cell.classList.add('miss');
+									if (cellContent.mineCount > 0) {
+										cell.textContent = `${cellContent.mineCount}`;
+										cell.dataset.mines = cellContent.mineCount;
+									}
+								}
+							}else {
+								if (cellContent.flag) {
+									if (cellContent.mine) {
+										cell.textContent = '🚩';
+										cell.classList.add('success');
+									}else {
+										cell.textContent = '🚩';
+										cell.classList.add('miss');
+									}
 								}
 							}
 						}
@@ -284,6 +286,11 @@ class Settings {
 			this.this.getSize();
 			this.this.refresh();
 		}});
+
+		// いろいろ更新
+		document.getElementById('ms-sizeX').addEventListener('change', () => {this.reloadCustom()});
+		document.getElementById('ms-sizeY').addEventListener('change', () => {this.reloadCustom()});
+		document.getElementById('ms-mines').addEventListener('change', () => {this.reloadCustom()});
 	}
 
 	getSize() {
@@ -306,6 +313,24 @@ class Settings {
 		}
 	}
 
+	reloadCustom() {
+		const sizeX = document.getElementById('ms-sizeX');
+		const sizeY = document.getElementById('ms-sizeY');
+		const mines = document.getElementById('ms-mines');
+		
+		console.log(sizeX.max);
+		if (sizeX.value < sizeX.min) document.getElementById('ms-sizeX').value = sizeX.min;
+		if (sizeX.value > sizeX.max) document.getElementById('ms-sizeX').value = sizeX.max;
+		if (sizeY.value < sizeY.min) document.getElementById('ms-sizeY').value = sizeY.min;
+		if (sizeY.value > sizeY.max) document.getElementById('ms-sizeY').value = sizeY.max;		
+		if (mines.value < mines.min) document.getElementById('ms-mines').value = mines.min;
+		if (mines.value > sizeX.value * sizeY.value - 25) document.getElementById('ms-mines').value = sizeX.value * sizeY.value - 25;
+
+		this.sizeX = sizeX.value;
+		this.sizeY = sizeY.value;
+		this.mines = mines.value;
+	}
+
 	refresh() {
 		if (this.difficulty == 'custom') {
 			document.getElementById('ms-sizeX').disabled = false;
@@ -325,4 +350,9 @@ class Settings {
 const settings = new Settings('easy');
 
 // 盤面取得
-const board = new Board(settings.sizeX, settings.sizeY, settings.mines);
+let board = new Board(settings.sizeX, settings.sizeY, settings.mines);
+
+// START / RESET
+document.getElementById('ms-start').onclick = function() {
+	board = new Board(settings.sizeX, settings.sizeY, settings.mines);
+}

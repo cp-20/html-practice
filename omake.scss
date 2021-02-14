@@ -3,6 +3,8 @@ $color-background: whitesmoke;
 $color-background-line: lightgray;
 $color-accent: rgb(255, 116, 139);
 
+$color-background-footer: rgb(253, 199, 208);
+
 $color-minesweeper-background: rgb(150, 160, 252);
 
 $mesh-size: 20px;
@@ -23,22 +25,27 @@ html {
 				h1.title {
 					margin: 0 20px 20px 20px;
 					padding-left: 20px;
-					border-bottom: solid $color-accent;
+					border-bottom: solid $color-accent 5px;
 				}
 			}
 
 			main {
+				padding-left: 10px;
+				margin-bottom: 40px;
+
 				h2.label {
 					padding-left: 10px;
-					border-left: solid $color-accent 5px;
+					border-bottom: solid $color-accent 2px;
 					margin-left: 20px;
+					width: 300px;
+					font-size: 20px;
+					margin-bottom: 30px;
 				}
 				div.content {
-					margin-left: 40px;
+					margin-left: 30px;
 				}
 
 				#minesweeper {
-
 					#ms-setting {
 						margin: 0 0 5px 10px;
 						display: flex;
@@ -81,8 +88,25 @@ html {
 							border-radius: 2px;
 							cursor: pointer;
 
+							border-bottom: solid rgba(black, 0.2) 1px;
+
 							&:hover {
 								background-color: rgba($color-accent, 0.8);
+							}
+							&:active {
+								transform: translate(0, 1px);
+								border-top: solid rgba(white, 0.2) 1px;
+								border-bottom: none;
+							}
+						}
+
+						.ms-setting-timer {
+							&::after {
+								content: 's';
+								position: absolute;
+								margin-left: -15px;
+								margin-top: 3px;
+								color: rgb(84, 84, 84);
 							}
 						}
 
@@ -93,6 +117,7 @@ html {
 								font-size: 12px;
 								position: absolute;
 								margin-top: -14px;
+								margin-left: 2px;
 								color: $color-accent;
 							}
 
@@ -100,14 +125,17 @@ html {
 							&.ms-setting-sizeX::before { content: '横' }
 							&.ms-setting-sizeY::before { content: '縦' }
 							&.ms-setting-mines::before { content: '地雷' }
+							&.ms-setting-timer::before { content: 'タイマー' }
 						}
 					}
 
 					table {
-						padding: 10px;
+						margin: 20px 0 0 20px;
+						border-radius: 3px;
+						padding: 1px;
 						border-collapse: separate;
 						border-spacing: 2px 2px;
-						background-color: rgba($color-accent, 0.2);
+						background-color: rgb(235, 235, 235);
 						
 						tbody#msBoard {
 							tr {
@@ -127,7 +155,7 @@ html {
 									user-select: none;
 									
 									&.closed {
-										background-color: $color-minesweeper-background;
+										background: $color-minesweeper-background;
 									}
 									&.opened {
 										background-color: white;
@@ -169,7 +197,16 @@ html {
 			}
 
 			footer {
+				height: 40px;
+				background-color: $color-background-footer;
+				display: flex;
+				align-items: center;
+				
+				p {
+					margin-left: 20px;
 
+					color: rgb(66, 66, 66);
+				}
 			}
 		}
 
