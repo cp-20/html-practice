@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>おまけ</title>
+
+	<link rel="stylesheet" href="./omake.css">
+</head>
+<body>
+	<div id="content">
+		<header>
+			<h1 class="title">おまけコーナー</h1>
+		</header>
+
+		<main>
+			<h2 class="label">マインスイーパ</h2>
+			<div class="content" id="minesweeper">
+				<div id="ms-setting">
+					<div class="ms-setting-difficulty ms-setting-box">
+						<select name="difficulty" class="ms-setting" id="ms-difficulty">
+							<option value="easy" selected>初級 (9×9 10コ)</option>
+							<option value="normal">中級 (16×16 40コ)</option>
+							<option value="hard">上級 (30×16 99コ)</option>
+							<option value="custom">カスタム</option>
+						</select>
+					</div>
+
+					<div class="ms-setting-sizeX ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-sizeX">
+					</div>
+					
+					<div class="ms-setting-sizeY ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-sizeY">
+					</div>
+
+					<div class="ms-setting-mines ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-mines">
+					</div>
+
+					<div class="ms-setting-start ms-setting-box">
+						<button id="ms-start">START / RESET</button>
+					</div>
+				</div>
+
+				<table>
+					<tbody id="msBoard">
+						
+					</tbody>
+				</table>
+			</div>
+			<script src="./js/minesweeper.js"></script>
+		</main>
+
+		<footer>
+
+		</footer>
+	</div>
+
+	<div id="loading" style="display: none;">
+		<div>
+			<div class="loading"></div>
+			<p>Now Loading...</p>
+		</div>
+	</div>	
+</body>
+</html>

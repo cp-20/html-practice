@@ -1,5 +1,8 @@
 $color-background: WhiteSmoke;
+$color-background-line: lightgray;
 $color-popup-background: white;
+
+$mesh-size: 30px;
 
 $font-size-small: 12px;
 $font-size-medium: 16px;
@@ -66,9 +69,9 @@ html {
 
 	body {
 		margin: 0;
-		height: 100%;
 		background-color: $color-background;
-	
+		background: repeating-linear-gradient(to bottom, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px)), repeating-linear-gradient(to right, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px));
+		
 		input.settings {
 			display: none;
 	

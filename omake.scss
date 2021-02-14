@@ -1,0 +1,227 @@
+$color-load-background: rgb(252, 236, 238);
+$color-background: whitesmoke;
+$color-background-line: lightgray;
+$color-accent: rgb(255, 116, 139);
+
+$color-minesweeper-background: rgb(150, 160, 252);
+
+$mesh-size: 20px;
+
+html {
+	body {
+		margin: 0;
+		background-color: $color-background;
+		background: repeating-linear-gradient(to bottom, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px)), repeating-linear-gradient(to right, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px));
+
+		#content {
+			max-width: 900px;
+			margin: 0 auto;
+			background-color: white;
+			padding-top: 20px;
+
+			header {
+				h1.title {
+					margin: 0 20px 20px 20px;
+					padding-left: 20px;
+					border-bottom: solid $color-accent;
+				}
+			}
+
+			main {
+				h2.label {
+					padding-left: 10px;
+					border-left: solid $color-accent 5px;
+					margin-left: 20px;
+				}
+				div.content {
+					margin-left: 40px;
+				}
+
+				#minesweeper {
+
+					#ms-setting {
+						margin: 0 0 5px 10px;
+						display: flex;
+						flex-wrap: wrap;
+
+						#ms-difficulty {
+							padding: 2px 10px 2px 2px;
+							border: none;
+							border-bottom: solid $color-accent 2px;
+							font-size: 16px;
+							outline: 0;
+							height: 30px;
+						}
+
+						input[type="number"] {
+							border: none;
+							border-bottom: solid $color-accent 2px;
+							width: 50px;
+							font-size: 15px;
+							outline: 0;
+							background-color: white;
+							height: 26px;
+							width: 60px;
+							padding-left: 5px;
+
+							transition: border-color .1s;
+
+							&:disabled {
+								border-bottom: solid rgba($color-accent, 0.3) 2px;
+							}
+						}
+
+						#ms-start {
+							outline: 0;
+							border: none;
+							background-color: $color-accent;
+							color: white;
+							font-size: 14px;
+							padding: 7px 10px 4px 10px;
+							border-radius: 2px;
+							cursor: pointer;
+
+							&:hover {
+								background-color: rgba($color-accent, 0.8);
+							}
+						}
+
+						.ms-setting-box {
+							margin-right: 20px;
+
+							&.ms-setting-box::before {
+								font-size: 12px;
+								position: absolute;
+								margin-top: -14px;
+								color: $color-accent;
+							}
+
+							&.ms-setting-difficulty::before { content: '難易度' }
+							&.ms-setting-sizeX::before { content: '横' }
+							&.ms-setting-sizeY::before { content: '縦' }
+							&.ms-setting-mines::before { content: '地雷' }
+						}
+					}
+
+					table {
+						padding: 10px;
+						border-collapse: separate;
+						border-spacing: 2px 2px;
+						background-color: rgba($color-accent, 0.2);
+						
+						tbody#msBoard {
+							tr {
+								td {
+									padding: 0;
+									margin: 0;
+									width: 23px;
+									height: 23px;
+									box-sizing: border-box;
+									border-radius: 2px;
+									font-size: 15px;
+									line-height: 20px;
+									text-align: center;
+									font-weight: bold;
+									transition: background-color .1s;
+									cursor: default;
+									user-select: none;
+									
+									&.closed {
+										background-color: $color-minesweeper-background;
+									}
+									&.opened {
+										background-color: white;
+									}
+									
+									&.success::before {
+										content: '💣';
+										position: absolute;
+										opacity: 0.8;
+									}
+									&.miss::before {
+										content: '✖';
+										position: absolute;
+										color: white;
+										font-size: 24px;
+										opacity: 0.9;
+									}
+									
+									&[data-mines] {
+										color: rgb(100, 0, 0);
+									}
+									&[data-mines="1"] {
+										color: rgb(50, 50, 255);
+									}
+									&[data-mines="2"] {
+										color: rgb(0, 150, 0);
+									}
+									&[data-mines="3"] {
+										color: rgb(200, 0, 0);
+									}
+									&[data-mines="4"] {
+										color: rgb(150, 0, 150);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			footer {
+
+			}
+		}
+
+		#loading {
+			background-color: $color-load-background;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			animation: loaded 1s forwards;
+			z-index: 10;
+
+			div {
+				.loading {
+					width: 75px;
+					height: 75px;
+					margin: 10px auto;
+					border-radius: 50%;
+					border: solid rgba($color-accent, 0.2) 10px;
+					border-top: solid $color-accent 10px;
+					animation: loading 1s linear infinite;
+				}
+				@keyframes loading {
+					from {
+						transform: rotate(0deg);
+					}
+					to {
+						transform: rotate(360deg);
+					}
+				}
+
+				p {
+					margin: 0;
+				}
+			}
+		}
+		
+		@keyframes loaded {
+			from {
+				opacity: 1;
+				visibility: visible;
+				top: 0;
+			}
+			to {
+				top: -100px;
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+	}
+}
