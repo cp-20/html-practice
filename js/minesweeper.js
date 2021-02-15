@@ -9,6 +9,28 @@ const arroundCells = [
 	{x: 1, y: 1},
 ]
 
+let timer;
+let msTotal = 0;
+const timerFunc = {
+	start: () => {
+		if (timer) clearInterval(timer);
+		timer = setInterval(() => {
+			msTotal += 10;
+			timerFunc.refresh();
+		}, 10);	
+	},
+	stop: () => {
+		if (timer) clearInterval(timer);
+	},
+	reset: () => {
+		if (timer) clearInterval(timer);
+		msTotal = 0;
+		timerFunc.refresh();
+	},
+	refresh: () => {document.getElementById('ms-timer').value = `${(msTotal / 1000).toFixed(2)}`;}
+}
+timerFunc.reset();
+
 // 盤面
 class Board {
 	constructor(x, y, mine) {
@@ -36,6 +58,10 @@ class Board {
 		this.initialized = false;
 		// 爆発フラグ
 		this.bombed = false
+		// 残りのマス
+		this.left = this.sizeX * this.sizeY;
+		// フラグの数
+		this.flags = 0;
 
 		// 盤面初期化
 		this.initialize();
@@ -63,10 +89,20 @@ class Board {
 
 	// マスを開く
 	open(openX, openY) {
+		if (this.board[this.getIndex(openX, openY)].opened) return;
+
+		// 旗を消す
+		this.board[this.getIndex(openX, openY)].flag = false;
+
 		// 開ける
 		const cell = document.querySelector(`#msBoard td[data-x="${openX}"][data-y="${openY}"]`);
 		cell.classList.remove('closed');
 		cell.classList.add('opened');
+
+		// 残りのマスを減らす
+		this.left--;
+
+		console.log(this.left);
 
 		// 初期化処理
 		if (!this.initialized) {
@@ -93,7 +129,11 @@ class Board {
 				cellList.splice(index, 1);
 			}
 
+			// 初期化フラグ
 			this.initialized = true;
+
+			// タイマー開始
+			timerFunc.start();
 		}
 
 		// 地雷処理
@@ -113,6 +153,22 @@ class Board {
 				}
 			}
 		}
+
+		// クリア処理
+		if (this.left == this.mine) {
+			this.clear();
+		}
+	}
+
+	// クリア
+	clear() {
+		// クリアエフェクト
+		const overlay = document.getElementById('ms-overlay');
+		overlay.classList.add('show');
+		overlay.classList.add('clear');
+
+		// タイマーストップ
+		timerFunc.stop();
 	}
 
 	// 爆発(ゲームオーバー)
@@ -123,6 +179,14 @@ class Board {
 
 		// 爆弾描画
 		this.draw();
+
+		// ゲームオーバーエフェクト
+		const overlay = document.getElementById('ms-overlay');
+		overlay.classList.add('show');
+		overlay.classList.add('gameover');
+
+		// タイマーストップ
+		timerFunc.stop();
 	}
 
 	// 盤面初期化
@@ -162,7 +226,16 @@ class Board {
 					e.preventDefault();
 					
 					// 旗フラグ反転
-					this.this.board[this.this.getIndex(clickX, clickY)].flag = !this.this.board[this.this.getIndex(clickX, clickY)].flag;
+					if (this.this.board[this.this.getIndex(clickX, clickY)].flag) {
+						this.this.board[this.this.getIndex(clickX, clickY)].flag = false;
+						this.this.flags--;
+					}else {
+						this.this.board[this.this.getIndex(clickX, clickY)].flag = true;
+						this.this.flags++;
+					}
+
+					// 残りの地雷
+					document.getElementById('ms-left').value = Number(this.this.mine) - Number(this.this.flags);
 
 					// 描画
 					this.this.draw();
@@ -181,7 +254,6 @@ class Board {
 						if (!this.this.inBoard(x, y)) continue;
 						if (this.this.board[this.this.getIndex(x, y)].flag) mineCount++
 					}
-					console.log(mineCount);
 
 					// 数字と合致したなら開く
 					if (mineCount == this.this.board[this.this.getIndex(clickX, clickY)].mineCount) {
@@ -197,10 +269,18 @@ class Board {
 					}
 				}})
 
+				// 残りの地雷
+				document.getElementById('ms-left').value = Number(this.mine) - Number(this.flags);
+
 				line.appendChild(cell);
 			}
 			board.appendChild(line);
 		}
+
+		// オーバーレイのサイズ設定
+		const overlay = document.getElementById('ms-overlay');
+		overlay.style.width = `${this.sizeX * 24.85 + 3}px`
+		overlay.style.height = `${this.sizeY * 24.85 + 3}px`
 	}
 
 	// 盤面描画
@@ -254,6 +334,8 @@ class Board {
 							if (cellContent.mineCount > 0) {
 								cell.textContent = `${cellContent.mineCount}`;
 								cell.dataset.mines = cellContent.mineCount;
+							}else {
+								cell.textContent = '';
 							}
 						}
 					}else {
@@ -318,13 +400,12 @@ class Settings {
 		const sizeY = document.getElementById('ms-sizeY');
 		const mines = document.getElementById('ms-mines');
 		
-		console.log(sizeX.max);
-		if (sizeX.value < sizeX.min) document.getElementById('ms-sizeX').value = sizeX.min;
-		if (sizeX.value > sizeX.max) document.getElementById('ms-sizeX').value = sizeX.max;
-		if (sizeY.value < sizeY.min) document.getElementById('ms-sizeY').value = sizeY.min;
-		if (sizeY.value > sizeY.max) document.getElementById('ms-sizeY').value = sizeY.max;		
-		if (mines.value < mines.min) document.getElementById('ms-mines').value = mines.min;
-		if (mines.value > sizeX.value * sizeY.value - 25) document.getElementById('ms-mines').value = sizeX.value * sizeY.value - 25;
+		if (Number(sizeX.value) < Number(sizeX.min)) document.getElementById('ms-sizeX').value = sizeX.min;
+		if (Number(sizeX.value) > Number(sizeX.max)) document.getElementById('ms-sizeX').value = sizeX.max;
+		if (Number(sizeY.value) < Number(sizeY.min)) document.getElementById('ms-sizeY').value = sizeY.min;
+		if (Number(sizeY.value) > Number(sizeY.max)) document.getElementById('ms-sizeY').value = sizeY.max;		
+		if (Number(mines.value) < Number(mines.min)) document.getElementById('ms-mines').value = mines.min;
+		if (Number(mines.value) > Number(sizeX.value) * Number(sizeY.value) - 25) document.getElementById('ms-mines').value = sizeX.value * sizeY.value - 25;
 
 		this.sizeX = sizeX.value;
 		this.sizeY = sizeY.value;
@@ -353,6 +434,16 @@ const settings = new Settings('easy');
 let board = new Board(settings.sizeX, settings.sizeY, settings.mines);
 
 // START / RESET
-document.getElementById('ms-start').onclick = function() {
+document.getElementById('ms-start').onclick = resetGame;
+// RESTART
+document.getElementById('ms-restart').onclick = resetGame;
+
+function resetGame() {
+	const overlay = document.getElementById('ms-overlay');
+	overlay.classList.remove('show');
+	overlay.classList.remove('gameover');
+	overlay.classList.remove('clear');
+
 	board = new Board(settings.sizeX, settings.sizeY, settings.mines);
+	timerFunc.reset();
 }

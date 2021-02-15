@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>おまけ</title>
+	<title>未来日記 - おまけ</title>
 	
 	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 
@@ -46,7 +46,20 @@
 					</div>
 
 					<div class="ms-setting-timer ms-setting-box">
-						<input type="number" class="ms-setting" id="ms-timer">
+						<input type="number" class="ms-setting" id="ms-timer" disabled>
+					</div>
+
+					<div class="ms-setting-left ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-left" disabled>
+					</div>
+				</div>
+
+				<div id="ms-overlay" class="">
+					<div>
+						<p class="ms-clear">CLEAR!</p>
+						<p class="ms-gameover">GAME OVER!</p>
+						
+						<button id="ms-restart">RESTART</button>	
 					</div>
 				</div>
 
@@ -55,7 +68,6 @@
 						
 					</tbody>
 				</table>
-			</div>
 			<script src="./js/minesweeper.js"></script>
 		</main>
 
