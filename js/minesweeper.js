@@ -447,3 +447,8 @@ function resetGame() {
 	board = new Board(settings.sizeX, settings.sizeY, settings.mines);
 	timerFunc.reset();
 }
+
+// その他
+document.getElementById('ms-board').addEventListener('contextmenu', function() {
+	this.preventDefault();
+});

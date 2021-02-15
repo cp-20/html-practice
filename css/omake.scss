@@ -36,12 +36,23 @@ html {
 
 				h2.label {
 					padding-left: 10px;
+					margin: 20px 0 20px 20px;
 					border-bottom: solid $color-accent 2px;
-					margin-left: 20px;
 					width: 300px;
 					font-size: 20px;
-					margin-bottom: 30px;
 					color: rgb(70, 70, 70);
+
+					svg {
+						width: 28px;
+						position: relative;
+						top: 8px;
+						left: 120px;
+
+						&.minesweeper {
+							fill: $color-accent;
+							stroke: none;
+						}
+					}
 				}
 				div.content {
 					margin-left: 30px;
@@ -105,9 +116,9 @@ html {
 
 						.ms-setting-timer {
 							&::after {
-								content: 's';
+								content: '秒';
 								position: absolute;
-								margin-left: -15px;
+								margin-left: -20px;
 								margin-top: 3px;
 								color: rgb(84, 84, 84);
 							}
