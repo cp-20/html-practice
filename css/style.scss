@@ -69,9 +69,32 @@ html {
 
 	body {
 		margin: 0;
-		background-color: $color-background;
-		background: repeating-linear-gradient(to bottom, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px)), repeating-linear-gradient(to right, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px));
-		
+
+		a {
+			color: var(--color-text);
+			text-decoration: underline solid var(--color-accent);
+			text-decoration-thickness: 2px;
+
+			transition: color .2s;
+
+			&:hover {
+				color: var(--color-accent);
+				text-decoration-thickness: 3px;
+			}
+		}
+
+		&::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: $color-background;
+			background: repeating-linear-gradient(to bottom, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px)), repeating-linear-gradient(to right, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px));
+			z-index: -1;
+		}
+
 		input.settings {
 			display: none;
 	

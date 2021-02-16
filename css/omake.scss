@@ -1,5 +1,6 @@
 $color-load-background: rgb(252, 236, 238);
 $color-background: whitesmoke;
+$color-text: rgb(70, 70, 70);
 $color-background-line: lightgray;
 $color-accent: rgb(255, 116, 139);
 
@@ -7,13 +8,23 @@ $color-background-footer: rgb(253, 199, 208);
 
 $color-minesweeper-background: rgb(150, 160, 252);
 
-$mesh-size: 20px;
+$mesh-size: 30px;
 
 html {
 	body {
 		margin: 0;
-		background-color: $color-background;
-		background: repeating-linear-gradient(to bottom, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px)), repeating-linear-gradient(to right, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px));
+
+		&::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: $color-background;
+			background: repeating-linear-gradient(to bottom, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px)), repeating-linear-gradient(to right, transparent, transparent $mesh-size, $color-background-line $mesh-size, $color-background-line calc(#{$mesh-size} + 1px));
+			z-index: -1;
+		}
 
 		#content {
 			max-width: 900px;
@@ -22,11 +33,32 @@ html {
 			padding-top: 20px;
 
 			header {
-				h1.title {
-					margin: 0 20px 20px 20px;
-					padding-left: 20px;
+				div {
+					margin: 0 20px;
 					border-bottom: solid $color-accent 5px;
-					color: rgb(70, 70, 70);
+					display: flex;
+
+					h1.title {
+						margin: 0;
+						padding-left: 20px;
+						width: 300px;
+						display: inline-block;
+						color: $color-text;
+					}
+
+					a {
+						height: 20px;
+						text-decoration: none;
+						color: $color-text;
+						border-bottom: solid $color-accent 1px;
+						margin: 20px 20px 0 auto;
+
+						transition: border .1s, color .1s;
+						&:hover {
+							color: $color-accent;
+							border-bottom-width: 2px;
+						}
+					}
 				}
 			}
 
@@ -40,25 +72,86 @@ html {
 					border-bottom: solid $color-accent 2px;
 					width: 300px;
 					font-size: 20px;
-					color: rgb(70, 70, 70);
+					color: $color-text;
 
 					svg {
 						width: 28px;
-						position: relative;
-						top: 8px;
-						left: 120px;
+						position: absolute;
+						margin-left: 265px;
 
 						&.minesweeper {
-							fill: $color-accent;
-							stroke: none;
+							polygon, circle {
+								fill: $color-accent;
+								stroke: none;	
+							}
+						}
+
+						&.afterword {
+							path {
+								fill: none;
+								stroke: $color-accent;
+								stroke-width: 4px;
+							}
 						}
 					}
 				}
 				div.content {
-					margin-left: 30px;
+					margin: 0 0 40px 30px;
 				}
 
 				#minesweeper {
+					#ms-description {
+						margin: 0 0 0 10px;
+						
+						p {
+							margin: 0 0 10px 0;
+						}
+
+						label[for="ms-rule"] {
+							border-bottom: solid $color-accent 2px;
+							padding: 0 10px 0 5px;
+							cursor: pointer;
+
+							transition: color, .2s;
+							&:hover {
+								color: $color-accent;
+							}
+							
+							span.plus {
+								color: $color-accent;
+							}
+						}
+
+						div.ms-rule {
+							margin-right: 20px;
+							background-color: rgba($color-accent, 0.1);
+							padding-left: 10px;
+							transition: all .2s;
+							max-height: 0px;
+							opacity: 0;
+							visibility: hidden;
+							padding: 10px;
+
+							h3 {
+								font-size: 16px;
+								font-weight: normal;
+								padding-left: 10px;
+								margin: 0 0 10px 0;
+								border-left: solid $color-accent 5px;
+							}
+							p {
+								margin: 5px 0 5px 10px;
+								&:last-of-type { margin: 5px 0 0 10px; }
+							}
+						}
+						input#ms-rule:checked + div.ms-rule {
+							margin-bottom: 0;
+							max-height: 1000px;
+							visibility: visible;
+							opacity: 1;
+						}
+					}
+
 					#ms-setting {
 						margin: 0 0 5px 10px;
 						display: flex;
@@ -71,7 +164,7 @@ html {
 							font-size: 16px;
 							outline: 0;
 							height: 30px;
-							color: rgb(70, 70, 70);
+							color: $color-text;
 						}
 
 						input[type="number"] {
@@ -96,7 +189,7 @@ html {
 							outline: 0;
 							border: none;
 							background-color: $color-accent;
-							color: whitesmoke;
+							color: white;
 							font-size: 14px;
 							padding: 7px 10px 4px 10px;
 							border-radius: 2px;
@@ -120,7 +213,7 @@ html {
 								position: absolute;
 								margin-left: -20px;
 								margin-top: 3px;
-								color: rgb(84, 84, 84);
+								color: $color-text;
 							}
 
 							#ms-timer {

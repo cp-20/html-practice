@@ -449,6 +449,6 @@ function resetGame() {
 }
 
 // その他
-document.getElementById('ms-board').addEventListener('contextmenu', function() {
+document.getElementById('msBoard').addEventListener('contextmenu', function() {
 	this.preventDefault();
 });

@@ -8,17 +8,19 @@
 	
 	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 
-	<link rel="stylesheet" href="./omake.css">
+	<link rel="stylesheet" href="./css/omake.css">
 </head>
 <body>
 	<div id="content">
 		<header>
-			<h1 class="title">おまけコーナー</h1>
+			<div>
+				<h1 class="title">おまけコーナー</h1>
+				<a href="./index.html">トップに戻る</a>
+			</div>
 		</header>
 
 		<main>
 			<h2 class="label">
-				<span>マインスイーパ</span>
 				<svg class="minesweeper" viewBox="0 0 64 64">
 					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(0deg); transform-origin: center;" />
 					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(45deg); transform-origin: center;" />
@@ -30,8 +32,25 @@
 					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(315deg); transform-origin: center;" />
 					<circle cx="32" cy="32" r="20" />
 				</svg>
+				<span>マインスイーパ</span>
 				</h2>
 			<div class="content" id="minesweeper">
+				<div id="ms-description">
+					<p>自作マインスイーパです。デザインとかは大目に見てやって下さい。</p>
+
+					<label for="ms-rule"><span class="plus">＋</span>マインスイーパのルール</label>
+					<input type="checkbox" id="ms-rule" hidden>
+					<div class="ms-rule">
+						<h3>基本ルール</h3>
+						<p>爆弾以外のマスを全て開けるとゲームクリア</p>
+						<p>逆に一つでも爆弾のマスを開けるとゲームオーバー</p>
+						<p>マスに書かれた数字はそのマスの周囲8マスの内いくつ爆弾が入っているのかを示す</p>
+						<h3>基本操作</h3>
+						<p>左クリック：マスを開く</p>
+						<p>右クリック：旗を立てるor消す</p>
+						<p>ダブルクリック：（マスの数字と周囲の爆弾の数が同じ時に）周囲の開いていないマスを全て開く</p>
+					</div>
+				</div>
 				<div id="ms-setting">
 					<div class="ms-setting-difficulty ms-setting-box">
 						<select name="difficulty" class="ms-setting" id="ms-difficulty">
@@ -84,7 +103,35 @@
 			</div>
 			<script src="./js/minesweeper.js"></script>
 
-			
+			<h2 class="label">
+				<svg class="afterword" viewBox="0 0 64 64">
+					<path d="
+					M 10 4
+					L 50 4
+					Q 54 4, 54 8
+					L 54 56
+					Q 54 60, 50 60
+					L 10 60
+					L 10 4
+					L 20 4
+					L 20 60
+					" />
+					<path d="
+					M 26 12
+					L 48 12
+					L 48 22
+					L 26 22
+					L 26 12
+					L 27 12
+					" />
+				</svg>
+				<span>あとがき</span>
+			</h2>
+			<div class="content" id="afterword">
+				<p>|ω・｀)ﾉ ﾔｧ</p>
+				<p>なんで多言語対応したサイトを作ったのかって？最初に1ページだけサイトを作ってどうしようか困ったからとりあえず複数ページ作るために対応したという訳だ</p>
+				<p>このページは友達が3Dエンジン自作してたことに感化されてゲーム作ろうとなり製作した</p>
+			</div>
 		</main>
 
 		<footer>
