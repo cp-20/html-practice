@@ -21,6 +21,27 @@
 
 		<main>
 			<h2 class="label">
+				<svg class="index" viewBox="0 0 64 64">
+					<circle cx="10" cy="10" r="5" />
+					<line x1="20" y1="10" x2="60" y2="10" />
+					<circle cx="10" cy="30" r="5" />
+					<line x1="20" y1="30" x2="60" y2="30" />
+					<circle cx="10" cy="50" r="5" />
+					<line x1="20" y1="50" x2="60" y2="50" />
+				</svg>
+				<span>目次</span>
+			</h2>
+			<div class="content" id="index-list">
+				<ul class="index-list">
+					<li class="index"><a href="#index-minesweeper">マインスイーパ</a></li>
+					<li class="index"><a href="#index-othello">オセロ</a></li>
+					<li class="index"><a href="#index-quiz">HTML/CSSクイズ</a></li>
+					<li class="index"><a href="#index-pictogram">ピクトグラム</a></li>
+					<li class="index"><a href="#index-afterword">あとがき</a></li>
+				</ul>
+			</div>
+
+			<h2 class="label" id="index-minesweeper">
 				<svg class="minesweeper" viewBox="0 0 64 64">
 					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(0deg); transform-origin: center;" />
 					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(45deg); transform-origin: center;" />
@@ -86,7 +107,7 @@
 					</div>
 				</div>
 
-				<div id="ms-overlay" class="">
+				<div id="ms-overlay">
 					<div>
 						<p class="ms-clear">CLEAR!</p>
 						<p class="ms-gameover">GAME OVER!</p>
@@ -103,7 +124,88 @@
 			</div>
 			<script src="./js/minesweeper.js"></script>
 
-			<h2 class="label">
+			<h2 class="label" id="index-othello">
+				<svg class="othello" viewBox="0 0 64 64">
+					<circle class="black" cx="24" cy="24" r="20" />
+					<circle class="white" cx="40" cy="40" r="20" />
+				</svg>
+				<span>オセロ</span>
+			</h2>
+			<div class="content" id="othello">
+				<div id="oth-overlay">
+					<div class="black-win">
+						<p>YOU WIN!</p>
+						<button id="oth-restart">RESTART</button>
+					</div>
+					<div class="white-win">
+						<p>YOU LOSE</p>
+						<button id="oth-restart">RESTART</button>
+					</div>
+					<div class="draw">
+						<p>DRAW</p>
+						<button id="oth-restart">RESTART</button>
+					</div>
+				</div>
+
+				<table>
+					<tbody id="oth-board">
+					</tbody>
+				</table>
+
+				<div id="oth-settings">
+					<div class="black">
+						<p>1P(黒)：YOU</p>
+						<div class="counter">
+							<input type="number" name="black-count" id="black-counter" disabled>
+						</div>
+					</div>
+
+					<div class="white">
+						<p>
+							<span>2P(白)：COM</span>
+							<select name="com-difficulty" id="com-difficulty-setting">
+								<option value="easy">よわい</option>
+								<option value="normal">ふつう</option>
+								<option value="hard">つよい</option>
+							</select>
+						</p>
+						<div class="counter">
+							<input type="number" name="white-count" id="white-counter" disabled>
+						</div>
+					</div>
+
+					<div class="start">
+						<button id="oth-start">GAME START</button>
+					</div>
+				</div>
+
+				<script src="./js/othello.js"></script>
+			</div>
+
+			<h2 class="label" id="index-quiz">
+				<svg class="quiz" viewBox="0 0 64 64">
+					<text x="32" y="60" text-anchor="middle" font-size="60">？</text>
+				</svg>
+				<span>HTML/CSSクイズ</span>
+			</h2>
+			<div class="content" id="quiz">
+				
+			</div>
+
+			<h2 class="label" id="index-pictogram">
+				<svg class="pictogram" viewBox="0 0 64 64">
+					<polygon points="4,12 60,12 60,52 4,52" />
+					<polygon points="10,18 54,18 54,46 10,46" />
+				</svg>
+				<span>ピクトグラム</span>
+			</h2>
+			<div class="content" id="pictogram">
+				<svg class="pictogram" viewBox="0 0 64 64">
+
+				</svg>
+			</div>
+
+			<h2 class="label" id="index-afterword">
 				<svg class="afterword" viewBox="0 0 64 64">
 					<path d="
 					M 10 4

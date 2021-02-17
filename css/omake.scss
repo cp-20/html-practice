@@ -79,10 +79,47 @@ html {
 						position: absolute;
 						margin-left: 265px;
 
+						&.index {
+							circle {
+								fill: $color-accent;
+							}
+							line {
+								stroke: $color-accent;
+								stroke-width: 6px;
+							}
+						}
+
 						&.minesweeper {
 							polygon, circle {
 								fill: $color-accent;
 								stroke: none;	
+							}
+						}
+
+						&.othello {
+							circle.black {
+								fill: $color-accent;
+								stroke: $color-accent;
+								stroke-width: 3px;
+							}
+							circle.white {
+								fill: none;
+								stroke: $color-accent;
+								stroke-width: 3px;
+							}
+						}
+
+						&.quiz {
+							text {
+								fill: $color-accent;
+							}
+						}
+
+						&.pictogram {
+							polygon {
+								fill: none;
+								stroke: $color-accent;
+								stroke-width: 4px;
 							}
 						}
 
@@ -97,6 +134,34 @@ html {
 				}
 				div.content {
 					margin: 0 0 40px 30px;
+				}
+
+				#index-list {
+					ul.index-list {
+						list-style: none;
+						padding-left: 10px;
+						li.index {
+							margin-bottom: 10px;
+							border-left: solid $color-accent 5px;
+							padding: 3px 0 3px 10px;
+							background-color: $color-load-background;
+							max-width: 200px;
+
+							transition: all .2s;
+
+							&:hover {
+								border-left-width: 15px;
+							}
+
+							a {
+								display: inline-block;
+								width: 100%;
+								font-weight: bold;
+								color: $color-text;
+								text-decoration: none;
+							}
+						}
+					}
 				}
 
 				#minesweeper {
@@ -126,7 +191,7 @@ html {
 							margin-right: 20px;
 							background-color: rgba($color-accent, 0.1);
 							padding-left: 10px;
-							transition: all .2s;
+							transition: all .5s;
 							max-height: 0px;
 							opacity: 0;
 							visibility: hidden;
@@ -345,6 +410,7 @@ html {
 							p {
 								display: none;
 								margin: 0 0 40px 0;
+								font-weight: bold;
 								font-size: 26px;
 								color: rgb(53, 53, 53);
 
@@ -363,8 +429,255 @@ html {
 								background-color: $color-accent;
 								color: whitesmoke;
 								cursor: pointer;
+
+								&:hover {
+									background-color: lighten($color-accent, 5%);
+								}
 							}
 						}
+					}
+				}
+
+				#othello {
+					display: flex;
+					
+					#oth-overlay {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						position: absolute;
+						margin: 20px 0 0 20px;
+						width: 258px;
+						height: 258px;
+						z-index: 10;
+						
+						visibility: hidden;
+						
+						div {
+							display: none;
+						}
+
+						div.black-win, div.white-win {
+							flex-direction: column;
+							align-items: center;
+							
+							p {
+								font-weight: bold;
+								font-size: 30px;
+							}
+							button {
+								width: 100px;
+								outline: 0;
+								border: none;
+								box-shadow: 0 0 2px 2px rgba(gray,  0.2);
+								padding: 5px 10px;
+								border-radius: 2px;
+								font-size: 16px;
+								background-color: $color-accent;
+								color: whitesmoke;
+								cursor: pointer;
+
+								&:hover {
+									background-color: lighten($color-accent, 5%);
+								}
+							}
+						}
+
+						&.black-win, &.white-win, &.draw {
+							background-color: rgba(white, 0.5);
+							animation: fade 1s forwards;
+
+							@keyframes fade {
+								from {
+									opacity: 0;
+									visibility: hidden;
+								}
+								to {
+									opacity: 1;
+									visibility: visible;
+								}
+							}
+
+							&.black-win div.black-win { display: flex; }
+							&.white-win div.white-win { display: flex; }
+							&.draw div.draw { display: flex; }
+						}
+					}
+					
+					table {
+						margin: 20px 0 0 20px;
+						border-radius: 3px;
+						border-collapse: separate;
+						border-spacing: 2px 2px;
+						background-color: rgb(14, 14, 14);
+
+						tbody#oth-board {
+							tr {
+								td {
+									padding: 0;
+									margin: 0;
+									width: 30px;
+									height: 30px;
+									box-sizing: border-box;
+									border-radius: 2px;
+									font-size: 30px;
+									text-align: center;
+									line-height: 32px;
+									user-select: none;
+									background-color: rgb(0, 179, 0);
+
+									&.black::before { content: '●'; color: black; }
+									&.white::before { content: '●'; color: rgb(240, 240, 240); }
+									&.putBlack::before { content: '・'; color: black; }
+									&.putWhite::after { content: '・'; color: rgb(240, 240, 240); }
+									
+									&::before {
+										position: absolute;
+										margin: -15px 0 0 -19px;
+										font-size: 38px;
+									}
+									&::after {
+										position: absolute;
+										margin: -15px 0 0 -19px;
+										font-size: 38px;
+									}
+
+									&.reverse {
+										&.black::before { animation: reverse-black .2s ease; }
+										&.white::before { animation: reverse-white .2s ease; }
+
+										@keyframes reverse-black {
+											0% {
+												color: white;
+												transform: scaleX(1);
+											}
+											50% {
+												color: white;
+												transform: scaleX(0);
+											}
+											51% {
+												color: black;
+												transform: scaleX(0);
+											}
+											100% {
+												color: black;
+												transform: scaleX(1);
+											}
+										}
+										@keyframes reverse-white {
+											0% {
+												color: black;
+												transform: scaleX(1);
+											}
+											50% {
+												color: black;
+												transform: scaleX(0);
+											}
+											51% {
+												color: white;
+												transform: scaleX(0);
+											}
+											100% {
+												color: white;
+												transform: scaleX(1);
+											}
+										}
+									}
+								}
+							}
+							
+							&.black {
+								td.putBlack::before { display: inline-block; }
+								td.putWhite::after { display: none; }
+							}
+							&.white {
+								td.putWhite::after { display: inline-block; }
+								td.putBlack::before { display: none; }
+							}
+						}
+					}
+
+					#oth-settings {
+						margin: 20px 0 0 20px;
+
+						div.black, div.white {
+							margin-bottom: 20px;
+							
+							p {
+								margin: 0 0 30px 0;
+
+								select#com-difficulty-setting {
+									outline: 0;
+									border: none;
+									font-size: 16px;
+									margin-top: -4px;
+									padding: 2px;
+									border-bottom: solid $color-accent 2px;
+								}
+							}
+
+							div.counter {
+								input {
+									background-color: transparent;
+									border: none;
+									border-bottom: solid rgba($color-accent, 0.6) 2px;
+									width: 60px;
+									font-size: 16px;
+									padding: 2px 0 2px 10px;
+								}
+
+								&::before {
+									content: 'コマの数';
+									color: $color-accent;
+									font-size: 12px;
+									position: absolute;
+									margin: -20px 0 0 0;
+								}
+
+								&::after {
+									content: 'コ';
+									color: $color-text;
+									font-size: 14px;
+									position: absolute;
+									margin: 0 0 0 -20px;
+								}
+							}
+						}
+
+						div.start {
+							button {
+								outline: 0;
+								border: none;
+								background-color: $color-accent;
+								color: white;
+								font-size: 14px;
+								padding: 7px 10px 4px 10px;
+								border-radius: 2px;
+								cursor: pointer;
+
+								border-bottom: solid rgba(black, 0.2) 1px;
+
+								&:hover {
+									background-color: rgba($color-accent, 0.8);
+								}
+								&:active {
+									transform: translate(0, 1px);
+									border-top: solid rgba(white, 0.2) 1px;
+									border-bottom: none;
+								}
+							}
+						}
+					}
+				}
+
+				#quiz {
+
+				}
+
+				#pictogram {
+					svg.pictogram {
+						width: 200px;
 					}
 				}
 			}

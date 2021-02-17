@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="28" />
+  <line x1="20" x2="20" y1="15" y2="30" stroke="black" />
+  <line x1="44" x2="44" y1="15" y2="30" stroke="black" />
+  <path d="
+  M 4 30
+  Q 8 33, 15 35
+  L 49 35
+  Q 56 33, 60 30
+  " />
+  <path d="
+  M 9 48
+  L 15 52
+  L 49 52
+  L 55 48
+  " />
+  <path d="
+  M 15 35
+  L 49 35
+  L 49 52
+  L 15 52
+  L 15 35
+  " />
+  <style>
+    path, circle {
+      fill: none;
+      stroke: #111;
+      stroke-linejoin: round;
+    }
+  </style>
+</svg>
