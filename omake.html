@@ -34,7 +34,7 @@
 			<div class="content" id="index-list">
 				<ul class="index-list">
 					<li class="index"><a href="#index-minesweeper">マインスイーパ</a></li>
-					<li class="index"><a href="#index-othello">オセロ</a></li>
+					<li class="index"><a href="#index-reversi">リバーシ</a></li>
 					<li class="index"><a href="#index-quiz">HTML/CSSクイズ</a></li>
 					<li class="index"><a href="#index-pictogram">ピクトグラム</a></li>
 					<li class="index"><a href="#index-afterword">あとがき</a></li>
@@ -124,62 +124,89 @@
 			</div>
 			<script src="./js/minesweeper.js"></script>
 
-			<h2 class="label" id="index-othello">
-				<svg class="othello" viewBox="0 0 64 64">
+			<h2 class="label" id="index-reversi">
+				<svg class="reversi" viewBox="0 0 64 64">
 					<circle class="black" cx="24" cy="24" r="20" />
 					<circle class="white" cx="40" cy="40" r="20" />
 				</svg>
-				<span>オセロ</span>
+				<span>リバーシ</span>
 			</h2>
-			<div class="content" id="othello">
-				<div id="oth-overlay">
+			<div class="content" id="reversi">
+				<div id="rv-description">
+					<p>コンピューターと対戦できるリバーシ</p>
+					<p>敵の強さを設定できるのがこだわり</p>
+					<label for="rv-rule"><span class="plus">＋</span>リバーシのルール</label>
+					<input type="checkbox" id="rv-rule" hidden>
+
+					<div class="rv-rule">
+						<h3>基本ルール</h3>
+						<p>黒と白それぞれ2つずつ中央の4マスに交互に置かれている状態からスタート</p>
+						<p>黒が先攻で、もともと置いてある自分のコマと自分が置いたコマで相手のコマを挟むと挟んだ相手のコマをひっくり返して自分のコマにできる</p>
+						<p>相手のコマを挟まない場所には置けず、置ける場所がない時はパスする</p>
+						<p>最終的に8×8の64マスが埋まった時にコマの数が多い方の勝利</p>
+						<h3>基本操作</h3>
+						<p>小さい丸の部分にしか置けない</p>
+						<p>自分の手番に小さい丸をクリックするとそこにコマを置ける</p>
+						<p></p>
+					</div>
+				</div>
+
+				<div id="rv-overlay">
+					<div class="black-pass">
+						<p>1P PASS</p>
+					</div>
+					<div class="white-pass">
+						<p>2P PASS</p>
+					</div>
 					<div class="black-win">
 						<p>YOU WIN!</p>
-						<button id="oth-restart">RESTART</button>
+						<button class="rv-restart">RESTART</button>
 					</div>
 					<div class="white-win">
 						<p>YOU LOSE</p>
-						<button id="oth-restart">RESTART</button>
+						<button class="rv-restart">RESTART</button>
 					</div>
 					<div class="draw">
 						<p>DRAW</p>
-						<button id="oth-restart">RESTART</button>
+						<button class="rv-restart">RESTART</button>
 					</div>
 				</div>
 
-				<table>
-					<tbody id="oth-board">
-					</tbody>
-				</table>
-
-				<div id="oth-settings">
-					<div class="black">
-						<p>1P(黒)：YOU</p>
-						<div class="counter">
-							<input type="number" name="black-count" id="black-counter" disabled>
+				<div class="screen">
+					<table>
+						<tbody id="rv-board">
+						</tbody>
+					</table>
+	
+					<div id="rv-settings">
+						<div class="black">
+							<p>1P(黒)：<strong>YOU</strong></p>
+							<div class="counter">
+								<input type="number" name="black-count" id="black-counter" disabled>
+							</div>
 						</div>
-					</div>
-
-					<div class="white">
-						<p>
-							<span>2P(白)：COM</span>
-							<select name="com-difficulty" id="com-difficulty-setting">
-								<option value="easy">よわい</option>
-								<option value="normal">ふつう</option>
-								<option value="hard">つよい</option>
-							</select>
-						</p>
-						<div class="counter">
-							<input type="number" name="white-count" id="white-counter" disabled>
+	
+						<div class="white">
+							<p>
+								<span>2P(白)：<strong>COM</strong></span>
+								<select name="com-difficulty" id="com-difficulty-setting">
+									<option value="easy">よわい</option>
+									<option value="normal">ふつう</option>
+									<option value="hard">つよい</option>
+								</select>
+							</p>
+							<div class="counter">
+								<input type="number" name="white-count" id="white-counter" disabled>
+							</div>
 						</div>
-					</div>
-
-					<div class="start">
-						<button id="oth-start">GAME START</button>
-					</div>
+	
+						<div class="start">
+							<button id="rv-start">GAME START</button>
+						</div>
+					</div>	
 				</div>
 
-				<script src="./js/othello.js"></script>
+				<script src="./js/reversi.js"></script>
 			</div>
 
 			<h2 class="label" id="index-quiz">

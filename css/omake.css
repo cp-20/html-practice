@@ -61,11 +61,11 @@ html body {
           html body #content main h2.label svg.minesweeper polygon, html body #content main h2.label svg.minesweeper circle {
             fill: #ff748b;
             stroke: none; }
-          html body #content main h2.label svg.othello circle.black {
+          html body #content main h2.label svg.reversi circle.black {
             fill: #ff748b;
             stroke: #ff748b;
             stroke-width: 3px; }
-          html body #content main h2.label svg.othello circle.white {
+          html body #content main h2.label svg.reversi circle.white {
             fill: none;
             stroke: #ff748b;
             stroke-width: 3px; }
@@ -328,57 +328,177 @@ html body {
             cursor: pointer; }
             html body #content main #minesweeper #ms-overlay div button:hover {
               background-color: #ff8ea0; }
-      html body #content main #othello {
+      html body #content main #reversi #rv-description {
+        margin: 0 0 0 10px; }
+        html body #content main #reversi #rv-description p {
+          margin: 0 0 10px 0; }
+        html body #content main #reversi #rv-description label[for="rv-rule"] {
+          border-bottom: solid #ff748b 2px;
+          padding: 0 10px 0 5px;
+          cursor: pointer;
+          -webkit-transition: color, .2s;
+          transition: color, .2s; }
+          html body #content main #reversi #rv-description label[for="rv-rule"]:hover {
+            color: #ff748b; }
+          html body #content main #reversi #rv-description label[for="rv-rule"] span.plus {
+            color: #ff748b; }
+        html body #content main #reversi #rv-description div.rv-rule {
+          margin-right: 20px;
+          background-color: rgba(255, 116, 139, 0.1);
+          padding-left: 10px;
+          -webkit-transition: all .5s;
+          transition: all .5s;
+          max-height: 0px;
+          opacity: 0;
+          visibility: hidden;
+          padding: 10px; }
+          html body #content main #reversi #rv-description div.rv-rule h3 {
+            font-size: 16px;
+            font-weight: normal;
+            padding-left: 10px;
+            margin: 0 0 10px 0;
+            border-left: solid #ff748b 5px; }
+          html body #content main #reversi #rv-description div.rv-rule p {
+            margin: 5px 0 5px 10px; }
+            html body #content main #reversi #rv-description div.rv-rule p:last-of-type {
+              margin: 5px 0 0 10px; }
+        html body #content main #reversi #rv-description input#rv-rule:checked + div.rv-rule {
+          margin-bottom: 0;
+          max-height: 1000px;
+          visibility: visible;
+          opacity: 1; }
+      html body #content main #reversi #rv-overlay {
         display: -webkit-box;
         display: -ms-flexbox;
-        display: flex; }
-        html body #content main #othello #oth-overlay {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        position: absolute;
+        margin: 10px 0 0 20px;
+        width: 258px;
+        height: 258px;
+        z-index: 10;
+        visibility: hidden; }
+        html body #content main #reversi #rv-overlay div {
+          display: none; }
+        html body #content main #reversi #rv-overlay div.black-pass, html body #content main #reversi #rv-overlay div.white-pass {
           -webkit-box-pack: center;
               -ms-flex-pack: center;
                   justify-content: center;
           -webkit-box-align: center;
               -ms-flex-align: center;
                   align-items: center;
-          position: absolute;
-          margin: 20px 0 0 20px;
-          width: 258px;
-          height: 258px;
-          z-index: 10;
-          visibility: hidden; }
-          html body #content main #othello #oth-overlay div {
-            display: none; }
-          html body #content main #othello #oth-overlay div.black-win, html body #content main #othello #oth-overlay div.white-win {
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-                -ms-flex-direction: column;
-                    flex-direction: column;
-            -webkit-box-align: center;
-                -ms-flex-align: center;
-                    align-items: center; }
-            html body #content main #othello #oth-overlay div.black-win p, html body #content main #othello #oth-overlay div.white-win p {
-              font-weight: bold;
-              font-size: 30px; }
-            html body #content main #othello #oth-overlay div.black-win button, html body #content main #othello #oth-overlay div.white-win button {
-              width: 100px;
-              outline: 0;
-              border: none;
-              -webkit-box-shadow: 0 0 2px 2px rgba(128, 128, 128, 0.2);
-                      box-shadow: 0 0 2px 2px rgba(128, 128, 128, 0.2);
-              padding: 5px 10px;
-              border-radius: 2px;
-              font-size: 16px;
-              background-color: #ff748b;
-              color: whitesmoke;
-              cursor: pointer; }
-              html body #content main #othello #oth-overlay div.black-win button:hover, html body #content main #othello #oth-overlay div.white-win button:hover {
-                background-color: #ff8ea0; }
-          html body #content main #othello #oth-overlay.black-win, html body #content main #othello #oth-overlay.white-win, html body #content main #othello #oth-overlay.draw {
-            background-color: rgba(255, 255, 255, 0.5);
-            -webkit-animation: fade 1s forwards;
-                    animation: fade 1s forwards; }
+          padding: 10px;
+          width: 100%;
+          background-color: rgba(255, 255, 255, 0.6); }
+          html body #content main #reversi #rv-overlay div.black-pass p, html body #content main #reversi #rv-overlay div.white-pass p {
+            margin: 0;
+            font-weight: bold;
+            font-size: 30px;
+            color: black;
+            font-style: italic; }
+        html body #content main #reversi #rv-overlay.black-pass, html body #content main #reversi #rv-overlay.white-pass {
+          -webkit-animation: slide-in-out 1s;
+                  animation: slide-in-out 1s; }
+
+@-webkit-keyframes slide-in-out {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+            transform: translateX(-20px); }
+  20% {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  80% {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+            transform: translateX(20px); } }
+
+@keyframes slide-in-out {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+            transform: translateX(-20px); }
+  20% {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  80% {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+            transform: translateX(20px); } }
+          html body #content main #reversi #rv-overlay.black-pass.black-pass div.black-pass, html body #content main #reversi #rv-overlay.white-pass.black-pass div.black-pass {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex; }
+          html body #content main #reversi #rv-overlay.black-pass.white-pass div.white-pass, html body #content main #reversi #rv-overlay.white-pass.white-pass div.white-pass {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex; }
+        html body #content main #reversi #rv-overlay div.black-win, html body #content main #reversi #rv-overlay div.white-win, html body #content main #reversi #rv-overlay div.draw {
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+              -ms-flex-direction: column;
+                  flex-direction: column;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center; }
+          html body #content main #reversi #rv-overlay div.black-win p, html body #content main #reversi #rv-overlay div.white-win p, html body #content main #reversi #rv-overlay div.draw p {
+            font-weight: bold;
+            font-size: 30px; }
+          html body #content main #reversi #rv-overlay div.black-win.black-win p, html body #content main #reversi #rv-overlay div.white-win.black-win p, html body #content main #reversi #rv-overlay div.draw.black-win p {
+            color: #fc9520; }
+          html body #content main #reversi #rv-overlay div.black-win button, html body #content main #reversi #rv-overlay div.white-win button, html body #content main #reversi #rv-overlay div.draw button {
+            width: 100px;
+            outline: 0;
+            border: none;
+            -webkit-box-shadow: 0 0 2px 2px rgba(128, 128, 128, 0.2);
+                    box-shadow: 0 0 2px 2px rgba(128, 128, 128, 0.2);
+            padding: 5px 10px;
+            border-radius: 2px;
+            font-size: 16px;
+            background-color: #ff748b;
+            color: whitesmoke;
+            cursor: pointer; }
+            html body #content main #reversi #rv-overlay div.black-win button:hover, html body #content main #reversi #rv-overlay div.white-win button:hover, html body #content main #reversi #rv-overlay div.draw button:hover {
+              background-color: #ff8ea0; }
+        html body #content main #reversi #rv-overlay.black-win, html body #content main #reversi #rv-overlay.white-win, html body #content main #reversi #rv-overlay.draw {
+          background-color: rgba(255, 255, 255, 0.5);
+          -webkit-animation: fade 1s forwards;
+                  animation: fade 1s forwards; }
+          html body #content main #reversi #rv-overlay.black-win.black-win div.black-win, html body #content main #reversi #rv-overlay.white-win.black-win div.black-win, html body #content main #reversi #rv-overlay.draw.black-win div.black-win {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex; }
+          html body #content main #reversi #rv-overlay.black-win.white-win div.white-win, html body #content main #reversi #rv-overlay.white-win.white-win div.white-win, html body #content main #reversi #rv-overlay.draw.white-win div.white-win {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex; }
+          html body #content main #reversi #rv-overlay.black-win.draw div.draw, html body #content main #reversi #rv-overlay.white-win.draw div.draw, html body #content main #reversi #rv-overlay.draw.draw div.draw {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex; }
 
 @-webkit-keyframes fade {
   from {
@@ -395,25 +515,19 @@ html body {
   to {
     opacity: 1;
     visibility: visible; } }
-            html body #content main #othello #oth-overlay.black-win.black-win div.black-win, html body #content main #othello #oth-overlay.white-win.black-win div.black-win, html body #content main #othello #oth-overlay.draw.black-win div.black-win {
-              display: -webkit-box;
-              display: -ms-flexbox;
-              display: flex; }
-            html body #content main #othello #oth-overlay.black-win.white-win div.white-win, html body #content main #othello #oth-overlay.white-win.white-win div.white-win, html body #content main #othello #oth-overlay.draw.white-win div.white-win {
-              display: -webkit-box;
-              display: -ms-flexbox;
-              display: flex; }
-            html body #content main #othello #oth-overlay.black-win.draw div.draw, html body #content main #othello #oth-overlay.white-win.draw div.draw, html body #content main #othello #oth-overlay.draw.draw div.draw {
-              display: -webkit-box;
-              display: -ms-flexbox;
-              display: flex; }
-        html body #content main #othello table {
-          margin: 20px 0 0 20px;
+      html body #content main #reversi div.screen {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap; }
+        html body #content main #reversi div.screen table {
+          margin: 10px 0 0 20px;
           border-radius: 3px;
           border-collapse: separate;
           border-spacing: 2px 2px;
           background-color: #0e0e0e; }
-          html body #content main #othello table tbody#oth-board tr td {
+          html body #content main #reversi div.screen table tbody#rv-board tr td {
             padding: 0;
             margin: 0;
             width: 30px;
@@ -429,30 +543,30 @@ html body {
                 -ms-user-select: none;
                     user-select: none;
             background-color: #00b300; }
-            html body #content main #othello table tbody#oth-board tr td.black::before {
+            html body #content main #reversi div.screen table tbody#rv-board tr td.black::before {
               content: '●';
               color: black; }
-            html body #content main #othello table tbody#oth-board tr td.white::before {
+            html body #content main #reversi div.screen table tbody#rv-board tr td.white::before {
               content: '●';
               color: #f0f0f0; }
-            html body #content main #othello table tbody#oth-board tr td.putBlack::before {
+            html body #content main #reversi div.screen table tbody#rv-board tr td.putBlack::before {
               content: '・';
               color: black; }
-            html body #content main #othello table tbody#oth-board tr td.putWhite::after {
+            html body #content main #reversi div.screen table tbody#rv-board tr td.putWhite::after {
               content: '・';
               color: #f0f0f0; }
-            html body #content main #othello table tbody#oth-board tr td::before {
+            html body #content main #reversi div.screen table tbody#rv-board tr td::before {
               position: absolute;
               margin: -15px 0 0 -19px;
               font-size: 38px; }
-            html body #content main #othello table tbody#oth-board tr td::after {
+            html body #content main #reversi div.screen table tbody#rv-board tr td::after {
               position: absolute;
               margin: -15px 0 0 -19px;
               font-size: 38px; }
-            html body #content main #othello table tbody#oth-board tr td.reverse.black::before {
+            html body #content main #reversi div.screen table tbody#rv-board tr td.reverse.black::before {
               -webkit-animation: reverse-black .2s ease;
                       animation: reverse-black .2s ease; }
-            html body #content main #othello table tbody#oth-board tr td.reverse.white::before {
+            html body #content main #reversi div.screen table tbody#rv-board tr td.reverse.white::before {
               -webkit-animation: reverse-white .2s ease;
                       animation: reverse-white .2s ease; }
 
@@ -527,47 +641,55 @@ html body {
     color: white;
     -webkit-transform: scaleX(1);
             transform: scaleX(1); } }
-          html body #content main #othello table tbody#oth-board.black td.putBlack::before {
+          html body #content main #reversi div.screen table tbody#rv-board.black td.putBlack::before {
             display: inline-block; }
-          html body #content main #othello table tbody#oth-board.black td.putWhite::after {
+          html body #content main #reversi div.screen table tbody#rv-board.black td.putWhite::after {
             display: none; }
-          html body #content main #othello table tbody#oth-board.white td.putWhite::after {
+          html body #content main #reversi div.screen table tbody#rv-board.white td.putWhite::after {
             display: inline-block; }
-          html body #content main #othello table tbody#oth-board.white td.putBlack::before {
+          html body #content main #reversi div.screen table tbody#rv-board.white td.putBlack::before {
             display: none; }
-        html body #content main #othello #oth-settings {
-          margin: 20px 0 0 20px; }
-          html body #content main #othello #oth-settings div.black, html body #content main #othello #oth-settings div.white {
-            margin-bottom: 20px; }
-            html body #content main #othello #oth-settings div.black p, html body #content main #othello #oth-settings div.white p {
+        html body #content main #reversi div.screen #rv-settings {
+          margin: 10px 0 0 20px; }
+          html body #content main #reversi div.screen #rv-settings div.black, html body #content main #reversi div.screen #rv-settings div.white {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: dotted transparent 3px;
+            -webkit-transition: border-color .4s;
+            transition: border-color .4s; }
+            html body #content main #reversi div.screen #rv-settings div.black p, html body #content main #reversi div.screen #rv-settings div.white p {
               margin: 0 0 30px 0; }
-              html body #content main #othello #oth-settings div.black p select#com-difficulty-setting, html body #content main #othello #oth-settings div.white p select#com-difficulty-setting {
+              html body #content main #reversi div.screen #rv-settings div.black p select#com-difficulty-setting, html body #content main #reversi div.screen #rv-settings div.white p select#com-difficulty-setting {
                 outline: 0;
                 border: none;
                 font-size: 16px;
                 margin-top: -4px;
                 padding: 2px;
                 border-bottom: solid #ff748b 2px; }
-            html body #content main #othello #oth-settings div.black div.counter input, html body #content main #othello #oth-settings div.white div.counter input {
+            html body #content main #reversi div.screen #rv-settings div.black div.counter input, html body #content main #reversi div.screen #rv-settings div.white div.counter input {
               background-color: transparent;
               border: none;
               border-bottom: solid rgba(255, 116, 139, 0.6) 2px;
               width: 60px;
               font-size: 16px;
               padding: 2px 0 2px 10px; }
-            html body #content main #othello #oth-settings div.black div.counter::before, html body #content main #othello #oth-settings div.white div.counter::before {
+            html body #content main #reversi div.screen #rv-settings div.black div.counter::before, html body #content main #reversi div.screen #rv-settings div.white div.counter::before {
               content: 'コマの数';
               color: #ff748b;
               font-size: 12px;
               position: absolute;
               margin: -20px 0 0 0; }
-            html body #content main #othello #oth-settings div.black div.counter::after, html body #content main #othello #oth-settings div.white div.counter::after {
+            html body #content main #reversi div.screen #rv-settings div.black div.counter::after, html body #content main #reversi div.screen #rv-settings div.white div.counter::after {
               content: 'コ';
               color: #464646;
               font-size: 14px;
               position: absolute;
               margin: 0 0 0 -20px; }
-          html body #content main #othello #oth-settings div.start button {
+          html body #content main #reversi div.screen #rv-settings.black div.black {
+            border-color: #ffa7b6; }
+          html body #content main #reversi div.screen #rv-settings.white div.white {
+            border-color: #ffa7b6; }
+          html body #content main #reversi div.screen #rv-settings div.start button {
             outline: 0;
             border: none;
             background-color: #ff748b;
@@ -577,9 +699,9 @@ html body {
             border-radius: 2px;
             cursor: pointer;
             border-bottom: solid rgba(0, 0, 0, 0.2) 1px; }
-            html body #content main #othello #oth-settings div.start button:hover {
+            html body #content main #reversi div.screen #rv-settings div.start button:hover {
               background-color: rgba(255, 116, 139, 0.8); }
-            html body #content main #othello #oth-settings div.start button:active {
+            html body #content main #reversi div.screen #rv-settings div.start button:active {
               -webkit-transform: translate(0, 1px);
                       transform: translate(0, 1px);
               border-top: solid rgba(255, 255, 255, 0.2) 1px;

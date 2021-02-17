@@ -46,7 +46,7 @@
 			this.put(4, 4, 'white', true);
 			
 			// 初期化
-			const board = document.getElementById('oth-board');
+			const board = document.getElementById('rv-board');
 			board.innerHTML = '';
 			for (let y = 0; y < size.y; y++) {
 				const line = document.createElement('tr');
@@ -146,7 +146,7 @@
 								}
 
 								// アニメーション
-								const reverseCell = document.querySelector(`#oth-board td[data-x="${reverseX}"][data-y="${reverseY}"]`);
+								const reverseCell = document.querySelector(`#rv-board td[data-x="${reverseX}"][data-y="${reverseY}"]`);
 								reverseCell.classList.add('reverse');
 							}
 							break;
@@ -199,6 +199,12 @@
 
 			if (force) return;
 
+			// 終了処理
+			if (this.blackCount + this.whiteCount == size.x * size.y) {
+				this.end();
+				return;
+			}
+
 			// 手番交代
 			if (color == 'black') {
 				if (this.putWhiteCount > 0) {
@@ -218,12 +224,6 @@
 
 			// 描画
 			this.draw();
-
-			// 終了処理
-			if (this.blackCount + this.whiteCount == size.x * size.y) {
-				this.end();
-				return;
-			}
 
 			// 相手のターン
 			if (this.turn == 'white') {
@@ -315,7 +315,14 @@
 				this.board[this.getIndex(choice.x, choice.y)].put = false;
 				this.board[this.getIndex(choice.x, choice.y)].color = '';
 				
-				return reverseCount * 10 - putBlackCount * 20 + putWhiteCount * 10;
+				switch (difficulty) {
+					case 'easy':
+						return reverseCount * 100 - putBlackCount * 10 + putWhiteCount * 10;						
+					case 'normal':
+						return reverseCount * 10 - putBlackCount * 20 + putWhiteCount * 10;						
+					case 'hard':
+						return reverseCount * 10 - putBlackCount * 30 + putWhiteCount * 10;						
+				}
 			});
 
 			const decision = choices[scores.indexOf(scores.reduce((a,b) => Math.max(a,b)))];
@@ -326,7 +333,7 @@
 		draw() {
 			for (let y = 0; y < size.y; y++) {
 				for (let x = 0; x < size.x; x++) {
-					const cell = document.querySelector(`#oth-board td[data-x="${x}"][data-y="${y}"]`);
+					const cell = document.querySelector(`#rv-board td[data-x="${x}"][data-y="${y}"]`);
 					const cellContent = this.board[this.getIndex(x, y)];
 
 					// 色
@@ -347,10 +354,14 @@
 					}
 
 					// 手番
-					const board = document.getElementById('oth-board');					
+					const board = document.getElementById('rv-board');					
 					board.classList.remove('black');
 					board.classList.remove('white');
 					if (this.turn) board.classList.add(this.turn);
+					const settings = document.getElementById('rv-settings');
+					settings.classList.remove('black');
+					settings.classList.remove('white');
+					if (this.turn) settings.classList.add(this.turn);
 
 					// コマの数
 					document.getElementById('black-counter').value = this.blackCount;
@@ -361,7 +372,9 @@
 
 		// 終了
 		end() {
-			const overlay = document.getElementById('oth-overlay');
+			const overlay = document.getElementById('rv-overlay');
+			overlay.classList.remove('black-pass');
+			overlay.classList.remove('white-pass');
 			if (this.blackCount < this.whiteCount) {
 				// 白の勝ち
 				overlay.classList.add('white-win');
@@ -372,11 +385,15 @@
 				// 引き分け
 				overlay.classList.add('draw');
 			}
+			this.draw();
 		}
 
 		// パスの演出
 		pass(color) {
-			console.log('pass ' + color);
+			const overlay = document.getElementById('rv-overlay');
+			overlay.classList.remove('black-pass');
+			overlay.classList.remove('white-pass');
+			overlay.classList.add(`${color}-pass`);
 		}
 	}
 
@@ -387,7 +404,7 @@
 	});
 
 	function restart() {
-		const overlay = document.getElementById('oth-overlay');
+		const overlay = document.getElementById('rv-overlay');
 		overlay.classList.remove('white-win');
 		overlay.classList.remove('black-win');
 		overlay.classList.remove('draw');
@@ -395,14 +412,16 @@
 	}
 
 	// START
-	document.getElementById('oth-start').addEventListener('click', () => {
+	document.getElementById('rv-start').addEventListener('click', () => {
 		restart();
 	});
 
 	// RESTART
-	document.getElementById('oth-restart').addEventListener('click', () => {
-		restart();
-	})
+	for (const button of document.getElementsByClassName('rv-restart')) {
+		button.addEventListener('click', () => {
+			restart();
+		});
+	}
 
 	let board = new Board();
 // }

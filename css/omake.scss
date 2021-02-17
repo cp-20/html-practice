@@ -96,7 +96,7 @@ html {
 							}
 						}
 
-						&.othello {
+						&.reversi {
 							circle.black {
 								fill: $color-accent;
 								stroke: $color-accent;
@@ -438,16 +438,67 @@ html {
 					}
 				}
 
-				#othello {
-					display: flex;
+				#reversi {
+
+					#rv-description {
+						margin: 0 0 0 10px;
+						
+						p {
+							margin: 0 0 10px 0;
+						}
+
+						label[for="rv-rule"] {
+							border-bottom: solid $color-accent 2px;
+							padding: 0 10px 0 5px;
+							cursor: pointer;
+
+							transition: color, .2s;
+							&:hover {
+								color: $color-accent;
+							}
+							
+							span.plus {
+								color: $color-accent;
+							}
+						}
+
+						div.rv-rule {
+							margin-right: 20px;
+							background-color: rgba($color-accent, 0.1);
+							padding-left: 10px;
+							transition: all .5s;
+							max-height: 0px;
+							opacity: 0;
+							visibility: hidden;
+							padding: 10px;
+
+							h3 {
+								font-size: 16px;
+								font-weight: normal;
+								padding-left: 10px;
+								margin: 0 0 10px 0;
+								border-left: solid $color-accent 5px;
+							}
+							p {
+								margin: 5px 0 5px 10px;
+								&:last-of-type { margin: 5px 0 0 10px; }
+							}
+						}
+						input#rv-rule:checked + div.rv-rule {
+							margin-bottom: 0;
+							max-height: 1000px;
+							visibility: visible;
+							opacity: 1;
+						}
+					}
 					
-					#oth-overlay {
+					#rv-overlay {
 						display: flex;
 						justify-content: center;
 						align-items: center;
 
 						position: absolute;
-						margin: 20px 0 0 20px;
+						margin: 10px 0 0 20px;
 						width: 258px;
 						height: 258px;
 						z-index: 10;
@@ -458,7 +509,53 @@ html {
 							display: none;
 						}
 
-						div.black-win, div.white-win {
+						div.black-pass, div.white-pass {
+							justify-content: center;
+							align-items: center;
+							padding: 10px;
+							width: 100%;
+							background-color: rgba(white, 0.6);
+
+							p {
+								margin: 0;
+								font-weight: bold;
+								font-size: 30px;
+								color: black;
+								font-style: italic;
+							}
+						}
+						
+						&.black-pass, &.white-pass {
+							animation: slide-in-out 1s;
+							
+							@keyframes slide-in-out {
+								0% {
+									visibility: hidden;
+									opacity: 0;
+									transform: translateX(-20px);
+								}
+								20% {
+									visibility: visible;
+									opacity: 1;
+									transform: translateX(0);
+								}
+								80% {
+									visibility: visible;
+									opacity: 1;
+									transform: translateX(0);
+								}
+								100% {
+									visibility: hidden;
+									opacity: 0;
+									transform: translateX(20px);
+								}
+							}
+
+							&.black-pass div.black-pass { display: flex; }
+							&.white-pass div.white-pass { display: flex; }
+						}
+
+						div.black-win, div.white-win, div.draw {
 							flex-direction: column;
 							align-items: center;
 							
@@ -466,6 +563,8 @@ html {
 								font-weight: bold;
 								font-size: 30px;
 							}
+							&.black-win p { color: rgb(252, 149, 32); }
+
 							button {
 								width: 100px;
 								outline: 0;
@@ -487,184 +586,195 @@ html {
 						&.black-win, &.white-win, &.draw {
 							background-color: rgba(white, 0.5);
 							animation: fade 1s forwards;
-
-							@keyframes fade {
-								from {
-									opacity: 0;
-									visibility: hidden;
-								}
-								to {
-									opacity: 1;
-									visibility: visible;
-								}
-							}
-
+							
 							&.black-win div.black-win { display: flex; }
 							&.white-win div.white-win { display: flex; }
 							&.draw div.draw { display: flex; }
 						}
+
+						@keyframes fade {
+							from {
+								opacity: 0;
+								visibility: hidden;
+							}
+							to {
+								opacity: 1;
+								visibility: visible;
+							}
+						}
 					}
 					
-					table {
-						margin: 20px 0 0 20px;
-						border-radius: 3px;
-						border-collapse: separate;
-						border-spacing: 2px 2px;
-						background-color: rgb(14, 14, 14);
+					div.screen {
+						display: flex;
+						flex-wrap: wrap;
 
-						tbody#oth-board {
-							tr {
-								td {
-									padding: 0;
-									margin: 0;
-									width: 30px;
-									height: 30px;
-									box-sizing: border-box;
-									border-radius: 2px;
-									font-size: 30px;
-									text-align: center;
-									line-height: 32px;
-									user-select: none;
-									background-color: rgb(0, 179, 0);
-
-									&.black::before { content: '●'; color: black; }
-									&.white::before { content: '●'; color: rgb(240, 240, 240); }
-									&.putBlack::before { content: '・'; color: black; }
-									&.putWhite::after { content: '・'; color: rgb(240, 240, 240); }
-									
-									&::before {
-										position: absolute;
-										margin: -15px 0 0 -19px;
-										font-size: 38px;
-									}
-									&::after {
-										position: absolute;
-										margin: -15px 0 0 -19px;
-										font-size: 38px;
-									}
-
-									&.reverse {
-										&.black::before { animation: reverse-black .2s ease; }
-										&.white::before { animation: reverse-white .2s ease; }
-
-										@keyframes reverse-black {
-											0% {
-												color: white;
-												transform: scaleX(1);
-											}
-											50% {
-												color: white;
-												transform: scaleX(0);
-											}
-											51% {
-												color: black;
-												transform: scaleX(0);
-											}
-											100% {
-												color: black;
-												transform: scaleX(1);
-											}
+						table {
+							margin: 10px 0 0 20px;
+							border-radius: 3px;
+							border-collapse: separate;
+							border-spacing: 2px 2px;
+							background-color: rgb(14, 14, 14);
+	
+							tbody#rv-board {
+								tr {
+									td {
+										padding: 0;
+										margin: 0;
+										width: 30px;
+										height: 30px;
+										box-sizing: border-box;
+										border-radius: 2px;
+										font-size: 30px;
+										text-align: center;
+										line-height: 32px;
+										user-select: none;
+										background-color: rgb(0, 179, 0);
+	
+										&.black::before { content: '●'; color: black; }
+										&.white::before { content: '●'; color: rgb(240, 240, 240); }
+										&.putBlack::before { content: '・'; color: black; }
+										&.putWhite::after { content: '・'; color: rgb(240, 240, 240); }
+										
+										&::before {
+											position: absolute;
+											margin: -15px 0 0 -19px;
+											font-size: 38px;
 										}
-										@keyframes reverse-white {
-											0% {
-												color: black;
-												transform: scaleX(1);
+										&::after {
+											position: absolute;
+											margin: -15px 0 0 -19px;
+											font-size: 38px;
+										}
+	
+										&.reverse {
+											&.black::before { animation: reverse-black .2s ease; }
+											&.white::before { animation: reverse-white .2s ease; }
+	
+											@keyframes reverse-black {
+												0% {
+													color: white;
+													transform: scaleX(1);
+												}
+												50% {
+													color: white;
+													transform: scaleX(0);
+												}
+												51% {
+													color: black;
+													transform: scaleX(0);
+												}
+												100% {
+													color: black;
+													transform: scaleX(1);
+												}
 											}
-											50% {
-												color: black;
-												transform: scaleX(0);
-											}
-											51% {
-												color: white;
-												transform: scaleX(0);
-											}
-											100% {
-												color: white;
-												transform: scaleX(1);
+											@keyframes reverse-white {
+												0% {
+													color: black;
+													transform: scaleX(1);
+												}
+												50% {
+													color: black;
+													transform: scaleX(0);
+												}
+												51% {
+													color: white;
+													transform: scaleX(0);
+												}
+												100% {
+													color: white;
+													transform: scaleX(1);
+												}
 											}
 										}
 									}
 								}
-							}
-							
-							&.black {
-								td.putBlack::before { display: inline-block; }
-								td.putWhite::after { display: none; }
-							}
-							&.white {
-								td.putWhite::after { display: inline-block; }
-								td.putBlack::before { display: none; }
+								
+								&.black {
+									td.putBlack::before { display: inline-block; }
+									td.putWhite::after { display: none; }
+								}
+								&.white {
+									td.putWhite::after { display: inline-block; }
+									td.putBlack::before { display: none; }
+								}
 							}
 						}
-					}
-
-					#oth-settings {
-						margin: 20px 0 0 20px;
-
-						div.black, div.white {
-							margin-bottom: 20px;
-							
-							p {
-								margin: 0 0 30px 0;
-
-								select#com-difficulty-setting {
+	
+						#rv-settings {
+							margin: 10px 0 0 20px;
+	
+							div.black, div.white {
+								margin-bottom: 10px;
+								padding: 5px;
+								border: dotted transparent 3px;
+								transition: border-color .4s;
+	
+								p {
+									margin: 0 0 30px 0;
+	
+									select#com-difficulty-setting {
+										outline: 0;
+										border: none;
+										font-size: 16px;
+										margin-top: -4px;
+										padding: 2px;
+										border-bottom: solid $color-accent 2px;
+									}
+								}
+	
+								div.counter {
+									input {
+										background-color: transparent;
+										border: none;
+										border-bottom: solid rgba($color-accent, 0.6) 2px;
+										width: 60px;
+										font-size: 16px;
+										padding: 2px 0 2px 10px;
+									}
+	
+									&::before {
+										content: 'コマの数';
+										color: $color-accent;
+										font-size: 12px;
+										position: absolute;
+										margin: -20px 0 0 0;
+									}
+	
+									&::after {
+										content: 'コ';
+										color: $color-text;
+										font-size: 14px;
+										position: absolute;
+										margin: 0 0 0 -20px;
+									}
+								}
+							}
+	
+							&.black div.black { border-color: lighten($color-accent, 10%); }
+							&.white div.white { border-color: lighten($color-accent, 10%); }
+	
+							div.start {
+								button {
 									outline: 0;
 									border: none;
-									font-size: 16px;
-									margin-top: -4px;
-									padding: 2px;
-									border-bottom: solid $color-accent 2px;
-								}
-							}
-
-							div.counter {
-								input {
-									background-color: transparent;
-									border: none;
-									border-bottom: solid rgba($color-accent, 0.6) 2px;
-									width: 60px;
-									font-size: 16px;
-									padding: 2px 0 2px 10px;
-								}
-
-								&::before {
-									content: 'コマの数';
-									color: $color-accent;
-									font-size: 12px;
-									position: absolute;
-									margin: -20px 0 0 0;
-								}
-
-								&::after {
-									content: 'コ';
-									color: $color-text;
+									background-color: $color-accent;
+									color: white;
 									font-size: 14px;
-									position: absolute;
-									margin: 0 0 0 -20px;
-								}
-							}
-						}
-
-						div.start {
-							button {
-								outline: 0;
-								border: none;
-								background-color: $color-accent;
-								color: white;
-								font-size: 14px;
-								padding: 7px 10px 4px 10px;
-								border-radius: 2px;
-								cursor: pointer;
-
-								border-bottom: solid rgba(black, 0.2) 1px;
-
-								&:hover {
-									background-color: rgba($color-accent, 0.8);
-								}
-								&:active {
-									transform: translate(0, 1px);
-									border-top: solid rgba(white, 0.2) 1px;
-									border-bottom: none;
+									padding: 7px 10px 4px 10px;
+									border-radius: 2px;
+									cursor: pointer;
+	
+									border-bottom: solid rgba(black, 0.2) 1px;
+	
+									&:hover {
+										background-color: rgba($color-accent, 0.8);
+									}
+									&:active {
+										transform: translate(0, 1px);
+										border-top: solid rgba(white, 0.2) 1px;
+										border-bottom: none;
+									}
 								}
 							}
 						}
