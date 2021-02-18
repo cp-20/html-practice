@@ -13,6 +13,7 @@ $mesh-size: 30px;
 html {
 	body {
 		margin: 0;
+		color: $color-text;
 
 		&::before {
 			content: '';
@@ -782,12 +783,165 @@ html {
 				}
 
 				#quiz {
+					div.quiz {
+						background-color: lighten($color-accent, 25%);
+						border: solid lighten($color-accent, 10%);
+						border-radius: 5px;
+						max-width: 500px;
+						padding: 10px 20px 20px 20px;
+						margin: 40px 20px 40px 0;
 
+						@for $i from 1 to 11 {
+							&:nth-child(#{$i})::before {
+								content: 'Q.#{$i}';
+								font-size: 20px;
+								font-weight: bold;
+								display: inline-block;
+								margin: 0 0 10px 0;
+							}
+						}
+
+						h3.question {
+							font-weight: normal;
+							margin: 0 0 10px 0;
+						}
+						div.choices {
+							display: flex;
+							flex-direction: column;
+
+							p.choice {
+								margin: 7px 10px;
+								padding: 10px 0;
+								border-radius: 5px;
+								box-shadow: 0px 2px 5px lightgray;
+								text-align: center;
+								background-color: rgba(lightgray, 0.4);
+								font-weight: bold;
+
+								&:hover {
+									background-color: rgba(lightgray, 0.2);
+								}
+							}
+
+							&.answered {
+								p.choice {
+									background-color: rgba(lightgray, 0.4);
+									&.answer {
+										background-color: rgba(rgb(0, 177, 0), 0.2);
+									}
+									&.missed {
+										background-color: rgba(red, 0.2);
+									}
+								}
+
+								& + div.answer {
+									animation: show-answer .3s forwards;
+
+									@keyframes show-answer {
+										0% {
+											visibility: hidden;
+											opacity: 0;
+											max-height: 0px;
+											margin-bottom: -50px;
+										}
+										100% {
+											visibility: visible;
+											opacity: 1;
+											max-height: 300px;
+											margin-bottom: 0px;
+										}
+									}
+
+									&::before {
+										font-size: 20px;
+										font-weight: bold;
+										margin-bottom: 20px;
+									}
+								}
+								&.correct + div.answer::before {
+									content: '正解！';
+									color: #72c572;
+								}
+								&.wrong + div.answer::before {
+									content: '不正解！';
+									color: darken($color-accent, 10%);
+								}
+							}
+						}
+
+						div.answer {
+							visibility: hidden;
+							max-height: 0px;
+							border-top: solid rgb(185, 185, 185) 3px;
+							margin: 20px 0 -50px 0;
+							padding-top: 20px;
+
+							p.answer {
+								margin: 0;
+								font-size: 26px;
+
+								&::before {
+									content: 'A.';
+									font-size: 20px;
+									margin-right: 10px;
+									color: darken($color-accent, 20%);
+								}
+							}
+							p:not(.answer) {
+								margin: 10px 0;
+							}
+						}
+					}
+
+					div#result {
+						background-color: lighten($color-accent, 25%);
+						border: solid lighten($color-accent, 10%);
+						border-radius: 5px;
+						max-width: 500px;
+						padding: 10px 20px 20px 20px;
+
+						h3 {
+							margin: 5px 0 0 0;
+							font-size: 22px;
+						}
+						
+						div.quizes {
+							display: flex;
+							flex-direction: row;
+							flex-wrap: wrap;
+							margin: 10px 0 0 0;
+
+							p {
+								margin: 5px 0;
+								padding-left: 10px;
+								box-sizing: border-box;
+								width: 50%;
+								font-size: 18px;
+								
+								span.answer {
+									font-weight: bold;
+									font-size: 20px;
+
+									&::before {
+										content: '未回答';
+									}
+									&.correct::before {
+										content: '正解';
+										color: #72c572;
+									}
+									&.wrong::before {
+										content: '不正解';
+										color: darken($color-accent, 10%);
+									}
+								}
+							}
+						}
+					}
 				}
 
 				#pictogram {
 					img.pictogram {
-						width: 200px;
+						width: 150px;
 					}
 				}
 			}

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 html body {
   margin: 0;
+  color: #464646;
 }
 
 html body::before {
@@ -994,8 +995,268 @@ html body #content main #reversi div.screen #rv-settings div.start button:active
   border-bottom: none;
 }
 
+html body #content main #quiz div.quiz {
+  background-color: #fff4f5;
+  border: solid #ffa7b6;
+  border-radius: 5px;
+  max-width: 500px;
+  padding: 10px 20px 20px 20px;
+  margin: 40px 20px 40px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(1)::before {
+  content: "Q.1";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(2)::before {
+  content: "Q.2";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(3)::before {
+  content: "Q.3";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(4)::before {
+  content: "Q.4";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(5)::before {
+  content: "Q.5";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(6)::before {
+  content: "Q.6";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(7)::before {
+  content: "Q.7";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(8)::before {
+  content: "Q.8";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(9)::before {
+  content: "Q.9";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(10)::before {
+  content: "Q.10";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz h3.question {
+  font-weight: normal;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz div.choices {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+html body #content main #quiz div.quiz div.choices p.choice {
+  margin: 7px 10px;
+  padding: 10px 0;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 5px lightgray;
+          box-shadow: 0px 2px 5px lightgray;
+  text-align: center;
+  background-color: rgba(211, 211, 211, 0.4);
+  font-weight: bold;
+}
+
+html body #content main #quiz div.quiz div.choices p.choice:hover {
+  background-color: rgba(211, 211, 211, 0.2);
+}
+
+html body #content main #quiz div.quiz div.choices.answered p.choice {
+  background-color: rgba(211, 211, 211, 0.4);
+}
+
+html body #content main #quiz div.quiz div.choices.answered p.choice.answer {
+  background-color: rgba(0, 177, 0, 0.2);
+}
+
+html body #content main #quiz div.quiz div.choices.answered p.choice.missed {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+html body #content main #quiz div.quiz div.choices.answered + div.answer {
+  -webkit-animation: show-answer .3s forwards;
+          animation: show-answer .3s forwards;
+}
+
+@-webkit-keyframes show-answer {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0px;
+    margin-bottom: -50px;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    max-height: 300px;
+    margin-bottom: 0px;
+  }
+}
+
+@keyframes show-answer {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0px;
+    margin-bottom: -50px;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    max-height: 300px;
+    margin-bottom: 0px;
+  }
+}
+
+html body #content main #quiz div.quiz div.choices.answered + div.answer::before {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+html body #content main #quiz div.quiz div.choices.answered.correct + div.answer::before {
+  content: '正解！';
+  color: #72c572;
+}
+
+html body #content main #quiz div.quiz div.choices.answered.wrong + div.answer::before {
+  content: '不正解！';
+  color: #ff4160;
+}
+
+html body #content main #quiz div.quiz div.answer {
+  visibility: hidden;
+  max-height: 0px;
+  border-top: solid #b9b9b9 3px;
+  margin: 20px 0 -50px 0;
+  padding-top: 20px;
+}
+
+html body #content main #quiz div.quiz div.answer p.answer {
+  margin: 0;
+  font-size: 26px;
+}
+
+html body #content main #quiz div.quiz div.answer p.answer::before {
+  content: 'A.';
+  font-size: 20px;
+  margin-right: 10px;
+  color: #ff0e36;
+}
+
+html body #content main #quiz div.quiz div.answer p:not(.answer) {
+  margin: 10px 0;
+}
+
+html body #content main #quiz div#result {
+  background-color: #fff4f5;
+  border: solid #ffa7b6;
+  border-radius: 5px;
+  max-width: 500px;
+  padding: 10px 20px 20px 20px;
+}
+
+html body #content main #quiz div#result h3 {
+  margin: 5px 0 0 0;
+  font-size: 22px;
+}
+
+html body #content main #quiz div#result div.quizes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 10px 0 0 0;
+}
+
+html body #content main #quiz div#result div.quizes p {
+  margin: 5px 0;
+  padding-left: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 50%;
+  font-size: 18px;
+}
+
+html body #content main #quiz div#result div.quizes p span.answer {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+html body #content main #quiz div#result div.quizes p span.answer::before {
+  content: '未回答';
+}
+
+html body #content main #quiz div#result div.quizes p span.answer.correct::before {
+  content: '正解';
+  color: #72c572;
+}
+
+html body #content main #quiz div#result div.quizes p span.answer.wrong::before {
+  content: '不正解';
+  color: #ff4160;
+}
+
 html body #content main #pictogram img.pictogram {
-  width: 200px;
+  width: 150px;
 }
 
 html body #content footer {

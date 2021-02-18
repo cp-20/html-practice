@@ -135,6 +135,7 @@
 				<div id="rv-description">
 					<p>コンピューターと対戦できるリバーシ</p>
 					<p>敵の強さを設定できるのがこだわり</p>
+					<p>技術力不足でそこまで強くできなかったのが残念</p>
 					<label for="rv-rule"><span class="plus">＋</span>リバーシのルール</label>
 					<input type="checkbox" id="rv-rule" hidden>
 
@@ -190,9 +191,9 @@
 							<p>
 								<span>2P(白)：<strong>COM</strong></span>
 								<select name="com-difficulty" id="com-difficulty-setting">
-									<option value="easy">よわい</option>
+									<option value="easy" selected>よわい</option>
 									<option value="normal">ふつう</option>
-									<option value="hard" selected>つよい</option>
+									<option value="hard">つよい</option>
 								</select>
 							</p>
 							<div class="counter">
@@ -216,7 +217,153 @@
 				<span>HTML/CSSクイズ</span>
 			</h2>
 			<div class="content" id="quiz">
-				
+				<div class="quiz">
+					<h3 class="question">HTMLで見出しに使用するタグは以下のうちどれ？</h3>
+					<div class="choices">
+						<p class="choice">label</p>
+						<p class="choice answer">h1</p>
+						<p class="choice">index</p>
+						<p class="choice">header</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>h1～h6までを見出しとして使用します</p>
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">HTMLでコメントをつける場合の構文は以下のうちどれ？</h3>
+					<div class="choices">
+						<p class="choice answer">&lt;!-- コメント --&gt;</p>
+						<p class="choice">&lt;comment&gt; コメント &lt;/comment&gt;</p>
+						<p class="choice">&lt;=! コメント=&gt;</p>
+						<p class="choice">&lt;!&gt; コメント &lt;/!&gt;</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>複数行コメントも可能です</p>
+						<!-- 
+	こ
+	ん
+	な
+	感
+	じ
+	で
+	ね 
+						-->
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">HTML5で書かれたものであるとブラウザに明示する記述は以下のうちどれ？</h3>
+					<div class="choices">
+						<p class="choice">&lt;!HTML5&gt;</p>
+						<p class="choice">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML5&gt;</p>
+						<p class="choice">&lt;!doctype=”HTML5”&gt;</p>
+						<p class="choice answer">&lt;!DOCTYPE html&gt;</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>2番目の記述がHTML4に似たもの</p>
+						<p>HTML5でかなりシンプルになりました</p>
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">背景色を指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">bgcolor</p>
+						<p class="choice answer">background-color</p>
+						<p class="choice">color</p>
+						<p class="choice">color-background</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>bgcolorはHTML4の属性、colorは文字色を設定するプロパティです</p>
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">リンクを表示させるHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice answer">a</p>
+						<p class="choice">link</p>
+						<p class="choice">href</p>
+						<p class="choice">jump</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>hrefはaタグの中でリンク先を指定するのに用います</p>
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">CSSを外部から読み込む際に使用するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">css</p>
+						<p class="choice">style</p>
+						<p class="choice">stylesheet</p>
+						<p class="choice answer">link</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>styleはHTML内にスタイルを記述する際に使用するタグです</p>
+						<p>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;の用に記述します</p>
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">クラス名がhotの要素にスタイルを適用する時に使うセレクタは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">#hot</p>
+						<p class="choice">&hot</p>
+						<p class="choice answer">.hot</p>
+						<p class="choice">,hot</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>#hotはidがhotの要素を指定できます</p>
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">レスポンシブデザインにする際、スマホなどの小さい画面で見た際にだけスタイルを適用するときに使用するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice answer">@media</p>
+						<p class="choice">@responsive</p>
+						<p class="choice">@breakpoint</p>
+						<p class="choice">@query</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>@media screen and {max-width:480px} { スマホ用のCSS }の用に記述します</p>
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">フォントの種類を指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">font-style</p>
+						<p class="choice answer">font-family</p>
+						<p class="choice">font-kind</p>
+						<p class="choice">font-property</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>font-styleはイタリックや打ち消し線などにしたいときに使用します</p>
+					</div>
+				</div>
+				<div class="quiz">
+					<h3 class="question">ブラウザでタブの部分に表示されるテキストを指定するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">tab</p>
+						<p class="choice">label</p>
+						<p class="choice">head</p>
+						<p class="choice answer">title</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>&lt;link rel=&quot;icon&quot; href=&quot;img/favicon.png&quot; type=&quot;image/png&quot;&gt;の用に記述することでファビコンと呼ばれるタイトルの横に表示されるアイコンを指定することもできます</p>
+					</div>
+				</div>
+				<div id="result">
+					<h3>正解数　<span id="result-quiz-correct">0</span> / <span id="result-quiz-all">0</span></h3>
+					<div class="quizes">
+					</div>
+				</div>
+				<script src="./js/quiz.js"></script>
 			</div>
 
 			<h2 class="label" id="index-pictogram">
@@ -227,6 +374,8 @@
 				<span>ピクトグラム</span>
 			</h2>
 			<div class="content" id="pictogram">
+				<p>「ここではマスクを着用してください」的な意味合いのピクトグラム</p>
+				<p>画像のセンスが圧倒的に欠けているので雑ですが心の瞳で見てください</p>
 				<img src="./img/pictogram.svg" alt="マスク着用をイメージしたピクトグラム" class="pictogram">
 			</div>
 
@@ -255,9 +404,12 @@
 				<span>あとがき</span>
 			</h2>
 			<div class="content" id="afterword">
-				<p>|ω・｀)ﾉ ﾔｧ</p>
-				<p>なんで多言語対応したサイトを作ったのかって？最初に1ページだけサイトを作ってどうしようか困ったからとりあえず複数ページ作るために対応したという訳だ</p>
-				<p>このページは友達が3Dエンジン自作してたことに感化されてゲーム作ろうとなり製作した</p>
+				<p>最初に1ページだけサイトを作ってどうしようか困ったから結果複数ページ作るために対応したという経緯で生まれたこのサイト</p>
+				<p>このページは友達が3Dエンジン自作してたことに感化されて、ゲーム作ろうとなり製作した</p>
+				<p>無駄に時間をかけすぎている気がするがそこそこ完成度の高いサイトになったのではないかと思う</p>
+				<p>中でもメインのページはページ遷移の部分以外にJSを使っていないのがどうでもいいこだわりポイント</p>
+				<p>しかし画像製作センスが欠けていることとリバーシのCOMがあんまり強くないことが少し微妙だったなと思う</p>
+				<p>こんなサイトの一番奥まで読んでくださった方、ありがとうございました</p>
 			</div>
 		</main>
 

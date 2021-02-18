@@ -1,4 +1,4 @@
-// {
+{
 	const size = { x: 8, y: 8 }
 
 	const arroundCells = [
@@ -227,7 +227,7 @@
 			}
 
 			// それぞれ評価
-			const scores = choices.map(choice => {
+			Promise.all(choices.map(choice => {
 				// ひっくり返す枚数
 				const reverseCount = (() => {
 					for (let i = 0; i < arroundCells; i++) {
@@ -259,27 +259,37 @@
 						let whiteCount = 0;
 						let blackCornerCount = 0;
 						let whiteCornerCount = 0;
+						const corners = [
+							{ x: 0, y: 0 },
+							{ x: size.x-1, y: 0 },
+							{ x: 0, y: size.x-1 },
+							{ x: size.x-1, y: size.y-1 },
+						]
 						for (let y = 0; y < size.y; y++) {
 							for (let x = 0; x < size.x; x++) {
-								const corners = [
-									{ x: 0, y: 0 },
-									{ x: size.x-1, y: 0 },
-									{ x: 0, y: size.x-1 },
-									{ x: size.x-1, y: size.y-1 },
-								]
+								const cell = this.board[this.getIndex(x, y)];
 								// 角
 								if (corners.includes({x, y})) {
 									if (cell.black) blackCornerCount++;
 									if (cell.white) whiteCornerCount++;
 								}
-								const cell = this.board[this.getIndex(x, y)];
 								if (cell.black) blackCount++;
 								if (cell.white) whiteCount++;								
 							}
 						}
 						const { putBlackCount, putWhiteCount, cellsPutBlack, cellsPutWhite } = this.getPutCount();
+						const putBlackCornerCount = cellsPutBlack.filter(cell => corners.includes(cell)).length
+						const putWhiteCornerCount = cellsPutWhite.filter(cell => corners.includes(cell)).length
 						return {
-							score: whiteCount - blackCount + whiteCornerCount * 100 - blackCornerCount * 200 - blackCount * 200 + putWhiteCount * 20 - putBlackCount * 20,
+							score: whiteCount - blackCount + whiteCornerCount * 1000 - blackCornerCount * 2000 + putWhiteCornerCount * 100 - putBlackCornerCount * 200 + putWhiteCount * 20 - putBlackCount * 20,
+							blackCount: blackCount,
+							whiteCount: whiteCount,
+							blackCornerCount: blackCornerCount,
+							whiteCornerCount: whiteCornerCount,
+							putBlackCount: putBlackCount,
+							putWhiteCount: putWhiteCount,
+							putBlackCornerCount: putBlackCornerCount,
+							putWhiteCornerCount: putWhiteCornerCount,
 							cellsPutBlack: cellsPutBlack,
 							cellsPutWhite: cellsPutWhite
 						}
@@ -287,20 +297,43 @@
 					this.board[this.getIndex(choice.x, choice.y)].put = true;
 					this.board[this.getIndex(choice.x, choice.y)].color = 'white';
 					const score = (() => {
-						const { score, cellsPutBlack, cellsPutWhite } = evalBoard();
-						if (i + 1 == max) {
+						const { score, cellsPutBlack, cellsPutWhite, blackCount, whiteCount, putBlackCount, putWhiteCount } = evalBoard();
+						if (blackCount + whiteCount == size.x * size.y || ( putBlackCount == 0 && putWhiteCount == 0 )) {
+							if (blackCount < whiteCount) {
+								return 10000000;
+							}else if (blackCount > whiteCount) {
+								return -10000000;
+							}else {
+								return 0;
+							}
+						}
+						if (i + 1 >= max) {
 							return score;
 						}else {
 							if (turn == 'white') {
-								const scores = cellsPutBlack.map(choice => {
-									return getNextPutCount(choice, max, turn='black', i+1);
-								});
-								return scores.reduce((a,b) => Math.max(a,b));
+								if (cellsPutBlack.length > 0) {
+									const scores = cellsPutBlack.map(choice => {
+										return getNextPutCount(choice, max, turn='black', i+1);
+									});
+									return scores.reduce((a,b) => Math.max(a,b));
+								}else {
+									const scores = cellsPutWhite.map(choice => {
+										return getNextPutCount(choice, max, turn='white', i+2);
+									});
+									return scores.reduce((a,b) => Math.min(a,b));	
+								}
 							}else {
-								const scores = cellsPutWhite.map(choice => {
-									return getNextPutCount(choice, max, turn='white', i+1);
-								});
-								return scores.reduce((a,b) => Math.min(a,b));
+								if (cellsPutWhite.length > 0) {
+									const scores = cellsPutWhite.map(choice => {
+										return getNextPutCount(choice, max, turn='white', i+1);
+									});
+									return scores.reduce((a,b) => Math.min(a,b));
+								}else {
+									const scores = cellsPutBlack.map(choice => {
+										return getNextPutCount(choice, max, turn='black', i+2);
+									});
+									return scores.reduce((a,b) => Math.max(a,b));
+								}
 							}
 						}
 					})();
@@ -309,7 +342,7 @@
 
 					return score;
 				}
-				if (difficulty == 'hard') return getNextPutCount(choice, 1, 'white');
+				if (difficulty == 'hard') return getNextPutCount(choice, 4, 'white');
 				
 				const { putBlackCount, putWhiteCount } = this.getPutCount();
 
@@ -321,15 +354,15 @@
 					case 'hard':
 						return reverseCount * 10 - putBlackCount * 30 + putWhiteCount * 10;						
 				}
+			})).then(scores => {
+				for (let i = 0; i < choices.length; i++) {
+					console.log(`(${choices[i].x},${choices[i].y}) = ${scores[i]}`);
+				}
+				console.log('----------------------------------------');
+	
+				const decision = choices[scores.indexOf(scores.reduce((a,b) => Math.max(a,b)))];
+				this.put(decision.x, decision.y, 'white');	
 			});
-
-			for (let i = 0; i < choices.length; i++) {
-				console.log(`(${choices[i].x},${choices[i].y}) = ${scores[i]}`);
-			}
-			console.log('----------------------------------------');
-
-			const decision = choices[scores.indexOf(scores.reduce((a,b) => Math.max(a,b)))];
-			this.put(decision.x, decision.y, 'white');
 		}
 
 		// 置ける場所の数
@@ -474,4 +507,4 @@
 	}
 
 	let board = new Board();
-// }
+}
