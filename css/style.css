@@ -1,674 +1,926 @@
 @charset "UTF-8";
 * {
-  z-index: 0; }
+  z-index: 0;
+}
 
 html {
-  height: 100%; }
-  html body {
-    margin: 0; }
-    html body a {
-      color: var(--color-text);
-      -webkit-text-decoration: underline solid var(--color-accent);
-              text-decoration: underline solid var(--color-accent);
-      text-decoration-thickness: 2px;
-      -webkit-transition: color .2s;
-      transition: color .2s; }
-      html body a:hover {
-        color: var(--color-accent);
-        text-decoration-thickness: 3px; }
-    html body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: WhiteSmoke;
-      background: repeating-linear-gradient(to bottom, transparent, transparent 30px, lightgray 30px, lightgray calc(30px + 1px)), repeating-linear-gradient(to right, transparent, transparent 30px, lightgray 30px, lightgray calc(30px + 1px));
-      z-index: -1; }
-    html body input.settings {
-      display: none; }
-      html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content label[for="setting-font-size-small"],
-      html body input.settings.setting-font-size#setting-font-size-medium:checked ~ #content label[for="setting-font-size-medium"],
-      html body input.settings.setting-font-size#setting-font-size-big:checked ~ #content label[for="setting-font-size-big"] {
-        color: var(--color-accent);
-        cursor: default !important; }
-        html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content label[for="setting-font-size-small"]::after,
-        html body input.settings.setting-font-size#setting-font-size-medium:checked ~ #content label[for="setting-font-size-medium"]::after,
-        html body input.settings.setting-font-size#setting-font-size-big:checked ~ #content label[for="setting-font-size-big"]::after {
-          opacity: 1 !important;
-          -webkit-transform: translateX(0) !important;
-                  transform: translateX(0) !important; }
-      html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content label[for="setting-font-size-medium"]::after,
-      html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content label[for="setting-font-size-big"]::after,
-      html body input.settings.setting-font-size#setting-font-size-medium:checked ~ #content label[for="setting-font-size-big"]::after {
-        -webkit-transform: translateX(-100%) !important;
-                transform: translateX(-100%) !important; }
-      html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content {
-        font-size: 12px; }
-      html body input.settings.setting-font-size#setting-font-size-medium:checked ~ #content {
-        font-size: 16px; }
-      html body input.settings.setting-font-size#setting-font-size-big:checked ~ #content {
-        font-size: 20px; }
-      html body input.settings.setting-colorset#setting-colorset-default:checked ~ #content {
-        background-color: white;
-        color: #2c2c2c;
-        --color-background: white;
-        --color-text: #2c2c2c;
-        --color-border: #ccc;
-        --color-accent: DeepSkyBlue;
-        --color-accent-hover: #ebf8ff;
-        --color-light: gray;
-        --color-text-footer: white;
-        --color-background-footer: gray;
-        --color-background-accent: lightgray;
-        --color-select: #96e6ff; }
-        html body input.settings.setting-colorset#setting-colorset-default:checked ~ #content div.setting-colorset div.setting-colorset-default {
-          border-color: var(--color-border); }
-      html body input.settings.setting-colorset#setting-colorset-yellow:checked ~ #content {
-        background-color: yellow;
-        color: black;
-        --color-background: yellow;
-        --color-text: black;
-        --color-border: darkgray;
-        --color-accent: DeepSkyBlue;
-        --color-accent-hover: rgba(0, 191, 255, 0.1);
-        --color-light: gray;
-        --color-text-footer: black;
-        --color-background-footer: #e6e600;
-        --color-background-accent: #ffff64;
-        --color-select: #96e6ff; }
-        html body input.settings.setting-colorset#setting-colorset-yellow:checked ~ #content div.setting-colorset div.setting-colorset-yellow {
-          border-color: var(--color-border); }
-      html body input.settings.setting-colorset#setting-colorset-blue:checked ~ #content {
-        background-color: blue;
-        color: yellow;
-        --color-background: blue;
-        --color-text: yellow;
-        --color-border: #ccc;
-        --color-accent: #f90;
-        --color-accent-hover: rgba(255, 153, 0, 0.1);
-        --color-light: lightgray;
-        --color-text-footer: black;
-        --color-background-footer: #6464ff;
-        --color-background-accent: #6464ff;
-        --color-select: #ffe696; }
-        html body input.settings.setting-colorset#setting-colorset-blue:checked ~ #content div.setting-colorset div.setting-colorset-blue {
-          border-color: var(--color-border); }
-      html body input.settings.setting-colorset#setting-colorset-black:checked ~ #content {
-        background-color: black;
-        color: white;
-        --color-background: black;
-        --color-text: white;
-        --color-border: #ccc;
-        --color-accent: DeepSkyBlue;
-        --color-accent-hover: rgba(0, 191, 255, 0.1);
-        --color-light: lightgray;
-        --color-text-footer: white;
-        --color-background-footer: #323232;
-        --color-background-accent: #323232;
-        --color-select: #96e6ff; }
-        html body input.settings.setting-colorset#setting-colorset-black:checked ~ #content div.setting-colorset div.setting-colorset-black {
-          border-color: var(--color-border); }
-    html body #content {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto; }
-      html body #content p.strike {
-        text-decoration: line-through; }
-      html body #content header #eyecatch {
-        margin: 0;
-        position: relative; }
-        html body #content header #eyecatch img {
-          vertical-align: top;
-          max-height: 400px;
-          -o-object-fit: cover;
-             object-fit: cover;
-          width: 100%; }
-        html body #content header #eyecatch figcaption {
-          width: 100%;
-          height: 100px;
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          margin: 0;
-          background: -webkit-gradient(linear, left bottom, left top, from(black), to(rgba(0, 0, 0, 0)));
-          background: linear-gradient(to top, black, rgba(0, 0, 0, 0));
-          -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center;
-          -webkit-box-align: center;
-              -ms-flex-align: center;
-                  align-items: center; }
-          html body #content header #eyecatch figcaption div {
-            height: 100px;
-            margin: 0 10% 0 auto;
-            width: 200px; }
-            html body #content header #eyecatch figcaption div p {
-              color: white;
-              font-family: '游ゴシック', sans-serif;
-              background-color: transparent;
-              margin: 0 auto; }
-            html body #content header #eyecatch figcaption div .caption {
-              text-align: center;
-              font-size: 45px;
-              width: 180px; }
-            html body #content header #eyecatch figcaption div .subcaption {
-              width: 200px;
-              text-align: center;
-              position: relative;
-              top: -10px;
-              font-size: 23px; }
-        html body #content header #eyecatch #setting-button {
-          position: absolute;
-          top: 5px;
-          right: 5px; }
-          html body #content header #eyecatch #setting-button svg {
-            position: absolute;
-            top: 0;
-            right: 0; }
-            html body #content header #eyecatch #setting-button svg circle, html body #content header #eyecatch #setting-button svg line {
-              stroke: white;
-              stroke-width: 10px; }
-          html body #content header #eyecatch #setting-button label {
-            position: absolute;
-            top: 0;
-            right: 0;
-            cursor: pointer;
-            width: 32px;
-            height: 32px; }
-            html body #content header #eyecatch #setting-button label:hover ~ div {
-              opacity: 1;
-              -webkit-transform: scaleY(1);
-                      transform: scaleY(1); }
-          html body #content header #eyecatch #setting-button div {
-            opacity: 0;
-            -webkit-transform: scaleY(0);
-                    transform: scaleY(0);
-            -webkit-transition: opacity .2s .2s, -webkit-transform .2s .2s;
-            transition: opacity .2s .2s, -webkit-transform .2s .2s;
-            transition: opacity .2s .2s, transform .2s .2s;
-            transition: opacity .2s .2s, transform .2s .2s, -webkit-transform .2s .2s;
-            position: absolute;
-            top: 47px;
-            right: -5px;
-            width: 32px;
-            padding: 2px 5px;
-            background-color: white;
-            border-radius: 2px; }
-            html body #content header #eyecatch #setting-button div::before {
-              content: '';
-              position: absolute;
-              left: 12px;
-              top: -10px;
-              display: block;
-              width: 0;
-              height: 0;
-              border-right: 10px solid transparent;
-              border-bottom: 10px solid white;
-              border-left: 10px solid transparent; }
-            html body #content header #eyecatch #setting-button div p {
-              margin: 0; }
-      html body #content main .tab-wrap {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-        overflow: hidden;
-        padding: 0 0 20px; }
-        html body #content main .tab-wrap label.tab-menu {
-          color: var(--color-light);
-          cursor: pointer;
-          -webkit-box-flex: 1;
-              -ms-flex: 1;
-                  flex: 1;
-          height: 30px;
-          line-height: 30px;
-          font-weight: bold;
-          -webkit-box-ordinal-group: 0;
-              -ms-flex-order: -1;
-                  order: -1;
-          padding: 10px 15px;
-          position: relative;
-          text-align: center;
-          -webkit-transition: -webkit-transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-          transition: -webkit-transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-          transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-          transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s, -webkit-transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-          -webkit-user-select: none;
-             -moz-user-select: none;
-              -ms-user-select: none;
-                  user-select: none;
-          white-space: nowrap;
-          -webkit-tap-highlight-color: transparent; }
-          html body #content main .tab-wrap label.tab-menu:hover {
-            background-color: var(--color-accent-hover); }
-          html body #content main .tab-wrap label.tab-menu::after {
-            bottom: 0;
-            content: '';
-            display: block;
-            height: 3px;
-            left: 0;
-            opacity: 0;
-            pointer-events: none;
-            position: absolute;
-            -webkit-transform: translateX(100%);
-                    transform: translateX(100%);
-            -webkit-transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s 80ms;
-            transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s 80ms;
-            width: 100%;
-            z-index: 1; }
-        html body #content main .tab-wrap input {
-          display: none; }
-          html body #content main .tab-wrap input:checked + label {
-            color: var(--color-accent); }
-            html body #content main .tab-wrap input:checked + label::after {
-              background-color: var(--color-accent); }
-          html body #content main .tab-wrap input:checked ~ label::after {
-            -webkit-transform: translateX(-100%);
-                    transform: translateX(-100%); }
-          html body #content main .tab-wrap input:checked + label::after {
-            opacity: 1;
-            -webkit-transform: translateX(0);
-                    transform: translateX(0); }
-          html body #content main .tab-wrap input:checked ~ div {
-            -webkit-transform: translateX(30%);
-                    transform: translateX(30%); }
-          html body #content main .tab-wrap input:checked + label + div {
-            height: auto;
-            opacity: 1;
-            -webkit-box-ordinal-group: 2;
-                -ms-flex-order: 1;
-                    order: 1;
-            pointer-events: auto;
-            -webkit-transform: translateX(0);
-                    transform: translateX(0); }
-        html body #content main .tab-wrap div.tab-content {
-          height: 0;
-          opacity: 0;
-          padding: 0 10px;
-          pointer-events: none;
-          -webkit-transform: translateX(-30%);
-                  transform: translateX(-30%);
-          -webkit-transition: opacity .3s 80ms, -webkit-transform .3s 80ms;
-          transition: opacity .3s 80ms, -webkit-transform .3s 80ms;
-          transition: transform .3s 80ms, opacity .3s 80ms;
-          transition: transform .3s 80ms, opacity .3s 80ms, -webkit-transform .3s 80ms;
-          -webkit-box-sizing: border-box;
-                  box-sizing: border-box;
-          width: 100%; }
-          html body #content main .tab-wrap div.tab-content:not(#tab-home) {
-            -webkit-animation: loading .3s 0s;
-                    animation: loading .3s 0s; }
-          html body #content main .tab-wrap div.tab-content h2 {
-            padding-left: 10px;
-            border-left: solid var(--color-accent) 7px;
-            border-bottom: solid var(--color-accent) 3px; }
-            html body #content main .tab-wrap div.tab-content h2 p {
-              margin: 0;
-              display: inline-block;
-              width: calc(100% - 150px); }
-            html body #content main .tab-wrap div.tab-content h2 svg {
-              width: 128px;
-              height: 32px;
-              position: relative;
-              top: 5px; }
-              html body #content main .tab-wrap div.tab-content h2 svg#pict-home {
-                width: 32px;
-                margin-left: 100px; }
-                html body #content main .tab-wrap div.tab-content h2 svg#pict-home polyline {
-                  fill: none;
-                  stroke: var(--color-accent);
-                  stroke-width: 5px;
-                  stroke-linecap: round; }
-              html body #content main .tab-wrap div.tab-content h2 svg#pict-past path, html body #content main .tab-wrap div.tab-content h2 svg#pict-now path, html body #content main .tab-wrap div.tab-content h2 svg#pict-future path {
-                fill: none;
-                stroke: var(--color-accent);
-                stroke-width: 2px; }
-              html body #content main .tab-wrap div.tab-content h2 svg#pict-past circle, html body #content main .tab-wrap div.tab-content h2 svg#pict-now circle, html body #content main .tab-wrap div.tab-content h2 svg#pict-future circle {
-                fill: var(--color-background);
-                stroke: var(--color-accent);
-                stroke-width: 2px;
-                r: 7px; }
-              html body #content main .tab-wrap div.tab-content h2 svg#pict-past > circle:nth-of-type(1) {
-                fill: var(--color-select); }
-              html body #content main .tab-wrap div.tab-content h2 svg#pict-now > circle:nth-of-type(2) {
-                fill: var(--color-select); }
-              html body #content main .tab-wrap div.tab-content h2 svg#pict-future > circle:nth-of-type(3) {
-                fill: var(--color-select); }
-          html body #content main .tab-wrap div.tab-content div h3 {
-            border-bottom: solid var(--color-border) 2px;
-            max-width: 300px;
-            padding-left: 10px; }
-            html body #content main .tab-wrap div.tab-content div h3 p {
-              margin: 0;
-              display: inline-block;
-              width: calc(100% - 40px); }
-            html body #content main .tab-wrap div.tab-content div h3 svg {
-              width: 32px;
-              height: 32px;
-              position: relative;
-              top: 7px; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#baby rect, html body #content main .tab-wrap div.tab-content div h3 svg#baby circle, html body #content main .tab-wrap div.tab-content div h3 svg#baby polygon {
-                fill: var(--color-border);
-                stroke: var(--color-background);
-                stroke-width: 3px; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#elementary circle {
-                stroke: none;
-                fill: var(--color-border); }
-              html body #content main .tab-wrap div.tab-content div h3 svg#elementary path {
-                stroke: var(--color-background);
-                stroke-width: 3px;
-                fill: none; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#junior polygon {
-                stroke: none;
-                fill: var(--color-border); }
-              html body #content main .tab-wrap div.tab-content div h3 svg#programming polygon.screen {
-                fill: none;
-                stroke: var(--color-border);
-                stroke-width: 5px; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#programming polygon.keyboard {
-                fill: var(--color-border);
-                stroke: var(--color-border);
-                stroke-width: 5px; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#blackboard-eraser path.cover {
-                stroke: none;
-                fill: var(--color-border); }
-              html body #content main .tab-wrap div.tab-content div h3 svg#blackboard-eraser circle.button {
-                stroke: none;
-                r: 3px; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#blackboard-eraser path.up {
-                stroke: var(--color-border);
-                stroke-width: 5px;
-                fill: none; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#blackboard-eraser path.bottom {
-                stroke: none;
-                fill: var(--color-border); }
-              html body #content main .tab-wrap div.tab-content div h3 svg#to-do path.hand {
-                fill: none;
-                stroke: var(--color-border);
-                stroke-width: 5px; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#to-do path.bag {
-                fill: var(--color-border);
-                stroke: none; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#end path {
-                fill: var(--color-border);
-                stroke: none; }
-              html body #content main .tab-wrap div.tab-content div h3 svg#end circle {
-                fill: var(--color-border);
-                stroke: var(--color-background);
-                stroke-width: 3px; }
-          html body #content main .tab-wrap div.tab-content div h3 ~ h3 {
-            margin-top: 40px; }
-          html body #content main .tab-wrap div.tab-content div h3 ~ div.content {
-            margin: 0 10px 0 20px; }
-            html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif {
-              -webkit-box-sizing: border-box;
-                      box-sizing: border-box;
-              width: 90%;
-              max-width: 305px;
-              border-radius: 10px;
-              padding: 1px 10px;
-              background-color: var(--color-background-accent); }
-              html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif::after {
-                content: '';
-                display: inline-block;
-                width: 0;
-                height: 0;
-                position: relative;
-                border: 40px solid transparent;
-                margin-top: -100px; }
-                @media (min-width: 460px) {
-                  html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif::after {
-                    top: -10px;
-                    left: 290px;
-                    border-left: 40px solid var(--color-background-accent); } }
-                @media (max-width: 459px) {
-                  html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif::after {
-                    top: 80px;
-                    left: 0px;
-                    border-top: 40px solid var(--color-background-accent); } }
-              html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif p {
-                margin-bottom: 0; }
-            html body #content main .tab-wrap div.tab-content div h3 ~ div.content img.logo {
-              height: 150px; }
-              @media (min-width: 460px) {
-                html body #content main .tab-wrap div.tab-content div h3 ~ div.content img.logo {
-                  position: relative;
-                  top: -260px;
-                  left: 350px;
-                  margin-bottom: -250px; } }
-              @media (max-width: 459px) {
-                html body #content main .tab-wrap div.tab-content div h3 ~ div.content img.logo {
-                  margin-top: 40px;
-                  margin-left: 10px; } }
-          html body #content main .tab-wrap div.tab-content div div.pages {
-            width: 100%;
-            max-width: 400px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-                -ms-flex-direction: row;
-                    flex-direction: row;
-            margin-top: 50px; }
-            html body #content main .tab-wrap div.tab-content div div.pages label.page {
-              -webkit-box-flex: 1;
-                  -ms-flex: 1;
-                      flex: 1;
-              margin: 0 5px;
-              text-align: center; }
-              html body #content main .tab-wrap div.tab-content div div.pages label.page:not(.now) {
-                cursor: pointer;
-                color: var(--color-accent);
-                text-decoration: underline; }
-              html body #content main .tab-wrap div.tab-content div div.pages label.page.now {
-                font-weight: bold; }
-        html body #content main .tab-wrap::after {
-          content: '';
-          height: 20px;
-          -webkit-box-ordinal-group: 0;
-              -ms-flex-order: -1;
-                  order: -1;
-          width: 100%; }
-      html body #content footer {
-        height: auto;
-        padding: 5px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        background-color: var(--color-background-footer);
-        color: var(--color-text-footer); }
-        html body #content footer p {
-          -webkit-box-flex: 1;
-              -ms-flex: 1;
-                  flex: 1;
-          margin: auto 1vw auto 2vw; }
-        html body #content footer #settings {
-          margin: auto 0;
-          min-width: 120px; }
-          html body #content footer #settings svg {
-            float: left; }
-            html body #content footer #settings svg circle, html body #content footer #settings svg line {
-              stroke-width: 10px;
-              stroke: var(--color-text-footer); }
-          html body #content footer #settings input {
-            display: none; }
-            html body #content footer #settings input:checked ~ .popup-settings {
-              visibility: visible; }
-              html body #content footer #settings input:checked ~ .popup-settings .popup-background {
-                z-index: 1;
-                visibility: visible;
-                opacity: 1; }
-              html body #content footer #settings input:checked ~ .popup-settings .popup-settings-screen {
-                visibility: visible;
-                opacity: 1;
-                z-index: 3; }
-          html body #content footer #settings label.settings {
-            display: block;
-            position: relative;
-            width: 100%;
-            line-height: 32px;
-            margin: 0;
-            cursor: pointer; }
-          html body #content footer #settings .popup-settings {
-            -webkit-animation: loading .3s 0s;
-                    animation: loading .3s 0s;
-            color: var(--color-text);
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            z-index: 1;
-            visibility: hidden;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex; }
-            html body #content footer #settings .popup-settings .popup-background {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background-color: rgba(0, 0, 0, 0.5);
-              z-index: 1;
-              -webkit-transition: visibility .2s ease-out, opacity .2s ease-out;
-              transition: visibility .2s ease-out, opacity .2s ease-out;
-              visibility: hidden;
-              opacity: 0; }
-            html body #content footer #settings .popup-settings .popup-settings-screen {
-              width: 95%;
-              max-width: 500px;
-              height: 95%;
-              max-height: 500px;
-              margin: auto;
-              border-radius: 2px;
-              background-color: var(--color-background);
-              -webkit-transition: visibility .2s ease-out, opacity .2s ease-out;
-              transition: visibility .2s ease-out, opacity .2s ease-out;
-              visibility: hidden;
-              opacity: 0;
-              z-index: -1;
-              position: relative; }
-              html body #content footer #settings .popup-settings .popup-settings-screen label.popup-escape {
-                position: absolute;
-                top: 5px;
-                right: 10px;
-                font-size: 30px;
-                color: gray;
-                line-height: 30px;
-                cursor: pointer; }
-              html body #content footer #settings .popup-settings .popup-settings-screen h2 {
-                margin: 0px 20px;
-                padding-top: 10px;
-                padding-left: 15px;
-                border-bottom: solid var(--color-border) 2px; }
-              html body #content footer #settings .popup-settings .popup-settings-screen div.settings {
-                margin-left: 30px; }
-                html body #content footer #settings .popup-settings .popup-settings-screen div.settings h3 {
-                  border-left: solid var(--color-border) 4px;
-                  padding-left: 5px; }
-                html body #content footer #settings .popup-settings .popup-settings-screen div.settings div {
-                  margin-bottom: 30px; }
-                html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-font-size {
-                  display: -webkit-box;
-                  display: -ms-flexbox;
-                  display: flex;
-                  width: 150px; }
-                  html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-font-size label {
-                    -webkit-box-flex: 1;
-                        -ms-flex: 1;
-                            flex: 1;
-                    text-align: center;
-                    cursor: pointer;
-                    -webkit-transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-                    transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-                    -webkit-user-select: none;
-                       -moz-user-select: none;
-                        -ms-user-select: none;
-                            user-select: none;
-                    white-space: nowrap;
-                    -webkit-tap-highlight-color: transparent;
-                    -webkit-transition: -webkit-transform .2s ease;
-                    transition: -webkit-transform .2s ease;
-                    transition: transform .2s ease;
-                    transition: transform .2s ease, -webkit-transform .2s ease; }
-                    html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-font-size label::after {
-                      bottom: 0;
-                      content: '';
-                      display: block;
-                      height: 2px;
-                      left: 0;
-                      opacity: 0;
-                      pointer-events: none;
-                      -webkit-transform: translateX(100%);
-                              transform: translateX(100%);
-                      -webkit-transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-                      transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-                      width: 100%;
-                      z-index: 1;
-                      background-color: var(--color-accent); }
-                html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset {
-                  display: -webkit-box;
-                  display: -ms-flexbox;
-                  display: flex;
-                  -ms-flex-wrap: wrap;
-                      flex-wrap: wrap; }
-                  html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div {
-                    width: auto;
-                    margin: 0 10px;
-                    margin-bottom: 10px;
-                    padding: 2px;
-                    border-radius: 2px;
-                    border: solid transparent 3px; }
-                    html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label {
-                      width: 100%;
-                      cursor: pointer;
-                      padding: 2px;
-                      padding-left: 5px;
-                      border-left: solid 5px; }
-                      html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label[for="setting-colorset-default"] {
-                        background-color: white;
-                        color: #2c2c2c;
-                        border-left-color: DeepSkyBlue; }
-                      html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label[for="setting-colorset-yellow"] {
-                        background-color: yellow;
-                        color: black;
-                        border-left-color: DeepSkyBlue; }
-                      html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label[for="setting-colorset-blue"] {
-                        background-color: blue;
-                        color: yellow;
-                        border-left-color: #f90; }
-                      html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label[for="setting-colorset-black"] {
-                        background-color: black;
-                        color: white;
-                        border-left-color: DeepSkyBlue; }
-                html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-language select {
-                  margin-left: 10px;
-                  outline: none;
-                  border: none;
-                  border-bottom: solid 1px var(--color-accent);
-                  font-size: inherit;
-                  min-width: 150px;
-                  padding: 0 5px; }
+  height: 100%;
+}
+
+html body {
+  margin: 0;
+}
+
+html body a {
+  color: var(--color-text);
+  -webkit-text-decoration: underline solid var(--color-accent);
+          text-decoration: underline solid var(--color-accent);
+  text-decoration-thickness: 2px;
+  -webkit-transition: color .2s;
+  transition: color .2s;
+}
+
+html body a:hover {
+  color: var(--color-accent);
+  text-decoration-thickness: 3px;
+}
+
+html body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: WhiteSmoke;
+  background: repeating-linear-gradient(to bottom, transparent, transparent 30px, lightgray 30px, lightgray calc(30px + 1px)), repeating-linear-gradient(to right, transparent, transparent 30px, lightgray 30px, lightgray calc(30px + 1px));
+  z-index: -1;
+}
+
+html body input.settings {
+  display: none;
+}
+
+html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content label[for="setting-font-size-small"],
+html body input.settings.setting-font-size#setting-font-size-medium:checked ~ #content label[for="setting-font-size-medium"],
+html body input.settings.setting-font-size#setting-font-size-big:checked ~ #content label[for="setting-font-size-big"] {
+  color: var(--color-accent);
+  cursor: default !important;
+}
+
+html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content label[for="setting-font-size-small"]::after,
+html body input.settings.setting-font-size#setting-font-size-medium:checked ~ #content label[for="setting-font-size-medium"]::after,
+html body input.settings.setting-font-size#setting-font-size-big:checked ~ #content label[for="setting-font-size-big"]::after {
+  opacity: 1 !important;
+  -webkit-transform: translateX(0) !important;
+          transform: translateX(0) !important;
+}
+
+html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content label[for="setting-font-size-medium"]::after,
+html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content label[for="setting-font-size-big"]::after,
+html body input.settings.setting-font-size#setting-font-size-medium:checked ~ #content label[for="setting-font-size-big"]::after {
+  -webkit-transform: translateX(-100%) !important;
+          transform: translateX(-100%) !important;
+}
+
+html body input.settings.setting-font-size#setting-font-size-small:checked ~ #content {
+  font-size: 12px;
+}
+
+html body input.settings.setting-font-size#setting-font-size-medium:checked ~ #content {
+  font-size: 16px;
+}
+
+html body input.settings.setting-font-size#setting-font-size-big:checked ~ #content {
+  font-size: 20px;
+}
+
+html body input.settings.setting-colorset#setting-colorset-default:checked ~ #content {
+  background-color: white;
+  color: #2c2c2c;
+  --color-background: white;
+  --color-text: #2c2c2c;
+  --color-border: #ccc;
+  --color-accent: DeepSkyBlue;
+  --color-accent-hover: #ebf8ff;
+  --color-light: gray;
+  --color-text-footer: white;
+  --color-background-footer: gray;
+  --color-background-accent: lightgray;
+  --color-select: #96e6ff;
+}
+
+html body input.settings.setting-colorset#setting-colorset-default:checked ~ #content div.setting-colorset div.setting-colorset-default {
+  border-color: var(--color-border);
+}
+
+html body input.settings.setting-colorset#setting-colorset-yellow:checked ~ #content {
+  background-color: yellow;
+  color: black;
+  --color-background: yellow;
+  --color-text: black;
+  --color-border: darkgray;
+  --color-accent: DeepSkyBlue;
+  --color-accent-hover: rgba(0, 191, 255, 0.1);
+  --color-light: gray;
+  --color-text-footer: black;
+  --color-background-footer: #e6e600;
+  --color-background-accent: #ffff64;
+  --color-select: #96e6ff;
+}
+
+html body input.settings.setting-colorset#setting-colorset-yellow:checked ~ #content div.setting-colorset div.setting-colorset-yellow {
+  border-color: var(--color-border);
+}
+
+html body input.settings.setting-colorset#setting-colorset-blue:checked ~ #content {
+  background-color: blue;
+  color: yellow;
+  --color-background: blue;
+  --color-text: yellow;
+  --color-border: #ccc;
+  --color-accent: #f90;
+  --color-accent-hover: rgba(255, 153, 0, 0.1);
+  --color-light: lightgray;
+  --color-text-footer: black;
+  --color-background-footer: #6464ff;
+  --color-background-accent: #6464ff;
+  --color-select: #ffe696;
+}
+
+html body input.settings.setting-colorset#setting-colorset-blue:checked ~ #content div.setting-colorset div.setting-colorset-blue {
+  border-color: var(--color-border);
+}
+
+html body input.settings.setting-colorset#setting-colorset-black:checked ~ #content {
+  background-color: black;
+  color: white;
+  --color-background: black;
+  --color-text: white;
+  --color-border: #ccc;
+  --color-accent: DeepSkyBlue;
+  --color-accent-hover: rgba(0, 191, 255, 0.1);
+  --color-light: lightgray;
+  --color-text-footer: white;
+  --color-background-footer: #323232;
+  --color-background-accent: #323232;
+  --color-select: #96e6ff;
+}
+
+html body input.settings.setting-colorset#setting-colorset-black:checked ~ #content div.setting-colorset div.setting-colorset-black {
+  border-color: var(--color-border);
+}
+
+html body #content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+html body #content p.strike {
+  text-decoration: line-through;
+}
+
+html body #content header #eyecatch {
+  margin: 0;
+  position: relative;
+}
+
+html body #content header #eyecatch img {
+  vertical-align: top;
+  max-height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+
+html body #content header #eyecatch figcaption {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  background: -webkit-gradient(linear, left bottom, left top, from(black), to(rgba(0, 0, 0, 0)));
+  background: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body #content header #eyecatch figcaption div {
+  height: 100px;
+  margin: 0 10% 0 auto;
+  width: 200px;
+}
+
+html body #content header #eyecatch figcaption div p {
+  color: white;
+  font-family: '游ゴシック', sans-serif;
+  background-color: transparent;
+  margin: 0 auto;
+}
+
+html body #content header #eyecatch figcaption div .caption {
+  text-align: center;
+  font-size: 45px;
+  width: 180px;
+}
+
+html body #content header #eyecatch figcaption div .subcaption {
+  width: 200px;
+  text-align: center;
+  position: relative;
+  top: -10px;
+  font-size: 23px;
+}
+
+html body #content header #eyecatch #setting-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+html body #content header #eyecatch #setting-button svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+html body #content header #eyecatch #setting-button svg circle, html body #content header #eyecatch #setting-button svg line {
+  stroke: white;
+  stroke-width: 10px;
+}
+
+html body #content header #eyecatch #setting-button label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
+
+html body #content header #eyecatch #setting-button label:hover ~ div {
+  opacity: 1;
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+}
+
+html body #content header #eyecatch #setting-button div {
+  opacity: 0;
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  -webkit-transition: opacity .2s .2s, -webkit-transform .2s .2s;
+  transition: opacity .2s .2s, -webkit-transform .2s .2s;
+  transition: opacity .2s .2s, transform .2s .2s;
+  transition: opacity .2s .2s, transform .2s .2s, -webkit-transform .2s .2s;
+  position: absolute;
+  top: 47px;
+  right: -5px;
+  width: 32px;
+  padding: 2px 5px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+html body #content header #eyecatch #setting-button div::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: -10px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+  border-left: 10px solid transparent;
+}
+
+html body #content header #eyecatch #setting-button div p {
+  margin: 0;
+}
+
+html body #content main .tab-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  overflow: hidden;
+  padding: 0 0 20px;
+}
+
+html body #content main .tab-wrap label.tab-menu {
+  color: var(--color-light);
+  cursor: pointer;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
+  padding: 10px 15px;
+  position: relative;
+  text-align: center;
+  -webkit-transition: -webkit-transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  transition: -webkit-transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s, -webkit-transform cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html body #content main .tab-wrap label.tab-menu:hover {
+  background-color: var(--color-accent-hover);
+}
+
+html body #content main .tab-wrap label.tab-menu::after {
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 3px;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s 80ms;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s 80ms;
+  width: 100%;
+  z-index: 1;
+}
+
+html body #content main .tab-wrap input {
+  display: none;
+}
+
+html body #content main .tab-wrap input:checked + label {
+  color: var(--color-accent);
+}
+
+html body #content main .tab-wrap input:checked + label::after {
+  background-color: var(--color-accent);
+}
+
+html body #content main .tab-wrap input:checked ~ label::after {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+html body #content main .tab-wrap input:checked + label::after {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+html body #content main .tab-wrap input:checked ~ div {
+  -webkit-transform: translateX(30%);
+          transform: translateX(30%);
+}
+
+html body #content main .tab-wrap input:checked + label + div {
+  height: auto;
+  opacity: 1;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  pointer-events: auto;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+html body #content main .tab-wrap div.tab-content {
+  height: 0;
+  opacity: 0;
+  padding: 0 10px;
+  pointer-events: none;
+  -webkit-transform: translateX(-30%);
+          transform: translateX(-30%);
+  -webkit-transition: opacity .3s 80ms, -webkit-transform .3s 80ms;
+  transition: opacity .3s 80ms, -webkit-transform .3s 80ms;
+  transition: transform .3s 80ms, opacity .3s 80ms;
+  transition: transform .3s 80ms, opacity .3s 80ms, -webkit-transform .3s 80ms;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+}
+
+html body #content main .tab-wrap div.tab-content:not(#tab-home) {
+  -webkit-animation: loading .3s 0s;
+          animation: loading .3s 0s;
+}
+
+html body #content main .tab-wrap div.tab-content h2 {
+  padding-left: 10px;
+  border-left: solid var(--color-accent) 7px;
+  border-bottom: solid var(--color-accent) 3px;
+}
+
+html body #content main .tab-wrap div.tab-content h2 p {
+  margin: 0;
+  display: inline-block;
+  width: calc(100% - 150px);
+}
+
+html body #content main .tab-wrap div.tab-content h2 svg {
+  width: 128px;
+  height: 32px;
+  position: relative;
+  top: 5px;
+}
+
+html body #content main .tab-wrap div.tab-content h2 svg#pict-home {
+  width: 32px;
+  margin-left: 100px;
+}
+
+html body #content main .tab-wrap div.tab-content h2 svg#pict-home polyline {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 5px;
+  stroke-linecap: round;
+}
+
+html body #content main .tab-wrap div.tab-content h2 svg#pict-past path, html body #content main .tab-wrap div.tab-content h2 svg#pict-now path, html body #content main .tab-wrap div.tab-content h2 svg#pict-future path {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2px;
+}
+
+html body #content main .tab-wrap div.tab-content h2 svg#pict-past circle, html body #content main .tab-wrap div.tab-content h2 svg#pict-now circle, html body #content main .tab-wrap div.tab-content h2 svg#pict-future circle {
+  fill: var(--color-background);
+  stroke: var(--color-accent);
+  stroke-width: 2px;
+  r: 7px;
+}
+
+html body #content main .tab-wrap div.tab-content h2 svg#pict-past > circle:nth-of-type(1) {
+  fill: var(--color-select);
+}
+
+html body #content main .tab-wrap div.tab-content h2 svg#pict-now > circle:nth-of-type(2) {
+  fill: var(--color-select);
+}
+
+html body #content main .tab-wrap div.tab-content h2 svg#pict-future > circle:nth-of-type(3) {
+  fill: var(--color-select);
+}
+
+html body #content main .tab-wrap div.tab-content div h3 {
+  border-bottom: solid var(--color-border) 2px;
+  max-width: 300px;
+  padding-left: 10px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 p {
+  margin: 0;
+  display: inline-block;
+  width: calc(100% - 40px);
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  top: 7px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#baby rect, html body #content main .tab-wrap div.tab-content div h3 svg#baby circle, html body #content main .tab-wrap div.tab-content div h3 svg#baby polygon {
+  fill: var(--color-border);
+  stroke: var(--color-background);
+  stroke-width: 3px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#elementary circle {
+  stroke: none;
+  fill: var(--color-border);
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#elementary path {
+  stroke: var(--color-background);
+  stroke-width: 3px;
+  fill: none;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#junior polygon {
+  stroke: none;
+  fill: var(--color-border);
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#programming polygon.screen {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 5px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#programming polygon.keyboard {
+  fill: var(--color-border);
+  stroke: var(--color-border);
+  stroke-width: 5px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#blackboard-eraser path.cover {
+  stroke: none;
+  fill: var(--color-border);
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#blackboard-eraser circle.button {
+  stroke: none;
+  r: 3px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#blackboard-eraser path.up {
+  stroke: var(--color-border);
+  stroke-width: 5px;
+  fill: none;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#blackboard-eraser path.bottom {
+  stroke: none;
+  fill: var(--color-border);
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#to-do path.hand {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 5px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#to-do path.bag {
+  fill: var(--color-border);
+  stroke: none;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#end path {
+  fill: var(--color-border);
+  stroke: none;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 svg#end circle {
+  fill: var(--color-border);
+  stroke: var(--color-background);
+  stroke-width: 3px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 ~ h3 {
+  margin-top: 40px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 ~ div.content {
+  margin: 0 10px 0 20px;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 90%;
+  max-width: 305px;
+  border-radius: 10px;
+  padding: 1px 10px;
+  background-color: var(--color-background-accent);
+}
+
+html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  position: relative;
+  border: 40px solid transparent;
+  margin-top: -100px;
+}
+
+@media (min-width: 460px) {
+  html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif::after {
+    top: -10px;
+    left: 290px;
+    border-left: 40px solid var(--color-background-accent);
+  }
+}
+
+@media (max-width: 459px) {
+  html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif::after {
+    top: 80px;
+    left: 0px;
+    border-top: 40px solid var(--color-background-accent);
+  }
+}
+
+html body #content main .tab-wrap div.tab-content div h3 ~ div.content div.serif p {
+  margin-bottom: 0;
+}
+
+html body #content main .tab-wrap div.tab-content div h3 ~ div.content img.logo {
+  height: 150px;
+}
+
+@media (min-width: 460px) {
+  html body #content main .tab-wrap div.tab-content div h3 ~ div.content img.logo {
+    position: relative;
+    top: -260px;
+    left: 350px;
+    margin-bottom: -250px;
+  }
+}
+
+@media (max-width: 459px) {
+  html body #content main .tab-wrap div.tab-content div h3 ~ div.content img.logo {
+    margin-top: 40px;
+    margin-left: 10px;
+  }
+}
+
+html body #content main .tab-wrap div.tab-content div div.pages {
+  width: 100%;
+  max-width: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 50px;
+}
+
+html body #content main .tab-wrap div.tab-content div div.pages label.page {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0 5px;
+  text-align: center;
+}
+
+html body #content main .tab-wrap div.tab-content div div.pages label.page:not(.now) {
+  cursor: pointer;
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+html body #content main .tab-wrap div.tab-content div div.pages label.page.now {
+  font-weight: bold;
+}
+
+html body #content main .tab-wrap::after {
+  content: '';
+  height: 20px;
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
+  width: 100%;
+}
+
+html body #content footer {
+  height: auto;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: var(--color-background-footer);
+  color: var(--color-text-footer);
+}
+
+html body #content footer p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: auto 1vw auto 2vw;
+}
+
+html body #content footer #settings {
+  margin: auto 0;
+  min-width: 120px;
+}
+
+html body #content footer #settings svg {
+  float: left;
+}
+
+html body #content footer #settings svg circle, html body #content footer #settings svg line {
+  stroke-width: 10px;
+  stroke: var(--color-text-footer);
+}
+
+html body #content footer #settings input {
+  display: none;
+}
+
+html body #content footer #settings input:checked ~ .popup-settings {
+  visibility: visible;
+}
+
+html body #content footer #settings input:checked ~ .popup-settings .popup-background {
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+}
+
+html body #content footer #settings input:checked ~ .popup-settings .popup-settings-screen {
+  visibility: visible;
+  opacity: 1;
+  z-index: 3;
+}
+
+html body #content footer #settings label.settings {
+  display: block;
+  position: relative;
+  width: 100%;
+  line-height: 32px;
+  margin: 0;
+  cursor: pointer;
+}
+
+html body #content footer #settings .popup-settings {
+  -webkit-animation: loading .3s 0s;
+          animation: loading .3s 0s;
+  color: var(--color-text);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  visibility: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html body #content footer #settings .popup-settings .popup-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  -webkit-transition: visibility .2s ease-out, opacity .2s ease-out;
+  transition: visibility .2s ease-out, opacity .2s ease-out;
+  visibility: hidden;
+  opacity: 0;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen {
+  width: 95%;
+  max-width: 500px;
+  height: 95%;
+  max-height: 500px;
+  margin: auto;
+  border-radius: 2px;
+  background-color: var(--color-background);
+  -webkit-transition: visibility .2s ease-out, opacity .2s ease-out;
+  transition: visibility .2s ease-out, opacity .2s ease-out;
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+  position: relative;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen label.popup-escape {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 30px;
+  color: gray;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen h2 {
+  margin: 0px 20px;
+  padding-top: 10px;
+  padding-left: 15px;
+  border-bottom: solid var(--color-border) 2px;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings {
+  margin-left: 30px;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings h3 {
+  border-left: solid var(--color-border) 4px;
+  padding-left: 5px;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div {
+  margin-bottom: 30px;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-font-size {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 150px;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-font-size label {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-transition: -webkit-transform .2s ease;
+  transition: -webkit-transform .2s ease;
+  transition: transform .2s ease;
+  transition: transform .2s ease, -webkit-transform .2s ease;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-font-size label::after {
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 2px;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  width: 100%;
+  z-index: 1;
+  background-color: var(--color-accent);
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div {
+  width: auto;
+  margin: 0 10px;
+  margin-bottom: 10px;
+  padding: 2px;
+  border-radius: 2px;
+  border: solid transparent 3px;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label {
+  width: 100%;
+  cursor: pointer;
+  padding: 2px;
+  padding-left: 5px;
+  border-left: solid 5px;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label[for="setting-colorset-default"] {
+  background-color: white;
+  color: #2c2c2c;
+  border-left-color: DeepSkyBlue;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label[for="setting-colorset-yellow"] {
+  background-color: yellow;
+  color: black;
+  border-left-color: DeepSkyBlue;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label[for="setting-colorset-blue"] {
+  background-color: blue;
+  color: yellow;
+  border-left-color: #f90;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-colorset div label[for="setting-colorset-black"] {
+  background-color: black;
+  color: white;
+  border-left-color: DeepSkyBlue;
+}
+
+html body #content footer #settings .popup-settings .popup-settings-screen div.settings div.setting-language select {
+  margin-left: 10px;
+  outline: none;
+  border: none;
+  border-bottom: solid 1px var(--color-accent);
+  font-size: inherit;
+  min-width: 150px;
+  padding: 0 5px;
+}
 
 @-webkit-keyframes loading {
   from {
     visibility: hidden;
-    opacity: 0; }
+    opacity: 0;
+  }
   to {
     visibility: hidden;
-    opacity: 0; } }
+    opacity: 0;
+  }
+}
 
 @keyframes loading {
   from {
     visibility: hidden;
-    opacity: 0; }
+    opacity: 0;
+  }
   to {
     visibility: hidden;
-    opacity: 0; } }
+    opacity: 0;
+  }
+}

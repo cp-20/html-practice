@@ -15,7 +15,7 @@
 	const sleep = msec => new Promise(resolve => setTimeout(() => resolve(), msec))
 
 	class Board {
-		constructor() {
+		constructor(draw=true) {
 			// 盤面
 			this.board = new Array(size.x * size.y);
 			for (let i = 0; i < size.x * size.y; i++) {
@@ -45,6 +45,8 @@
 			this.put(3, 4, 'black', true);
 			this.put(4, 4, 'white', true);
 			
+			if (!draw) return;
+
 			// 初期化
 			const board = document.getElementById('rv-board');
 			board.innerHTML = '';
@@ -156,61 +158,32 @@
 			}
 
 			// 設置可能フラグ
-			this.putBlackCount = 0;
-			this.putWhiteCount = 0;
-			for (let y = 0; y < size.y; y++) {
-				for (let x = 0; x < size.x; x++) {
-					const cell = this.board[this.getIndex(x, y)];
-					cell.putBlack = false;
-					cell.putWhite = false;
-					if (!cell.put) {
-						for (let i = 0; i < arroundCells.length; i++) {
-							const direction = arroundCells[i];
-
-							let myColor = '';
-							for (let d = 1; true; d++) {
-								const nextX = x + direction.x * d;
-								const nextY = y + direction.y * d;
-			
-								// 盤面外に出る
-								if (!this.inBoard(nextX, nextY)) break;
-								const nextCell = this.board[this.getIndex(nextX, nextY)];
-								// 何も置かれてない
-								if (!nextCell.put) break;
-								// 置けるかどうか
-								if (d == 1) {
-									myColor = nextCell.color;
-								}else {
-									if (nextCell.color != myColor) {
-										if (myColor == 'white') {
-											cell.putBlack = true;
-											this.putBlackCount++;
-										}else {
-											cell.putWhite = true;
-											this.putWhiteCount++;
-										}
-									}
-								}
-							}
-						}
-					}
-				}				
+			const { putBlackCount, putWhiteCount, cellsPutBlack, cellsPutWhite } = this.getPutCount();
+			this.putBlackCount = putBlackCount;
+			this.putWhiteCount = putWhiteCount;
+			for (let i = 0; i < this.board.length; i++) {
+				this.board[i].putBlack = false;
+				this.board[i].putWhite = false;
 			}
+			cellsPutBlack.forEach(pos => this.board[this.getIndex(pos.x, pos.y)].putBlack = true);
+			cellsPutWhite.forEach(pos => this.board[this.getIndex(pos.x, pos.y)].putWhite = true);
 
 			if (force) return;
 
 			// 終了処理
-			if (this.blackCount + this.whiteCount == size.x * size.y) {
+			if (this.blackCount + this.whiteCount == size.x * size.y || ( this.putBlackCount == 0 && this.putWhiteCount == 0 )) {
 				this.end();
 				return;
 			}
 
 			// 手番交代
+			let pass = false;
 			if (color == 'black') {
 				if (this.putWhiteCount > 0) {
 					this.turn = 'white';
 				}else {
 					this.turn = 'black';
+					pass = true;
 					this.pass('white');
 				}
 			}else {
@@ -218,6 +191,7 @@
 					this.turn = 'black';
 				}else {
 					this.turn = 'white';
+					pass = true;
 					this.pass('black');
 				}
 			}
@@ -227,14 +201,20 @@
 
 			// 相手のターン
 			if (this.turn == 'white') {
-				this.action();
+				this.action(pass);
 			}
 		}
 
 		// CPUのターン
-		async action() {
-			// 1s待機
-			await sleep(1000);
+		async action(pass) {
+			// 待機
+			if (pass) {
+				// パスしたとき
+				await sleep(3000);
+			}else {
+				// パスしてないとき
+				await sleep(1000)
+			}
 
 			// 選択肢リスト
 			let choices = [];
@@ -270,51 +250,69 @@
 					return 0;
 				})();
 
-				// 自分と相手の置けるマス
-				this.board[this.getIndex(choice.x, choice.y)].put = true;
-				this.board[this.getIndex(choice.x, choice.y)].color = 'white';
-				const { putBlackCount, putWhiteCount } = (() => {
-					let putBlackCount = 0;
-					let putWhiteCount = 0;
-					for (let y = 0; y < size.y; y++) {
-						for (let x = 0; x < size.x; x++) {
-							const cell = this.board[this.getIndex(x, y)];
-							if (!cell.put) {
-								for (let i = 0; i < arroundCells.length; i++) {
-									const direction = arroundCells[i];
-
-									let myColor = '';
-									for (let d = 1; true; d++) {
-										const nextX = x + direction.x * d;
-										const nextY = y + direction.y * d;
-					
-										// 盤面外に出る
-										if (!this.inBoard(nextX, nextY)) break;
-										const nextCell = this.board[this.getIndex(nextX, nextY)];
-										// 何も置かれてない
-										if (!nextCell.put) break;
-										// 置けるかどうか
-										if (d == 1) {
-											myColor = nextCell.color;
-										}else {
-											if (nextCell.color != myColor) {
-												if (myColor == 'white') {
-													putBlackCount++;
-												}else {
-													putWhiteCount++;
-												}
-											}
-										}
-									}
+				// 全探索関数
+				const getNextPutCount = (choice, max, turn, i=0) => {
+					// 評価関数
+					const evalBoard = () => {
+						// 判断引数
+						let blackCount = 0;
+						let whiteCount = 0;
+						let blackCornerCount = 0;
+						let whiteCornerCount = 0;
+						for (let y = 0; y < size.y; y++) {
+							for (let x = 0; x < size.x; x++) {
+								const corners = [
+									{ x: 0, y: 0 },
+									{ x: size.x-1, y: 0 },
+									{ x: 0, y: size.x-1 },
+									{ x: size.x-1, y: size.y-1 },
+								]
+								// 角
+								if (corners.includes({x, y})) {
+									if (cell.black) blackCornerCount++;
+									if (cell.white) whiteCornerCount++;
 								}
+								const cell = this.board[this.getIndex(x, y)];
+								if (cell.black) blackCount++;
+								if (cell.white) whiteCount++;								
 							}
 						}
+						const { putBlackCount, putWhiteCount, cellsPutBlack, cellsPutWhite } = this.getPutCount();
+						return {
+							score: whiteCount - blackCount + whiteCornerCount * 100 - blackCornerCount * 200 - blackCount * 200 + putWhiteCount * 20 - putBlackCount * 20,
+							cellsPutBlack: cellsPutBlack,
+							cellsPutWhite: cellsPutWhite
+						}
 					}
-					return { putBlackCount, putWhiteCount }
-				})();
-				this.board[this.getIndex(choice.x, choice.y)].put = false;
-				this.board[this.getIndex(choice.x, choice.y)].color = '';
+					this.board[this.getIndex(choice.x, choice.y)].put = true;
+					this.board[this.getIndex(choice.x, choice.y)].color = 'white';
+					const score = (() => {
+						const { score, cellsPutBlack, cellsPutWhite } = evalBoard();
+						if (i + 1 == max) {
+							return score;
+						}else {
+							if (turn == 'white') {
+								const scores = cellsPutBlack.map(choice => {
+									return getNextPutCount(choice, max, turn='black', i+1);
+								});
+								return scores.reduce((a,b) => Math.max(a,b));
+							}else {
+								const scores = cellsPutWhite.map(choice => {
+									return getNextPutCount(choice, max, turn='white', i+1);
+								});
+								return scores.reduce((a,b) => Math.min(a,b));
+							}
+						}
+					})();
+					this.board[this.getIndex(choice.x, choice.y)].put = false;
+					this.board[this.getIndex(choice.x, choice.y)].color = '';
+
+					return score;
+				}
+				if (difficulty == 'hard') return getNextPutCount(choice, 1, 'white');
 				
+				const { putBlackCount, putWhiteCount } = this.getPutCount();
+
 				switch (difficulty) {
 					case 'easy':
 						return reverseCount * 100 - putBlackCount * 10 + putWhiteCount * 10;						
@@ -325,8 +323,58 @@
 				}
 			});
 
+			for (let i = 0; i < choices.length; i++) {
+				console.log(`(${choices[i].x},${choices[i].y}) = ${scores[i]}`);
+			}
+			console.log('----------------------------------------');
+
 			const decision = choices[scores.indexOf(scores.reduce((a,b) => Math.max(a,b)))];
 			this.put(decision.x, decision.y, 'white');
+		}
+
+		// 置ける場所の数
+		getPutCount() {
+			let putBlackCount = 0;
+			let putWhiteCount = 0;
+			let cellsPutBlack = [];
+			let cellsPutWhite = [];
+			for (let y = 0; y < size.y; y++) {
+				for (let x = 0; x < size.x; x++) {
+					const cell = this.board[this.getIndex(x, y)];
+					if (!cell.put) {
+						for (let i = 0; i < arroundCells.length; i++) {
+							const direction = arroundCells[i];
+
+							let myColor = '';
+							for (let d = 1; true; d++) {
+								const nextX = x + direction.x * d;
+								const nextY = y + direction.y * d;
+			
+								// 盤面外に出る
+								if (!this.inBoard(nextX, nextY)) break;
+								const nextCell = this.board[this.getIndex(nextX, nextY)];
+								// 何も置かれてない
+								if (!nextCell.put) break;
+								// 置けるかどうか
+								if (d == 1) {
+									myColor = nextCell.color;
+								}else {
+									if (nextCell.color != myColor) {
+										if (myColor == 'white') {
+											cellsPutBlack.push({ x, y });
+											putBlackCount++;
+										}else {
+											cellsPutWhite.push({ x, y });
+											putWhiteCount++;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			return { putBlackCount, putWhiteCount, cellsPutBlack, cellsPutWhite };
 		}
 
 		// 描画
@@ -391,14 +439,16 @@
 		// パスの演出
 		pass(color) {
 			const overlay = document.getElementById('rv-overlay');
-			overlay.classList.remove('black-pass');
-			overlay.classList.remove('white-pass');
 			overlay.classList.add(`${color}-pass`);
+			setTimeout(color => {
+				const overlay = document.getElementById('rv-overlay');
+				overlay.classList.remove(color);	
+			}, 1000, `${color}-pass`);
 		}
 	}
 
 	// 難易度設定
-	let difficulty = 'easy';
+	let difficulty = document.getElementById('com-difficulty-setting').value;
 	document.getElementById('com-difficulty-setting').addEventListener('change', function() {
 		difficulty = this.value;
 	});
