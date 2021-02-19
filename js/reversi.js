@@ -450,13 +450,24 @@
 
 		// 終了
 		end() {
+			// コマの数を計算
+			let blackCount = 0;
+			let whiteCount = 0;
+			for (let y = 0; y < size.y; y++) {
+				for (let x = 0; x < size.x; x++) {
+					// コマの数
+					if (cellContent.color == 'black') blackCount++;
+					if (cellContent.color == 'white') whiteCount++;					
+				}
+			}
+			
 			const overlay = document.getElementById('rv-overlay');
 			overlay.classList.remove('black-pass');
 			overlay.classList.remove('white-pass');
-			if (this.blackCount < this.whiteCount) {
+			if (blackCount < whiteCount) {
 				// 白の勝ち
 				overlay.classList.add('white-win');
-			}else if (this.blackCount > this.whiteCount) {
+			}else if (blackCount > whiteCount) {
 				// 黒の勝ち
 				overlay.classList.add('black-win');
 			}else {
