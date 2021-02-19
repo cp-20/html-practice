@@ -772,6 +772,10 @@ html body #content main #reversi div.screen table tbody#rv-board tr td {
   background-color: #00b300;
 }
 
+html body #content main #reversi div.screen table tbody#rv-board tr td:hover {
+  background-color: #00cd00;
+}
+
 html body #content main #reversi div.screen table tbody#rv-board tr td.black::before {
   content: '●';
   color: black;
@@ -800,6 +804,7 @@ html body #content main #reversi div.screen table tbody#rv-board tr td::before {
 
 @media (max-width: 399px) {
   html body #content main #reversi div.screen table tbody#rv-board tr td::before {
+    margin: -16px 0 0 -15px;
     font-size: 30px;
   }
 }
@@ -812,6 +817,7 @@ html body #content main #reversi div.screen table tbody#rv-board tr td::after {
 
 @media (max-width: 399px) {
   html body #content main #reversi div.screen table tbody#rv-board tr td::after {
+    margin: -16px 0 0 -15px;
     font-size: 30px;
   }
 }
