@@ -354,9 +354,13 @@ html {
 									transition: background-color .1s;
 									cursor: default;
 									user-select: none;
-									
+
 									&.closed {
 										background: $color-minesweeper-background;
+
+										&:hover {
+											background-color: lighten($color-minesweeper-background, 5%);
+										}
 									}
 									&.opened {
 										background-color: white;
@@ -1033,7 +1037,7 @@ html {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			animation: loaded 1s forwards;
+			animation: loaded 1s 3s forwards;
 			z-index: 10;
 
 			div {
