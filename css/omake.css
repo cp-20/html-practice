@@ -804,6 +804,7 @@ html body #content main #reversi div.screen table tbody#rv-board tr td::before {
   position: absolute;
   margin: -15px 0 0 -19px;
   font-size: 38px;
+  pointer-events: none;
 }
 
 @media (max-width: 419px) {
@@ -817,6 +818,7 @@ html body #content main #reversi div.screen table tbody#rv-board tr td::after {
   position: absolute;
   margin: -15px 0 0 -19px;
   font-size: 38px;
+  pointer-events: none;
 }
 
 @media (max-width: 419px) {

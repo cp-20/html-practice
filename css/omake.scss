@@ -663,6 +663,8 @@ html {
 											position: absolute;
 											margin: -15px 0 0 -19px;
 											font-size: 38px;
+											pointer-events: none;
+											
 											@include sp {
 												margin: -16px 0 0 -15px;
 												font-size: 30px;
@@ -672,6 +674,8 @@ html {
 											position: absolute;
 											margin: -15px 0 0 -19px;
 											font-size: 38px;
+											pointer-events: none;
+
 											@include sp {
 												margin: -16px 0 0 -15px;
 												font-size: 30px;

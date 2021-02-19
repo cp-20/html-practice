@@ -245,42 +245,118 @@
 						// 判断引数
 						let blackCount = 0;
 						let whiteCount = 0;
-						let blackCornerCount = 0;
-						let whiteCornerCount = 0;
 						const corners = [
 							{ x: 0, y: 0 },
 							{ x: size.x-1, y: 0 },
 							{ x: 0, y: size.x-1 },
 							{ x: size.x-1, y: size.y-1 },
 						];
+						const corners1 = [
+							// 左上
+							{ x: 1, y: 0 },
+							{ x: 0, y: 1 },
+							{ x: 1, y: 1 },
+							// 右上
+							{ x: size.x-2, y: 0 },
+							{ x: size.x-1, y: 1 },
+							{ x: size.x-2, y: 1 },
+							// 左下
+							{ x: 0, y: size.y-2 },
+							{ x: 1, y: size.y-1 },
+							{ x: 1, y: size.y-2 },
+							// 右下
+							{ x: size.x-2, y: size.y-1 },
+							{ x: size.x-1, y: size.y-2 },
+							{ x: size.x-2, y: size.y-2 },
+						];
+						const corners2 = [
+							// 左上
+							{ x: 2, y: 0 },
+							{ x: 0, y: 2 },
+							{ x: 2, y: 2 },
+							// 右上
+							{ x: size.x-3, y: 0 },
+							{ x: size.x-1, y: 2 },
+							{ x: size.x-3, y: 2 },
+							// 左下
+							{ x: 0, y: size.y-3 },
+							{ x: 2, y: size.y-1 },
+							{ x: 2, y: size.y-3 },
+							// 右下
+							{ x: size.x-3, y: size.y-1 },
+							{ x: size.x-1, y: size.y-3 },
+							{ x: size.x-3, y: size.y-3 },
+						];
+						const containPos = (array, element) => {
+							let contain = false;
+							for (let i = 0; i < array.length; i++) {
+								if (array[i].x == element.x && array[i].y == element.y) {
+									contain = true;
+									break;
+								}
+							}
+							return contain;
+						}
+						
+						let cornerScore = 0;
 						for (let y = 0; y < size.y; y++) {
 							for (let x = 0; x < size.x; x++) {
 								const cell = this.board[this.getIndex(x, y)];
 								// 角
-								for (let i = 0; i < corners.length; i++) {
-									if (corners[i].x == x && corners[i].y == y) {
-										if (cell.color == 'black') blackCornerCount++;
-										if (cell.color == 'white') whiteCornerCount++;
+								let corner = '';
+								if (containPos(corners, { x, y })) {
+									if (cell.color == 'black') {
+										cornerScore += -5;
+										corner = 'black';
+									}
+									if (cell.color == 'white') {
+										cornerScore += 5;
+										corner = 'white';
 									}
 								}
+								// 角の1つ隣り
+								if (containPos(corners1, { x, y })) {
+									if (cell.color == 'black') {
+										if (corner == 'black') {
+											cornerScore += -1;
+										}else {
+											cornerScore += 1;
+										}
+									}
+									if (cell.color == 'white') {
+										if (corner == 'white') {
+											cornerScore += 1;
+										}else {
+											cornerScore += -1;
+										}
+									}
+								}
+								// 角の2つ隣り
+								if (containPos(corners2, { x, y })) {
+									if (cell.color == 'black') cornerScore += -1;
+									if (cell.color == 'white') cornerScore += 1;
+								}
+
+								// 普通のマス
 								if (cell.color == 'black') blackCount++;
 								if (cell.color == 'white') whiteCount++;
 							}
 						}
 						const { putBlackCount, putWhiteCount, cellsPutBlack, cellsPutWhite } = this.getPutCount();
-						const putBlackCornerCount = cellsPutBlack.filter(cell => corners.includes(cell)).length
-						const putWhiteCornerCount = cellsPutWhite.filter(cell => corners.includes(cell)).length
+						cornerScore += -5 * cellsPutBlack.filter(cell => containPos(corners, cell)).length
+						cornerScore += 5 * cellsPutWhite.filter(cell => containPos(corners, cell)).length
+						cornerScore += -cellsPutBlack.filter(cell => containPos(corners2, cell)).length
+						cornerScore += cellsPutWhite.filter(cell => containPos(corners2, cell)).length
 
+						const countScore = whiteCount - blackCount + putWhiteCount * 10 - putBlackCount * 10;
+
+						const totalScore = cornerScore * 100 + countScore;
 						return {
-							score: whiteCount - blackCount + whiteCornerCount * 1000 - blackCornerCount * 2000 + putWhiteCornerCount * 100 - putBlackCornerCount * 200 + putWhiteCount * 20 - putBlackCount * 20,
+							score: totalScore,
 							blackCount: blackCount,
 							whiteCount: whiteCount,
-							blackCornerCount: blackCornerCount,
-							whiteCornerCount: whiteCornerCount,
 							putBlackCount: putBlackCount,
 							putWhiteCount: putWhiteCount,
-							putBlackCornerCount: putBlackCornerCount,
-							putWhiteCornerCount: putWhiteCornerCount,
 							cellsPutBlack: cellsPutBlack,
 							cellsPutWhite: cellsPutWhite
 						}
@@ -345,6 +421,10 @@
 						return reverseCount * 10 - putBlackCount * 30 + putWhiteCount * 10;						
 				}
 			})).then(scores => {	
+				for (let i = 0; i < scores.length; i++) {
+					console.log(`(${choices[i].x},${choices[i].y}) = ${scores[i]}`);
+				}
+				console.log('-------------------------------------');
 				const decision = choices[scores.indexOf(scores.reduce((a,b) => Math.max(a,b)))];
 				this.put(decision.x, decision.y, 'white');	
 			});
