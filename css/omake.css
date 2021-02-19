@@ -1372,8 +1372,8 @@ html body #loading {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-animation: loaded 1s 3s forwards;
-          animation: loaded 1s 3s forwards;
+  -webkit-animation: loaded 1s 1s forwards;
+          animation: loaded 1s 1s forwards;
   z-index: 10;
 }
 
