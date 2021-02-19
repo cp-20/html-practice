@@ -59,6 +59,8 @@
 			this.initialized = false;
 			// 爆発フラグ
 			this.bombed = false
+			// クリアフラグ
+			this.cleared = false;
 			// 残りのマス
 			this.left = this.sizeX * this.sizeY;
 			// フラグの数
@@ -90,6 +92,7 @@
 	
 		// マスを開く
 		open(openX, openY) {
+			if (this.cleared) return;
 			if (this.board[this.getIndex(openX, openY)].opened) return;
 	
 			// 旗を消す
@@ -102,8 +105,6 @@
 	
 			// 残りのマスを減らす
 			this.left--;
-	
-			console.log(this.left);
 	
 			// 初期化処理
 			if (!this.initialized) {
@@ -141,6 +142,7 @@
 			if (this.board[this.getIndex(openX, openY)].mine) {
 				// 爆発(ゲームオーバー)
 				this.bomb(openX, openY);
+				return;
 			}else {
 				// 開く
 				this.board[this.getIndex(openX, openY)].opened = true;
@@ -163,6 +165,9 @@
 	
 		// クリア
 		clear() {
+			// クリアフラグ
+			this.cleared = true;
+
 			// クリアエフェクト
 			const overlay = document.getElementById('ms-overlay');
 			overlay.classList.add('show');

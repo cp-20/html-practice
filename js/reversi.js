@@ -332,7 +332,7 @@
 
 					return score;
 				}
-				if (difficulty == 'hard') return getNextPutCount(choice, 4, 'white');
+				if (difficulty == 'hard') return getNextPutCount(choice, 3, 'white');
 				
 				const { putBlackCount, putWhiteCount } = this.getPutCount();
 
@@ -344,12 +344,7 @@
 					case 'hard':
 						return reverseCount * 10 - putBlackCount * 30 + putWhiteCount * 10;						
 				}
-			})).then(scores => {
-				for (let i = 0; i < choices.length; i++) {
-					console.log(`(${choices[i].x},${choices[i].y}) = ${scores[i]}`);
-				}
-				console.log('----------------------------------------');
-	
+			})).then(scores => {	
 				const decision = choices[scores.indexOf(scores.reduce((a,b) => Math.max(a,b)))];
 				this.put(decision.x, decision.y, 'white');	
 			});
@@ -456,8 +451,9 @@
 			for (let y = 0; y < size.y; y++) {
 				for (let x = 0; x < size.x; x++) {
 					// コマの数
-					if (cellContent.color == 'black') blackCount++;
-					if (cellContent.color == 'white') whiteCount++;					
+					const cell = this.board[this.getIndex(x, y)];
+					if (cell.color == 'black') blackCount++;
+					if (cell.color == 'white') whiteCount++;					
 				}
 			}
 			

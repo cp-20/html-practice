@@ -40,7 +40,9 @@
 					this.parentElement.classList.add('correct');
 					result.classList.add('correct');
 					answerCount++;
-					document.getElementById('result-quiz-correct').textContent = answerCount;
+					const correctCount = document.getElementById('result-quiz-correct');
+					correctCount.textContent = answerCount;
+					correctCount.dataset.count = answerCount;
 				}
 			}
 		});

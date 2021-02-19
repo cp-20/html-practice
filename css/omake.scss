@@ -35,6 +35,11 @@ html {
 			z-index: -1;
 		}
 
+		input[type="number"] {
+			-webkit-appearance: none;
+			-moz-appearance: textfield;
+		}
+
 		#content {
 			max-width: 900px;
 			margin: 0 auto;
@@ -451,7 +456,6 @@ html {
 				}
 
 				#reversi {
-
 					#rv-description {
 						margin: 0 0 0 10px;
 						
@@ -651,11 +655,17 @@ html {
 											position: absolute;
 											margin: -15px 0 0 -19px;
 											font-size: 38px;
+											@include sp {
+												font-size: 30px;
+											}
 										}
 										&::after {
 											position: absolute;
 											margin: -15px 0 0 -19px;
 											font-size: 38px;
+											@include sp {
+												font-size: 30px;
+											}
 										}
 	
 										&.reverse {
@@ -731,6 +741,7 @@ html {
 										font-size: 16px;
 										margin-top: -4px;
 										padding: 2px;
+										background-color: white;
 										border-bottom: solid $color-accent 2px;
 									}
 								}
@@ -932,12 +943,17 @@ html {
 							margin: 5px 0 0 0;
 							font-size: 22px;
 						}
+
+						p {
+							margin: 10px 0 0 0;
+
+						}
 						
 						div.quizes {
 							display: flex;
 							flex-direction: row;
 							flex-wrap: wrap;
-							margin: 10px 0 0 0;
+							margin: 0;
 
 							p {
 								margin: 5px 0;
