@@ -29,12 +29,14 @@ html body #content header div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 html body #content header div h1.title {
   margin: 0;
   padding-left: 20px;
-  width: 300px;
+  width: 230px;
   display: inline-block;
   color: #464646;
 }
@@ -44,7 +46,7 @@ html body #content header div a {
   text-decoration: none;
   color: #464646;
   border-bottom: solid #ff748b 1px;
-  margin: 20px 20px 0 auto;
+  margin: 20px 20px 10px auto;
   -webkit-transition: border .1s, color .1s;
   transition: border .1s, color .1s;
 }
@@ -152,7 +154,7 @@ html body #content main #minesweeper #ms-description {
 }
 
 html body #content main #minesweeper #ms-description p {
-  margin: 0 0 10px 0;
+  margin: 0 20px 10px 0;
 }
 
 html body #content main #minesweeper #ms-description label[for="ms-rule"] {
@@ -480,7 +482,7 @@ html body #content main #reversi #rv-description {
 }
 
 html body #content main #reversi #rv-description p {
-  margin: 0 0 10px 0;
+  margin: 0 20px 10px 0;
 }
 
 html body #content main #reversi #rv-description label[for="rv-rule"] {
@@ -1004,6 +1006,36 @@ html body #content main #quiz div.quiz {
   margin: 40px 20px 40px 0;
 }
 
+html body #content main #quiz div.quiz h3::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  margin: -40px 0 0 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffc400;
+}
+
+html body #content main #quiz div.quiz.difficulty-1 h3::before {
+  content: '★☆☆☆☆';
+}
+
+html body #content main #quiz div.quiz.difficulty-2 h3::before {
+  content: '★★☆☆☆';
+}
+
+html body #content main #quiz div.quiz.difficulty-3 h3::before {
+  content: '★★★☆☆';
+}
+
+html body #content main #quiz div.quiz.difficulty-4 h3::before {
+  content: '★★★★☆';
+}
+
+html body #content main #quiz div.quiz.difficulty-5 h3::before {
+  content: '★★★★★';
+}
+
 html body #content main #quiz div.quiz:nth-child(1)::before {
   content: "Q.1";
   font-size: 20px;
@@ -1085,6 +1117,7 @@ html body #content main #quiz div.quiz:nth-child(10)::before {
 }
 
 html body #content main #quiz div.quiz h3.question {
+  position: relative;
   font-weight: normal;
   margin: 0 0 10px 0;
 }
@@ -1206,6 +1239,7 @@ html body #content main #quiz div#result {
   border: solid #ffa7b6;
   border-radius: 5px;
   max-width: 500px;
+  margin-right: 20px;
   padding: 10px 20px 20px 20px;
 }
 
@@ -1236,6 +1270,12 @@ html body #content main #quiz div#result div.quizes p {
   font-size: 18px;
 }
 
+@media (max-width: 399px) {
+  html body #content main #quiz div#result div.quizes p {
+    width: 100%;
+  }
+}
+
 html body #content main #quiz div#result div.quizes p span.answer {
   font-weight: bold;
   font-size: 20px;
@@ -1255,12 +1295,20 @@ html body #content main #quiz div#result div.quizes p span.answer.wrong::before 
   color: #ff4160;
 }
 
+html body #content main #pictogram p {
+  margin-right: 20px;
+}
+
 html body #content main #pictogram img.pictogram {
   width: 150px;
 }
 
+html body #content main #afterword p {
+  margin-right: 20px;
+}
+
 html body #content footer {
-  height: 40px;
+  min-height: 40px;
   background-color: #fdc7d0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1271,7 +1319,7 @@ html body #content footer {
 }
 
 html body #content footer p {
-  margin-left: 20px;
+  margin: 10px 0 10px 20px;
   color: #424242;
 }
 

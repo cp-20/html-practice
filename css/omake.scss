@@ -10,6 +10,14 @@ $color-minesweeper-background: rgb(150, 160, 252);
 
 $mesh-size: 30px;
 
+@mixin pc {
+	@media (min-width: 400px) { @content; }
+}
+
+@mixin sp {
+	@media (max-width: 399px) { @content; }
+}
+
 html {
 	body {
 		margin: 0;
@@ -38,11 +46,12 @@ html {
 					margin: 0 20px;
 					border-bottom: solid $color-accent 5px;
 					display: flex;
+					flex-wrap: wrap;
 
 					h1.title {
 						margin: 0;
 						padding-left: 20px;
-						width: 300px;
+						width: 230px;
 						display: inline-block;
 						color: $color-text;
 					}
@@ -52,7 +61,7 @@ html {
 						text-decoration: none;
 						color: $color-text;
 						border-bottom: solid $color-accent 1px;
-						margin: 20px 20px 0 auto;
+						margin: 20px 20px 10px auto;
 
 						transition: border .1s, color .1s;
 						&:hover {
@@ -170,7 +179,7 @@ html {
 						margin: 0 0 0 10px;
 						
 						p {
-							margin: 0 0 10px 0;
+							margin: 0 20px 10px 0;
 						}
 
 						label[for="ms-rule"] {
@@ -445,7 +454,7 @@ html {
 						margin: 0 0 0 10px;
 						
 						p {
-							margin: 0 0 10px 0;
+							margin: 0 20px 10px 0;
 						}
 
 						label[for="rv-rule"] {
@@ -791,6 +800,21 @@ html {
 						padding: 10px 20px 20px 20px;
 						margin: 40px 20px 40px 0;
 
+						h3::before {
+							content: '';
+							position: absolute;
+							right: 0;
+							margin: -40px 0 0 0;
+							font-size: 22px;
+							font-weight: bold;
+							color: rgb(255, 196, 0);
+						}
+						&.difficulty-1 h3::before { content: '★☆☆☆☆'; }
+						&.difficulty-2 h3::before { content: '★★☆☆☆'; }
+						&.difficulty-3 h3::before { content: '★★★☆☆'; }
+						&.difficulty-4 h3::before { content: '★★★★☆'; }
+						&.difficulty-5 h3::before { content: '★★★★★'; }
+
 						@for $i from 1 to 11 {
 							&:nth-child(#{$i})::before {
 								content: 'Q.#{$i}';
@@ -802,6 +826,7 @@ html {
 						}
 
 						h3.question {
+							position: relative;
 							font-weight: normal;
 							margin: 0 0 10px 0;
 						}
@@ -898,6 +923,7 @@ html {
 						border: solid lighten($color-accent, 10%);
 						border-radius: 5px;
 						max-width: 500px;
+						margin-right: 20px;
 						padding: 10px 20px 20px 20px;
 
 						h3 {
@@ -917,6 +943,10 @@ html {
 								box-sizing: border-box;
 								width: 50%;
 								font-size: 18px;
+
+								@include sp {
+									width: 100%;
+								}
 								
 								span.answer {
 									font-weight: bold;
@@ -940,20 +970,29 @@ html {
 				}
 
 				#pictogram {
+					p {
+						margin-right: 20px;
+					}
 					img.pictogram {
 						width: 150px;
+					}
+				}
+
+				#afterword {
+					p {
+						margin-right: 20px;
 					}
 				}
 			}
 
 			footer {
-				height: 40px;
+				min-height: 40px;
 				background-color: $color-background-footer;
 				display: flex;
 				align-items: center;
 				
 				p {
-					margin-left: 20px;
+					margin: 10px 0 10px 20px;
 
 					color: rgb(66, 66, 66);
 				}
