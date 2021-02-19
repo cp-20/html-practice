@@ -47,13 +47,14 @@ html body #content header div a {
   color: #464646;
   border-bottom: solid #ff748b 1px;
   margin: 20px 20px 10px auto;
-  -webkit-transition: border .1s, color .1s;
-  transition: border .1s, color .1s;
+  -webkit-transition: all .1s;
+  transition: all .1s;
 }
 
 html body #content header div a:hover {
   color: #ff748b;
   border-bottom-width: 2px;
+  margin-bottom: 9px;
 }
 
 html body #content main {

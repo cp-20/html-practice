@@ -63,10 +63,12 @@ html {
 						border-bottom: solid $color-accent 1px;
 						margin: 20px 20px 10px auto;
 
-						transition: border .1s, color .1s;
+						transition: all .1s;
+
 						&:hover {
 							color: $color-accent;
 							border-bottom-width: 2px;
+							margin-bottom: 9px;
 						}
 					}
 				}

@@ -52,8 +52,8 @@
 		const quizResult = document.createElement('p');
 		quizResult.innerHTML = `${i+1}問目：<span class="answer"></span>`;
 		root.querySelector('div.quizes').appendChild(quizResult);
-	}
 
+	}
 	// リザルト
 	document.getElementById('result-quiz-all').textContent = quizCount;
 }

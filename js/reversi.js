@@ -32,9 +32,6 @@
 			}
 			// 手番
 			this.turn = 'black';
-			// それぞれのマス
-			this.blackCount = 0;
-			this.whiteCount = 0;
 			// それぞれの置けるマス
 			this.putBlackCount = 0;
 			this.putWhiteCount = 0;
@@ -97,7 +94,7 @@
 		}
 
 		// 設置
-		put(putX, putY, color, force=false) {
+		put(putX, putY, color, force=false, show=true) {
 			const cell = this.board[this.getIndex(putX, putY)];
 
 			// 設置不可能な場合
@@ -117,42 +114,33 @@
 			}
 
 			// ひっくり返す
-			if (!force) {
-				for (let i = 0; i < arroundCells.length; i++) {
-					const direction = arroundCells[i];
+			for (let i = 0; i < arroundCells.length; i++) {
+				const direction = arroundCells[i];
 
-					for (let d = 1; true; d++) {
-						const nextX = putX + direction.x * d;
-						const nextY = putY + direction.y * d;
+				for (let d = 1; true; d++) {
+					const nextX = putX + direction.x * d;
+					const nextY = putY + direction.y * d;
 
-						// 盤面外に出る
-						if (!this.inBoard(nextX, nextY)) break;
-						// 何も置かれてない
-						if (!this.board[this.getIndex(nextX, nextY)].put) break;
-						// 自分のコマ
-						if (this.board[this.getIndex(nextX, nextY)].color == color) {
-							for (let r = 1; r < d; r++) {
-								const reverseX = putX + direction.x * r;
-								const reverseY = putY + direction.y * r;
+					// 盤面外に出る
+					if (!this.inBoard(nextX, nextY)) break;
+					// 何も置かれてない
+					if (!this.board[this.getIndex(nextX, nextY)].put) break;
+					// 自分のコマ
+					if (this.board[this.getIndex(nextX, nextY)].color == color) {
+						for (let r = 1; r < d; r++) {
+							const reverseX = putX + direction.x * r;
+							const reverseY = putY + direction.y * r;
 
-								// コマを反転(自分のコマに)
-								this.board[this.getIndex(reverseX, reverseY)].color = color
+							// コマを反転(自分のコマに)
+							this.board[this.getIndex(reverseX, reverseY)].color = color;
 
-								// コマの数
-								if (color == 'black') {
-									this.blackCount++;
-									this.whiteCount--;
-								}else {
-									this.blackCount--;
-									this.whiteCount++;
-								}
-
-								// アニメーション
+							// アニメーション
+							if (!force) {
 								const reverseCell = document.querySelector(`#rv-board td[data-x="${reverseX}"][data-y="${reverseY}"]`);
 								reverseCell.classList.add('reverse');
 							}
-							break;
 						}
+						break;
 					}
 				}
 			}
@@ -264,22 +252,25 @@
 							{ x: size.x-1, y: 0 },
 							{ x: 0, y: size.x-1 },
 							{ x: size.x-1, y: size.y-1 },
-						]
+						];
 						for (let y = 0; y < size.y; y++) {
 							for (let x = 0; x < size.x; x++) {
 								const cell = this.board[this.getIndex(x, y)];
 								// 角
-								if (corners.includes({x, y})) {
-									if (cell.black) blackCornerCount++;
-									if (cell.white) whiteCornerCount++;
+								for (let i = 0; i < corners.length; i++) {
+									if (corners[i].x == x && corners[i].y == y) {
+										if (cell.color == 'black') blackCornerCount++;
+										if (cell.color == 'white') whiteCornerCount++;
+									}
 								}
-								if (cell.black) blackCount++;
-								if (cell.white) whiteCount++;								
+								if (cell.color == 'black') blackCount++;
+								if (cell.color == 'white') whiteCount++;
 							}
 						}
 						const { putBlackCount, putWhiteCount, cellsPutBlack, cellsPutWhite } = this.getPutCount();
 						const putBlackCornerCount = cellsPutBlack.filter(cell => corners.includes(cell)).length
 						const putWhiteCornerCount = cellsPutWhite.filter(cell => corners.includes(cell)).length
+
 						return {
 							score: whiteCount - blackCount + whiteCornerCount * 1000 - blackCornerCount * 2000 + putWhiteCornerCount * 100 - putBlackCornerCount * 200 + putWhiteCount * 20 - putBlackCount * 20,
 							blackCount: blackCount,
@@ -294,8 +285,8 @@
 							cellsPutWhite: cellsPutWhite
 						}
 					}
-					this.board[this.getIndex(choice.x, choice.y)].put = true;
-					this.board[this.getIndex(choice.x, choice.y)].color = 'white';
+					const board = JSON.parse(JSON.stringify(this.board));
+					this.put(choice.x, choice.y, turn, true, false);
 					const score = (() => {
 						const { score, cellsPutBlack, cellsPutWhite, blackCount, whiteCount, putBlackCount, putWhiteCount } = evalBoard();
 						if (blackCount + whiteCount == size.x * size.y || ( putBlackCount == 0 && putWhiteCount == 0 )) {
@@ -315,30 +306,29 @@
 									const scores = cellsPutBlack.map(choice => {
 										return getNextPutCount(choice, max, turn='black', i+1);
 									});
-									return scores.reduce((a,b) => Math.max(a,b));
+									return scores.reduce((a,b) => Math.min(a,b));
 								}else {
 									const scores = cellsPutWhite.map(choice => {
 										return getNextPutCount(choice, max, turn='white', i+2);
 									});
-									return scores.reduce((a,b) => Math.min(a,b));	
+									return scores.reduce((a,b) => Math.max(a,b));	
 								}
 							}else {
 								if (cellsPutWhite.length > 0) {
 									const scores = cellsPutWhite.map(choice => {
 										return getNextPutCount(choice, max, turn='white', i+1);
 									});
-									return scores.reduce((a,b) => Math.min(a,b));
+									return scores.reduce((a,b) => Math.max(a,b));
 								}else {
 									const scores = cellsPutBlack.map(choice => {
 										return getNextPutCount(choice, max, turn='black', i+2);
 									});
-									return scores.reduce((a,b) => Math.max(a,b));
+									return scores.reduce((a,b) => Math.min(a,b));
 								}
 							}
 						}
 					})();
-					this.board[this.getIndex(choice.x, choice.y)].put = false;
-					this.board[this.getIndex(choice.x, choice.y)].color = '';
+					this.board = board;
 
 					return score;
 				}
@@ -412,6 +402,10 @@
 
 		// 描画
 		draw() {
+			// コマの数を計算
+			let blackCount = 0;
+			let whiteCount = 0;
+			
 			for (let y = 0; y < size.y; y++) {
 				for (let x = 0; x < size.x; x++) {
 					const cell = document.querySelector(`#rv-board td[data-x="${x}"][data-y="${y}"]`);
@@ -434,21 +428,24 @@
 						cell.classList.remove('putWhite');
 					}
 
-					// 手番
-					const board = document.getElementById('rv-board');					
-					board.classList.remove('black');
-					board.classList.remove('white');
-					if (this.turn) board.classList.add(this.turn);
-					const settings = document.getElementById('rv-settings');
-					settings.classList.remove('black');
-					settings.classList.remove('white');
-					if (this.turn) settings.classList.add(this.turn);
-
 					// コマの数
-					document.getElementById('black-counter').value = this.blackCount;
-					document.getElementById('white-counter').value = this.whiteCount;
+					if (cellContent.color == 'black') blackCount++;
+					if (cellContent.color == 'white') whiteCount++;
 				}
 			}
+			// 手番
+			const board = document.getElementById('rv-board');					
+			board.classList.remove('black');
+			board.classList.remove('white');
+			if (this.turn) board.classList.add(this.turn);
+			const settings = document.getElementById('rv-settings');
+			settings.classList.remove('black');
+			settings.classList.remove('white');
+			if (this.turn) settings.classList.add(this.turn);
+
+			// コマの数
+			document.getElementById('black-counter').value = blackCount;
+			document.getElementById('white-counter').value = whiteCount;
 		}
 
 		// 終了
