@@ -806,7 +806,7 @@ html body #content main #reversi div.screen table tbody#rv-board tr td::before {
   font-size: 38px;
 }
 
-@media (max-width: 399px) {
+@media (max-width: 419px) {
   html body #content main #reversi div.screen table tbody#rv-board tr td::before {
     margin: -16px 0 0 -15px;
     font-size: 30px;
@@ -819,7 +819,7 @@ html body #content main #reversi div.screen table tbody#rv-board tr td::after {
   font-size: 38px;
 }
 
-@media (max-width: 399px) {
+@media (max-width: 419px) {
   html body #content main #reversi div.screen table tbody#rv-board tr td::after {
     margin: -16px 0 0 -15px;
     font-size: 30px;
@@ -1145,6 +1145,86 @@ html body #content main #quiz div.quiz:nth-child(10)::before {
   margin: 0 0 10px 0;
 }
 
+html body #content main #quiz div.quiz:nth-child(11)::before {
+  content: "Q.11";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(12)::before {
+  content: "Q.12";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(13)::before {
+  content: "Q.13";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(14)::before {
+  content: "Q.14";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(15)::before {
+  content: "Q.15";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(16)::before {
+  content: "Q.16";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(17)::before {
+  content: "Q.17";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(18)::before {
+  content: "Q.18";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(19)::before {
+  content: "Q.19";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+html body #content main #quiz div.quiz:nth-child(20)::before {
+  content: "Q.20";
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
 html body #content main #quiz div.quiz h3.question {
   position: relative;
   font-weight: normal;
@@ -1270,18 +1350,28 @@ html body #content main #quiz div#result {
   max-width: 500px;
   margin-right: 20px;
   padding: 10px 20px 20px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 html body #content main #quiz div#result h3 {
-  margin: 5px 0 0 0;
+  margin: 5px 0 5px 0;
   font-size: 22px;
+  display: inline-block;
+  width: 200px;
 }
 
 html body #content main #quiz div#result p {
-  margin: 10px 0 0 0;
+  margin: 10px 0 0 auto;
+  display: inline-block;
+  width: 120px;
 }
 
 html body #content main #quiz div#result div.quizes {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1303,7 +1393,7 @@ html body #content main #quiz div#result div.quizes p {
   font-size: 18px;
 }
 
-@media (max-width: 399px) {
+@media (max-width: 419px) {
   html body #content main #quiz div#result div.quizes p {
     width: 100%;
   }
@@ -1377,6 +1467,34 @@ html body #loading {
   z-index: 10;
 }
 
+@-webkit-keyframes loaded {
+  from {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+  to {
+    top: -200px;
+    opacity: 0;
+    visibility: hidden;
+    height: calc(100% + 200px);
+  }
+}
+
+@keyframes loaded {
+  from {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+  to {
+    top: -200px;
+    opacity: 0;
+    visibility: hidden;
+    height: calc(100% + 200px);
+  }
+}
+
 html body #loading div .loading {
   width: 75px;
   height: 75px;
@@ -1412,30 +1530,5 @@ html body #loading div .loading {
 
 html body #loading div p {
   margin: 0;
-}
-
-@-webkit-keyframes loaded {
-  from {
-    opacity: 1;
-    visibility: visible;
-    top: 0;
-  }
-  to {
-    top: -100px;
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes loaded {
-  from {
-    opacity: 1;
-    visibility: visible;
-    top: 0;
-  }
-  to {
-    top: -100px;
-    opacity: 0;
-    visibility: hidden;
-  }
+  font-weight: bold;
 }

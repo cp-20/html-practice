@@ -256,6 +256,19 @@
 						<p>hrefはaタグの中でリンク先を指定するのに用います</p>
 					</div>
 				</div>
+				<div class="quiz difficulty-1">
+					<h3 class="question">imgタグ(画像)で代替テキストを指定するために用いるプロパティは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice answer">alt</p>
+						<p class="choice">width</p>
+						<p class="choice">src</p>
+						<p class="choice">text</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>srcは画像のパスを指定するのに用います</p>
+					</div>
+				</div>
 				<div class="quiz difficulty-2">
 					<h3 class="question">HTML5で書かれたものであるとブラウザに明示する記述は以下のうちどれ？</h3>
 					<div class="choices">
@@ -281,6 +294,34 @@
 					<div class="answer">
 						<p class="answer"></p>
 						<p>#hotはidがhotの要素を指定できます</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-2">
+					<h3 class="question">文字色を指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">font-color</p>
+						<p class="choice">text-style</p>
+						<p class="choice">text-color</p>
+						<p class="choice answer">color</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>文字に関係するスタイルは紛らわしいものが多いので気を付けよう</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-2">
+					<h3 class="question">要素の回り込みを指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">wrap</p>
+						<p class="choice answer">float</p>
+						<p class="choice">arround</p>
+						<p class="choice">justify-content</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>float:left;を指定すると要素がすべて左側に回り込む</p>
+						<p>回り込みをやめる際にはclear:both;を指定する必要がある</p>
+						<p><strike>個人的にはflexboxとかcss gridを使う方がきれいでいいと思います</strike></p>
 					</div>
 				</div>
 				<div class="quiz difficulty-3">
@@ -329,6 +370,101 @@
 	で
 	ね 
 						-->
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">HTMLで表を作成する際に使用するタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">list</p>
+						<p class="choice answer">table</p>
+						<p class="choice">tb</p>
+						<p class="choice">form</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>列はtr、見出し部分はth、中身の要素はtdを用います</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">要素の周りの枠線を指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">grid</p>
+						<p class="choice">line</p>
+						<p class="choice answer">border</p>
+						<p class="choice">frame</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>paddingもmarginも余白を指定するがpaddingはborderの内側、marginはborderの外側という違いがある</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">テキストにルビを振る際に使用するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">span</p>
+						<p class="choice">sub</p>
+						<p class="choice">rb</p>
+						<p class="choice answer">ruby</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>subは文字を下付きにする際に使用するタグです</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">JavaScriptを書く際に使用するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice answer">script</p>
+						<p class="choice">js</p>
+						<p class="choice">link</p>
+						<p class="choice">import</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>&lt;script src=&quot;main.js&quot; /&gt;の様に記述することで外部のjsファイルを読み込むこともできます</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">リストを作る際に使用するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">list</p>
+						<p class="choice answer">ul</p>
+						<p class="choice">contents</p>
+						<p class="choice">pl</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>list-style:none;を適用するとリストの横の黒丸を削除できます</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-4">
+					<h3 class="question">次のようなフォルダ構造の時にindex.htmlからsample.jpgを指定するには以下の内どれを用いればよいか？<br>
+						├ sample.jpg<br>
+						└ html/<br>
+						　└ index.html<br>
+					</h3>
+					<div class="choices">
+						<p class="choice answer">../sample.jpg</p>
+						<p class="choice">*/sample.jpg</p>
+						<p class="choice">./sample.jpg</p>
+						<p class="choice">//sample.jpg</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>2階層上のファイルを指定したい場合は../../sample.jpgの様に記述します</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-4">
+					<h3 class="question">HTMLは以下の内どれの略称か？</h3>
+					<div class="choices">
+						<p class="choice">High Technology Making Language</p>
+						<p class="choice answer">Hyper Text Markup Language</p>
+						<p class="choice">Highly Transparent Major Language</p>
+						<p class="choice">Hashed Table Modifying Language</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p></p>
 					</div>
 				</div>
 				<div class="quiz difficulty-4">
