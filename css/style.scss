@@ -740,6 +740,7 @@ html {
 							opacity: 0;
 							z-index: -1;
 							position: relative;
+							overflow: scroll;
 		
 							label.popup-escape {
 								position: absolute;

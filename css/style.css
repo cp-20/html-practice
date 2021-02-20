@@ -768,6 +768,7 @@ html body #content footer #settings .popup-settings .popup-settings-screen {
   opacity: 0;
   z-index: -1;
   position: relative;
+  overflow: scroll;
 }
 
 html body #content footer #settings .popup-settings .popup-settings-screen label.popup-escape {
