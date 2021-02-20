@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+	<path fill="none" stroke="black" stroke-width="4" d="
+	M 10 4
+	L 50 4
+	Q 54 4, 54 8
+	L 54 56
+	Q 54 60, 50 60
+	L 10 60
+	L 10 4
+	L 20 4
+	L 20 60
+	" />
+	
+	<path fill="none" stroke="black" stroke-width="3" d="
+	M 26 12
+	L 48 12
+	L 48 22
+	L 26 22
+	L 26 12
+	L 27 12
+	" />
+</svg>

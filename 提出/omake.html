@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>未来日記 - おまけ</title>
+	
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+	<link rel="stylesheet" href="./css/omake.css">
+	<script src="./js/browser.js"></script>
+</head>
+<body>
+	<div id="content">
+		<header>
+			<div>
+				<h1 class="title">おまけコーナー</h1>
+				<a href="./index.html">トップに戻る</a>
+			</div>
+		</header>
+
+		<main>
+			<h2 class="label">
+				<svg class="index" viewBox="0 0 64 64">
+					<circle cx="10" cy="10" r="5" />
+					<line x1="20" y1="10" x2="60" y2="10" />
+					<circle cx="10" cy="30" r="5" />
+					<line x1="20" y1="30" x2="60" y2="30" />
+					<circle cx="10" cy="50" r="5" />
+					<line x1="20" y1="50" x2="60" y2="50" />
+				</svg>
+				<span>目次</span>
+			</h2>
+			<div class="content" id="index-list">
+				<ul class="index-list">
+					<li class="index"><a href="#index-minesweeper">マインスイーパ</a></li>
+					<li class="index"><a href="#index-reversi">リバーシ</a></li>
+					<li class="index"><a href="#index-quiz">HTML/CSSクイズ</a></li>
+					<li class="index"><a href="#index-pictogram">ピクトグラム</a></li>
+					<li class="index"><a href="#index-afterword">あとがき</a></li>
+				</ul>
+			</div>
+
+			<h2 class="label" id="index-minesweeper">
+				<svg class="minesweeper" viewBox="0 0 64 64">
+					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(0deg); transform-origin: center;" />
+					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(45deg); transform-origin: center;" />
+					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(90deg); transform-origin: center;" />
+					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(135deg); transform-origin: center;" />
+					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(180deg); transform-origin: center;" />
+					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(225deg); transform-origin: center;" />
+					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(270deg); transform-origin: center;" />
+					<polygon points="22,32 31,4 33,4 42,32" style="transform: rotate(315deg); transform-origin: center;" />
+					<circle cx="32" cy="32" r="20" />
+				</svg>
+				<span>マインスイーパ</span>
+				</h2>
+			<div class="content" id="minesweeper">
+				<div id="ms-description">
+					<p>自作マインスイーパです。デザインとかは大目に見てやって下さい。</p>
+
+					<label for="ms-rule"><span class="plus">＋</span>マインスイーパのルール</label>
+					<input type="checkbox" id="ms-rule" hidden>
+					<div class="ms-rule">
+						<h3>基本ルール</h3>
+						<p>爆弾以外のマスを全て開けるとゲームクリア</p>
+						<p>逆に一つでも爆弾のマスを開けるとゲームオーバー</p>
+						<p>マスに書かれた数字はそのマスの周囲8マスの内いくつ爆弾が入っているのかを示す</p>
+						<h3>基本操作</h3>
+						<p>左クリック：マスを開く</p>
+						<p>右クリック：旗を立てるor消す</p>
+						<p>ダブルクリック：（マスの数字と周囲の爆弾の数が同じ時に）周囲の開いていないマスを全て開く</p>
+					</div>
+				</div>
+				<div id="ms-setting">
+					<div class="ms-setting-difficulty ms-setting-box">
+						<select name="difficulty" class="ms-setting" id="ms-difficulty">
+							<option value="easy" selected>初級 (9×9 10コ)</option>
+							<option value="normal">中級 (16×16 40コ)</option>
+							<option value="hard">上級 (30×16 99コ)</option>
+							<option value="custom">カスタム</option>
+						</select>
+					</div>
+
+					<div class="ms-setting-sizeX ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-sizeX" min="7" max="50">
+					</div>
+					
+					<div class="ms-setting-sizeY ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-sizeY" min="7" max="50">
+					</div>
+
+					<div class="ms-setting-mines ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-mines" min="1">
+					</div>
+
+					<div class="ms-setting-start ms-setting-box">
+						<button id="ms-start">START / RESET</button>
+					</div>
+
+					<div class="ms-setting-timer ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-timer" disabled>
+					</div>
+
+					<div class="ms-setting-left ms-setting-box">
+						<input type="number" class="ms-setting" id="ms-left" disabled>
+					</div>
+				</div>
+
+				<div id="ms-overlay">
+					<div>
+						<p class="ms-clear">CLEAR!</p>
+						<p class="ms-gameover">GAME OVER!</p>
+						
+						<button id="ms-restart">RESTART</button>	
+					</div>
+				</div>
+
+				<table>
+					<tbody id="msBoard">
+						
+					</tbody>
+				</table>
+			</div>
+			<script src="./js/minesweeper.js"></script>
+
+			<h2 class="label" id="index-reversi">
+				<svg class="reversi" viewBox="0 0 64 64">
+					<circle class="black" cx="24" cy="24" r="20" />
+					<circle class="white" cx="40" cy="40" r="20" />
+				</svg>
+				<span>リバーシ</span>
+			</h2>
+			<div class="content" id="reversi">
+				<div id="rv-description">
+					<p>コンピューターと対戦できるリバーシ</p>
+					<p>敵の強さを設定できるのがこだわり</p>
+					<label for="rv-rule"><span class="plus">＋</span>リバーシのルール</label>
+					<input type="checkbox" id="rv-rule" hidden>
+
+					<div class="rv-rule">
+						<h3>基本ルール</h3>
+						<p>黒と白それぞれ2つずつ中央の4マスに交互に置かれている状態からスタート</p>
+						<p>黒が先攻で、もともと置いてある自分のコマと自分が置いたコマで相手のコマを挟むと挟んだ相手のコマをひっくり返して自分のコマにできる</p>
+						<p>相手のコマを挟まない場所には置けず、置ける場所がない時はパスする</p>
+						<p>最終的に8×8の64マスが埋まった時にコマの数が多い方の勝利</p>
+						<h3>基本操作</h3>
+						<p>小さい丸の部分にしか置けない</p>
+						<p>自分の手番に小さい丸をクリックするとそこにコマを置ける</p>
+						<p></p>
+					</div>
+				</div>
+
+				<div id="rv-overlay">
+					<div class="black-pass">
+						<p>1P PASS</p>
+					</div>
+					<div class="white-pass">
+						<p>2P PASS</p>
+					</div>
+					<div class="black-win">
+						<p>YOU WIN!</p>
+						<button class="rv-restart">RESTART</button>
+					</div>
+					<div class="white-win">
+						<p>YOU LOSE</p>
+						<button class="rv-restart">RESTART</button>
+					</div>
+					<div class="draw">
+						<p>DRAW</p>
+						<button class="rv-restart">RESTART</button>
+					</div>
+				</div>
+
+				<div class="screen">
+					<table>
+						<tbody id="rv-board">
+						</tbody>
+					</table>
+	
+					<div id="rv-settings">
+						<div class="black">
+							<p>1P(黒)：<strong>YOU</strong></p>
+							<div class="counter">
+								<input type="number" name="black-count" id="black-counter" disabled>
+							</div>
+						</div>
+	
+						<div class="white">
+							<p>
+								<span>2P(白)：<strong>COM</strong></span>
+								<select name="com-difficulty" id="com-difficulty-setting">
+									<option value="easy" selected>よわい</option>
+									<option value="normal">ふつう</option>
+									<option value="hard">つよい</option>
+									<option value="lunatic">おに</option>
+								</select>
+							</p>
+							<div class="counter">
+								<input type="number" name="white-count" id="white-counter" disabled>
+							</div>
+						</div>
+	
+						<div class="start">
+							<button id="rv-start">GAME START</button>
+						</div>
+					</div>	
+				</div>
+
+				<script src="./js/reversi.js"></script>
+			</div>
+
+			<h2 class="label" id="index-quiz">
+				<svg class="quiz" viewBox="0 0 64 64">
+					<text x="32" y="60" text-anchor="middle" font-size="60">？</text>
+				</svg>
+				<span>HTML/CSSクイズ</span>
+			</h2>
+			<div class="content" id="quiz">
+				<div class="quiz difficulty-1">
+					<h3 class="question">HTMLで見出しに使用するタグは以下のうちどれ？</h3>
+					<div class="choices">
+						<p class="choice">label</p>
+						<p class="choice answer">h1</p>
+						<p class="choice">index</p>
+						<p class="choice">header</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>h1～h6までを見出しとして使用します</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-1">
+					<h3 class="question">背景色を指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">bgcolor</p>
+						<p class="choice answer">background-color</p>
+						<p class="choice">color</p>
+						<p class="choice">color-background</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>bgcolorはHTML4の属性、colorは文字色を設定するプロパティです</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-1">
+					<h3 class="question">リンクを表示させるHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice answer">a</p>
+						<p class="choice">link</p>
+						<p class="choice">href</p>
+						<p class="choice">jump</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>hrefはaタグの中でリンク先を指定するのに用います</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-1">
+					<h3 class="question">imgタグ(画像)で代替テキストを指定するために用いるプロパティは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice answer">alt</p>
+						<p class="choice">width</p>
+						<p class="choice">src</p>
+						<p class="choice">text</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>srcは画像のパスを指定するのに用います</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-2">
+					<h3 class="question">HTML5で書かれたものであるとブラウザに明示する記述は以下のうちどれ？</h3>
+					<div class="choices">
+						<p class="choice">&lt;!HTML5&gt;</p>
+						<p class="choice">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML5&gt;</p>
+						<p class="choice">&lt;!doctype=”HTML5”&gt;</p>
+						<p class="choice answer">&lt;!DOCTYPE html&gt;</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>2番目の記述がHTML4に似たもの</p>
+						<p>HTML5でかなりシンプルになりました</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-2">
+					<h3 class="question">クラス名がhotの要素にスタイルを適用する時に使うセレクタは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">#hot</p>
+						<p class="choice">&hot</p>
+						<p class="choice answer">.hot</p>
+						<p class="choice">,hot</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>#hotはidがhotの要素を指定できます</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-2">
+					<h3 class="question">文字色を指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">font-color</p>
+						<p class="choice">text-style</p>
+						<p class="choice">text-color</p>
+						<p class="choice answer">color</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>文字に関係するスタイルは紛らわしいものが多いので気を付けよう</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-2">
+					<h3 class="question">要素の回り込みを指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">wrap</p>
+						<p class="choice answer">float</p>
+						<p class="choice">arround</p>
+						<p class="choice">justify-content</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>float:left;を指定すると要素がすべて左側に回り込む</p>
+						<p>回り込みをやめる際にはclear:both;を指定する必要がある</p>
+						<p><strike>個人的にはflexboxとかcss gridを使う方がきれいでいいと思います</strike></p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">フォントの種類を指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">font-style</p>
+						<p class="choice answer">font-family</p>
+						<p class="choice">font-kind</p>
+						<p class="choice">font-property</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>font-styleはイタリックや打ち消し線などにしたいときに使用します</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">ブラウザでタブの部分に表示されるテキストを指定するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">tab</p>
+						<p class="choice">label</p>
+						<p class="choice">head</p>
+						<p class="choice answer">title</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>&lt;link rel=&quot;icon&quot; href=&quot;img/favicon.png&quot; type=&quot;image/png&quot;&gt;の様に記述することでファビコンと呼ばれるタイトルの横に表示されるアイコンを指定することもできます</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">HTMLでコメントをつける場合の構文は以下のうちどれ？</h3>
+					<div class="choices">
+						<p class="choice answer">&lt;!-- コメント --&gt;</p>
+						<p class="choice">&lt;comment&gt; コメント &lt;/comment&gt;</p>
+						<p class="choice">&lt;=! コメント=&gt;</p>
+						<p class="choice">&lt;!&gt; コメント &lt;/!&gt;</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>複数行コメントも可能です</p>
+						<!-- 
+	こ
+	ん
+	な
+	感
+	じ
+	で
+	ね 
+						-->
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">HTMLで表を作成する際に使用するタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">list</p>
+						<p class="choice answer">table</p>
+						<p class="choice">tb</p>
+						<p class="choice">form</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>列はtr、見出し部分はth、中身の要素はtdを用います</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">要素の周りの枠線を指定するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">grid</p>
+						<p class="choice">line</p>
+						<p class="choice answer">border</p>
+						<p class="choice">frame</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>paddingもmarginも余白を指定するがpaddingはborderの内側、marginはborderの外側という違いがある</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">テキストにルビを振る際に使用するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">span</p>
+						<p class="choice">sub</p>
+						<p class="choice">rb</p>
+						<p class="choice answer">ruby</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>subは文字を下付きにする際に使用するタグです</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">JavaScriptを書く際に使用するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice answer">script</p>
+						<p class="choice">js</p>
+						<p class="choice">link</p>
+						<p class="choice">import</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>&lt;script src=&quot;main.js&quot; /&gt;の様に記述することで外部のjsファイルを読み込むこともできます</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-3">
+					<h3 class="question">リストを作る際に使用するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">list</p>
+						<p class="choice answer">ul</p>
+						<p class="choice">contents</p>
+						<p class="choice">pl</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>list-style:none;を適用するとリストの横の黒丸を削除できます</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-4">
+					<h3 class="question">次のようなフォルダ構造の時にindex.htmlからsample.jpgを指定するには以下の内どれを用いればよいか？<br>
+						├ sample.jpg<br>
+						└ html/<br>
+						　└ index.html<br>
+					</h3>
+					<div class="choices">
+						<p class="choice answer">../sample.jpg</p>
+						<p class="choice">*/sample.jpg</p>
+						<p class="choice">./sample.jpg</p>
+						<p class="choice">//sample.jpg</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>2階層上のファイルを指定したい場合は../../sample.jpgの様に記述します</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-4">
+					<h3 class="question">HTMLは以下の内どれの略称か？</h3>
+					<div class="choices">
+						<p class="choice">High Technology Making Language</p>
+						<p class="choice answer">Hyper Text Markup Language</p>
+						<p class="choice">Highly Transparent Major Language</p>
+						<p class="choice">Hashed Table Modifying Language</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p></p>
+					</div>
+				</div>
+				<div class="quiz difficulty-4">
+					<h3 class="question">CSSを外部から読み込む際に使用するHTMLのタグは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice">css</p>
+						<p class="choice">style</p>
+						<p class="choice">stylesheet</p>
+						<p class="choice answer">link</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>styleはHTML内にスタイルを記述する際に使用するタグです</p>
+						<p>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;の用に記述します</p>
+					</div>
+				</div>
+				<div class="quiz difficulty-5">
+					<h3 class="question">レスポンシブデザインにする際、スマホなどの小さい画面で見た際にだけスタイルを適用するときに使用するスタイルは以下の内どれ？</h3>
+					<div class="choices">
+						<p class="choice answer">@media</p>
+						<p class="choice">@responsive</p>
+						<p class="choice">@breakpoint</p>
+						<p class="choice">@query</p>
+					</div>
+					<div class="answer">
+						<p class="answer"></p>
+						<p>@media screen and {max-width:480px} { スマホ用のCSS }の様に記述します</p>
+					</div>
+				</div>
+				<div id="result">
+					<h3>リザルト</h3>
+					<p>正解数 <span id="result-quiz-correct">0</span> / <span id="result-quiz-all">0</span></p>
+					<div class="quizes">
+					</div>
+				</div>
+				<script src="./js/quiz.js"></script>
+			</div>
+
+			<h2 class="label" id="index-pictogram">
+				<svg class="pictogram" viewBox="0 0 64 64">
+					<polygon points="4,12 60,12 60,52 4,52" />
+					<polygon points="10,18 54,18 54,46 10,46" />
+				</svg>
+				<span>ピクトグラム</span>
+			</h2>
+			<div class="content" id="pictogram">
+				<p>「ここではマスクを着用してください」的な意味合いのピクトグラム</p>
+				<p>画像のセンスが圧倒的に欠けているので雑ですが心の瞳で見てください</p>
+				<img src="./img/pictogram.svg" alt="マスク着用をイメージしたピクトグラム" class="pictogram">
+			</div>
+
+			<h2 class="label" id="index-afterword">
+				<svg class="afterword" viewBox="0 0 64 64">
+					<path d="
+					M 10 4
+					L 50 4
+					Q 54 4, 54 8
+					L 54 56
+					Q 54 60, 50 60
+					L 10 60
+					L 10 4
+					L 20 4
+					L 20 60
+					" />
+					<path d="
+					M 26 12
+					L 48 12
+					L 48 22
+					L 26 22
+					L 26 12
+					L 27 12
+					" />
+				</svg>
+				<span>あとがき</span>
+			</h2>
+			<div class="content" id="afterword">
+				<p>最初に1ページだけサイトを作ってどうしようか困ったから結果複数ページ作るために対応したという経緯で生まれたこのサイト</p>
+				<p>このページは友達が3Dエンジン自作してたことに感化されて、ゲーム作ろうとなり製作した</p>
+				<p>無駄に時間をかけすぎている気がするがそこそこ完成度の高いサイトになったのではないかと思う</p>
+				<p>中でもメインのページはページ遷移の部分以外にJSを使っていないのがどうでもいいこだわりポイント</p>
+				<p>しかし画像製作センスが欠けていることが少し微妙だったなと思う</p>
+				<p>レスポンシブ対応も一応頑張ったのだが、実機で動作させると動かないということが起こりレスポンシブデザインの難しさを実感した</p>
+				<p>こんなサイトの一番奥まで読んでくださった方、ありがとうございました</p>
+			</div>
+		</main>
+
+		<footer>
+			<p>Copyright © 2021 未来日記 All Rights Reserved.</p>
+		</footer>
+	</div>
+
+	<div id="loading">
+		<div>
+			<div class="loading"></div>
+			<p>Now Loading...</p>
+		</div>
+	</div>	
+</body>
+<script src="./js/anchor.js"></script>
+</html>
