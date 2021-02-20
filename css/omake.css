@@ -231,6 +231,7 @@ html body #content main #minesweeper #ms-setting #ms-difficulty {
   outline: 0;
   height: 30px;
   color: #464646;
+  background-color: white;
 }
 
 html body #content main #minesweeper #ms-setting input[type="number"] {
