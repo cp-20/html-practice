@@ -350,7 +350,7 @@
 
 						const countScore = whiteCount - blackCount + putWhiteCount * 10 - putBlackCount * 10;
 
-						const totalScore = cornerScore * 100 + countScore;
+						const totalScore = cornerScore * 500 + countScore;
 						return {
 							score: totalScore,
 							blackCount: blackCount,
@@ -409,6 +409,7 @@
 					return score;
 				}
 				if (difficulty == 'hard') return getNextPutCount(choice, 3, 'white');
+				if (difficulty == 'lunatic') return getNextPutCount(choice, 4, 'white');
 				
 				const { putBlackCount, putWhiteCount } = this.getPutCount();
 
