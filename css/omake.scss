@@ -132,6 +132,15 @@ html {
 							}
 						}
 
+						&.projects {
+							path {
+								fill: white;
+								stroke: $color-accent;
+								stroke-linejoin: round;
+								stroke-width: 3px;
+							}
+						}
+
 						&.pictogram {
 							polygon {
 								fill: none;
@@ -179,6 +188,10 @@ html {
 							}
 						}
 					}
+				}
+
+				#index-minesweeper, #minesweeper, #index-reversi, #reversi, #index-quiz, #quiz {
+					display: none;
 				}
 
 				#minesweeper {
@@ -1004,6 +1017,44 @@ html {
 									}
 								}
 							}
+						}
+					}
+				}
+
+				#projects {
+					p {
+						a {
+							color: $color-text;
+							text-decoration: none;
+							border-bottom: solid $color-accent 1px;
+							transition: .2s;
+
+							&:hover {
+								color: $color-accent;
+								border-bottom: solid $color-accent 3px;
+							}
+						}
+					}
+
+					h3.title {
+						border-left: solid $color-accent 5px;
+						padding-left: 10px;
+						span.title {
+							margin-right: 5px;
+						}
+						span.language {
+							font-weight: normal;
+							font-size: 14px;
+						}
+					}
+					div.project {
+						margin: 0 20px 40px 10px;
+
+						img {
+							width: 100%;
+							max-width: 700px;
+							border-radius: 5px;
+							box-shadow: 0 0 5px rgb(146, 146, 146);
 						}
 					}
 				}

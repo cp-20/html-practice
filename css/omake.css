@@ -112,6 +112,13 @@ html body #content main h2.label svg.quiz text {
   fill: #ff748b;
 }
 
+html body #content main h2.label svg.projects path {
+  fill: white;
+  stroke: #ff748b;
+  stroke-linejoin: round;
+  stroke-width: 3px;
+}
+
 html body #content main h2.label svg.pictogram polygon {
   fill: none;
   stroke: #ff748b;
@@ -153,6 +160,10 @@ html body #content main #index-list ul.index-list li.index a {
   font-weight: bold;
   color: #464646;
   text-decoration: none;
+}
+
+html body #content main #index-minesweeper, html body #content main #minesweeper, html body #content main #index-reversi, html body #content main #reversi, html body #content main #index-quiz, html body #content main #quiz {
+  display: none;
 }
 
 html body #content main #minesweeper #ms-description {
@@ -1419,6 +1430,45 @@ html body #content main #quiz div#result div.quizes p span.answer.correct::befor
 html body #content main #quiz div#result div.quizes p span.answer.wrong::before {
   content: '不正解';
   color: #ff4160;
+}
+
+html body #content main #projects p a {
+  color: #464646;
+  text-decoration: none;
+  border-bottom: solid #ff748b 1px;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+html body #content main #projects p a:hover {
+  color: #ff748b;
+  border-bottom: solid #ff748b 3px;
+}
+
+html body #content main #projects h3.title {
+  border-left: solid #ff748b 5px;
+  padding-left: 10px;
+}
+
+html body #content main #projects h3.title span.title {
+  margin-right: 5px;
+}
+
+html body #content main #projects h3.title span.language {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+html body #content main #projects div.project {
+  margin: 0 20px 40px 10px;
+}
+
+html body #content main #projects div.project img {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px #929292;
+          box-shadow: 0 0 5px #929292;
 }
 
 html body #content main #pictogram p {

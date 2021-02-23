@@ -34,9 +34,10 @@
 			</h2>
 			<div class="content" id="index-list">
 				<ul class="index-list">
-					<li class="index"><a href="#index-minesweeper">マインスイーパ</a></li>
-					<li class="index"><a href="#index-reversi">リバーシ</a></li>
-					<li class="index"><a href="#index-quiz">HTML/CSSクイズ</a></li>
+					<!-- <li class="index"><a href="#index-minesweeper">マインスイーパ</a></li> -->
+					<!-- <li class="index"><a href="#index-reversi">リバーシ</a></li> -->
+					<!-- <li class="index"><a href="#index-quiz">HTML/CSSクイズ</a></li> -->
+					<li class="index"><a href="#index-projects">過去作</a></li>
 					<li class="index"><a href="#index-pictogram">ピクトグラム</a></li>
 					<li class="index"><a href="#index-afterword">あとがき</a></li>
 				</ul>
@@ -122,8 +123,8 @@
 						
 					</tbody>
 				</table>
+				<script src="./js/minesweeper.js"></script>
 			</div>
-			<script src="./js/minesweeper.js"></script>
 
 			<h2 class="label" id="index-reversi">
 				<svg class="reversi" viewBox="0 0 64 64">
@@ -504,6 +505,88 @@
 				<script src="./js/quiz.js"></script>
 			</div>
 
+			<h2 class="label" id="index-projects">
+				<svg class="projects" viewBox="0 0 64 64">
+					<path d="
+					M 20 20
+					L 44 20
+					Q 48 20, 48 24
+					L 48 56
+					Q 48 60, 44 60
+					L 16 60
+					Q 12 60, 12 56
+					L 12 24
+					Q 12 20, 16 20
+					L 20 20
+					" />
+					<path d="
+					M 32 4
+					L 48 4
+					L 60 16
+					L 48 16
+					L 48 4
+					L 60 16
+					L 60 40
+					Q 60 44, 56 44
+					L 28 44
+					Q 24 44, 24 40
+					L 24 8
+					Q 24 4, 28 4
+					L 32 4
+					" />
+				</svg>
+				<span>過去作</span>
+			</h2>
+			<div class="content" id="projects">
+				<p>過去に作った作品群を紹介</p>
+				<p>ここに書いたもの以外にもいろいろ作ってるのだが、細かいのも多いので抜粋して紹介</p>
+				<p>過去については<a href="./index.html">こちら</a>から見れます</p>
+				
+				<h3 class="title">
+					<span class="title">PIXEL</span>
+					<span class="language">-Made with HSP-</span>
+				</h3>
+				<div class="project">
+					<p>中3の5月～9月にかけて開発したシューティングゲーム</p>
+					<p>その年の文化祭にも展示してそれなりに賑わった</p>
+					<p>製作時間は300～400時間ぐらい</p>
+					<img src="./img/pixel.png" alt="PIXELのゲーム画面">
+				</div>
+
+				<h3 class="title">
+					<span class="title">Twins</span>
+					<span class="language">-Made with HSP-</span>
+				</h3>
+				<div class="project">
+					<p>PIXELを作った直後に作ったら、思ったより開発が進んで11月末締め切りのHSPプログラミングコンテストに応募した結果入賞したという作品です</p>
+					<p>製作時間は100時間ぐらい</p>
+					<p>自分の作るゲームはことごとく難易度が高いのをどうにかしたいと思いました</p>
+					<img src="./img/twins.png" alt="Twinsのゲーム画面">
+				</div>
+
+				<h3 class="title">
+					<span class="title">マインスイーパ</span>
+					<span class="language">-Made with JavaScript-</span>
+				</h3>
+				<div class="project">
+					<p>JavaScriptで作ってみた単純なゲーム</p>
+					<p>製作時間は20時間程度</p>
+					<p>一番時間かかったのはデザイン</p>
+					<img src="./img/minesweeper.png" alt="マインスイーパのゲーム画面">
+				</div>
+
+				<h3 class="title">
+					<span class="title">リバーシ</span>
+					<span class="language">-Made with JavaScript-</span>
+				</h3>
+				<div class="project">
+					<p>またまたJavaScriptで作ってみたゲーム</p>
+					<p>COMのプログラムを考えるのが結構難しくて30～40時間ぐらいかかってしまった</p>
+					<p>全探索という効率の悪さNo.1の方法を使っているので相手の手番が遅いという問題点があるのだが技術力不足で直せなかったのが残念</p>
+					<img src="./img/reversi.png" alt="リバーシのゲーム画面">
+				</div>
+			</div>
+
 			<h2 class="label" id="index-pictogram">
 				<svg class="pictogram" viewBox="0 0 64 64">
 					<polygon points="4,12 60,12 60,52 4,52" />
@@ -543,7 +626,6 @@
 			</h2>
 			<div class="content" id="afterword">
 				<p>最初に1ページだけサイトを作ってどうしようか困ったから結果複数ページ作るために対応したという経緯で生まれたこのサイト</p>
-				<p>このページは友達が3Dエンジン自作してたことに感化されて、ゲーム作ろうとなり製作した</p>
 				<p>無駄に時間をかけすぎている気がするがそこそこ完成度の高いサイトになったのではないかと思う</p>
 				<p>中でもメインのページはページ遷移の部分以外にJSを使っていないのがどうでもいいこだわりポイント</p>
 				<p>しかし画像製作センスが欠けていることが少し微妙だったなと思う</p>
