@@ -162,10 +162,6 @@ html body #content main #index-list ul.index-list li.index a {
   text-decoration: none;
 }
 
-html body #content main #index-minesweeper, html body #content main #minesweeper, html body #content main #index-reversi, html body #content main #reversi, html body #content main #index-quiz, html body #content main #quiz {
-  display: none;
-}
-
 html body #content main #minesweeper #ms-description {
   margin: 0 0 0 10px;
 }
